@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3e109af-2f30-48d1-aded-401ad62476ed" name="Default Changelist" comment="" />
+    <list default="true" id="b3e109af-2f30-48d1-aded-401ad62476ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/html/轮播图.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/img/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/img/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/img/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/img/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/img/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Demo/轮播图/js/tools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,13 +25,22 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Demo" />
   </component>
   <component name="ProjectId" id="1TbHzSwEjvy1znygICjBRead6dq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Demo/轮播图/js" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Demo/轮播图/js" />
+      <recent name="$PROJECT_DIR$/Demo" />
+      <recent name="$PROJECT_DIR$/Demo/轮播图/img" />
+      <recent name="$PROJECT_DIR$/Basecase" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -47,7 +65,11 @@
       <option name="presentableId" value="Default" />
       <updated>1573722136932</updated>
       <workItem from="1573722138131" duration="276000" />
-      <workItem from="1573819560864" duration="5922000" />
+      <workItem from="1573819560864" duration="6464000" />
+      <workItem from="1573892944390" duration="12000" />
+      <workItem from="1574068214795" duration="7351000" />
+      <workItem from="1574096329242" duration="3000" />
+      <workItem from="1574150030397" duration="1936000" />
     </task>
     <servers />
   </component>
@@ -59,7 +81,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

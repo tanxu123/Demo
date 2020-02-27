@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var arrayTr;
+    function sort(){
+        var nums=new Array(3);
+        var ele=document.getElementsByTagName("table");
+        arrayTr=ele[0].getElementsByTagName("tr");
+        for(var i=0;i<arrayTr.length;i++){
+            var arrayTd=arrayTr[i].getElementsByTagName("td");
+            for(var j=0;j<arrayTd.length;j++){
+               if(parseInt(arrayTd[j].innerText)!=NaN){
+                   //alert(arrayTd[j].innerText);
+                    nums[i]=parseInt(arrayTd[j].innerText);
+               }
+            }
+        }
+        alert(nums.length);
+   return nums;
+    }
+
+    function allNum(arra) {
+        var max;
+        for(var i=0;i<arra.length;i++){
+         for(var j=i;j<arra.length;j++){
+          if(arra[i]<arra[j]){
+            // max=arra[j];
+            // arra[j]=arra[i];
+            // arra[i]=max;
+              /**
+               * 测试对象的比较
+                */
+              // var arrayTd=arrayTr[i].getElementsByTagName("td");
+              // var arrayTd=arrayTr[j].getElementsByTagName("td");
+              // max=arrayTd[j].parentElement;
+              // arrayTd[j].parentElement=arrayTd[i].parentElement;
+              // arrayTd[i].parentElement=max;
+          }
+         }
+        }
+      //  print(arra);
+    }
+
+    function print(arra){
+        for(var i=0;i<arra.length;i++){
+            alert(arra[i]);
+        }
+    }
+
+</script>
+<body>
+<table>
+    <tr>
+        <td>267</td>
+    </tr>
+    <tr>
+        <td>453</td>
+    </tr>
+    <tr>
+        <td>124</td>
+    </tr>
+</table>
+<script>
+    allNum(sort());
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://cdn.goeasy.io/goeasy-1.0.3.js"></script>
+    <script>
+        var goEasy = new GoEasy({
+            host: 'hangzhou.goeasy.io', //应用所在的区域地址: 【hangzhou.goeasy.io |singapore.goeasy.io】
+            appkey: "BC-612573a13f16488e9cf03e26d8239bc4", //替换为您的应用appkey
+        });
+
+        goEasy.subscribe({
+            channel: "my_channel", //替换为您自己的channel
+            onMessage: function (message) {
+                console.log("Channel:" + message.channel + " content:" + message.content);
+            }
+        });
+
+        function send() {
+            goEasy.publish({
+                channel: "my_channel", //替换为您自己的channel
+                message: "Hello, GoEasy!" //替换为您想要发送的消息内容
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+<button onclick="send()">
+发送
+</button>
+</body>
+</html>

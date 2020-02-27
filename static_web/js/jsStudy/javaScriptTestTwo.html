@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<script>
+    function test12(){
+        var person={
+            name:"fang",
+            age:22,
+            sex:"男"
+        };
+        if(typeof Object.defineProperty=="function") {
+            Object.defineProperty(person, "name", {
+                get: function () {
+                    return this.name;
+                }
+                // set:function (v) {
+                //   this.name=v;
+                // }
+            });
+            alert("name"+person.name);
+            person.name="xiaoxiao";
+            alert("name"+person.name);
+
+        }else {
+            //alert(typeof Object.defineProperty);
+            alert("不支持此操作");
+        }
+    }
+   // test12();
+
+    function test1(){
+        // var book={};
+        //
+        // Object.defineProperties(book,{
+        //    _year:{
+        //       writable:true,
+        //       value:2004
+        //    },
+        //     edition:{
+        //       writable:true,
+        //         value:1
+        //     },
+        //     year:{
+        //        get:function(){
+        //            return this._year;
+        //        },
+        //        set:function (year) {
+        //         this._year= year;
+        //        }
+        //     }
+        // });
+
+
+        var person={};
+        Object.defineProperties(person,{
+          name:{
+              writable:true,
+              value:"fangzhiyue"
+          },
+          sex:{
+              writable:true,
+              value:"男"
+          },
+          age:{
+              set:function (age) {
+                 this.age=age;
+              },
+              get:function () {
+                 return this.age;
+              }
+          }
+        });
+        var descriptor=Object.getOwnPropertyDescriptor(person,"name");
+        //alert("描述符"+descriptor);
+        //var string="";
+        for(var item in descriptor){
+         alert(item+":"+descriptor[item]);
+           // string+=item+":"+descriptor[item];
+        }
+
+    }
+   // test1();
+
+    //创建对象
+    function test2(){
+
+        //1.使用工厂方法
+        function createObject(name,age,sex){
+            var o=new Object();
+            o.name=name;
+            o.sex=sex;
+            o.age=age;
+            o.satName=function () {
+              alert(this.name);
+            };
+            // function sayName() {
+            //   alert(this.name) ;
+            // }
+            // sayName.bind(o);//绑定对象为o;
+        }
+
+        //构造函数模式
+        function Person(name,age,sex){
+          this.name=name;
+          this.age=age;
+          this.sex=sex;
+          this.sayName=function () {
+            alert(this.name);
+          };
+        }
+
+        //构造函数与函数的关系
+       var person=new Person("fang",22,"男");
+
+        Person("xiao",23,"女");
+        //由于在构造函数的内部，使用的是this作为对象，
+        //所以会将创建对象时的属性放到window对象上，也就成为了window 的属性或方法了
+        var o={};
+        Person.call(o,"yueyue",21,"女");
+        //会将对象绑定到特定的对象上
+        o.satName();
+
+       //原型模式
+        function create(){
+        function Author(){}
+            Author.prototype.name="朱志清";
+            Author.prototype.address="安徽";
+            Author.prototype.bookName="背影";
+            Author.prototype.hello=function () {
+                alert("你好");
+            }
+
+            var author=new Author();
+            author.hello();
+            author.address;
+            author.name;
+            author.bookName;
+        }
+    }
+
+   // test2()
+     function twoTest(){
+        function Book(){}
+
+        Book.prototype.bookName="javaScript";
+        Book.prototype.author="尼古拉斯";
+        Book.prototype.price=80;
+        Book.prototype.action=function () {
+            alert("学习javaScript");
+        }
+
+        var book=new Book();
+         var book1=new Book();
+         book.bookName="javaScript高级教程";
+         // alert(book.bookName);
+         // alert(book1.bookName);
+         //
+         // delete book.bookName;
+         //
+         // alert(book.bookName);
+         // alert(book1.bookName);
+
+         alert(Object.getOwnPropertyDescriptor(book,"bookName"));
+
+     }
+
+     twoTest();
+
+    function twoTest1(){
+
+        //枚举实例属性
+        function Book(){}
+
+        Book.prototype.bookName="javaScript";
+        Book.prototype.author="尼古拉斯";
+        Book.prototype.price=80;
+        Book.prototype.action=function () {
+            alert("学习javaScript");
+        }
+
+        alert(Object.keys(Book.prototype))
+    }
+
+   //twoTest1();
+
+    function twoTest2(){
+        function Person(){}
+
+        var pro=Person.prototype;
+
+        //这种方法的减少了原型的书写时间，但是从新创建对象会销毁上个对象的属性
+        所以要重写constructor
+        pro={
+            constructor:Person,
+            name:"fangzhiyue",
+            age:21,
+            sex:"男",
+            sayName:function () {
+            alert("我的名字");
+            }
+        };
+    }
+
+    //原型模式
+    function pro(){
+        function Person() {}
+
+        Person.prototype.bookName="fang";
+
+        Person.prototype.age=21;
+
+        Person.prototype.sex="男";
+
+        var person=new Person();
+        var person1=new Person();
+    }
+
+    //原型加组合
+    function demo3(){
+        function Person(name,sex,age){
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+            this.sayHello=function () {
+             alert("你好");
+            }
+        }
+
+        var proto=Person.prototype;
+        proto={
+          constructor:Person,
+            sayName:function () {
+                alert(this.name);
+            }
+        }
+
+
+        //动态原型模型
+        function Person(name,age,sex){
+
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+
+            if(typeof this.sayName!="function"){
+                this.sayName=function(){
+                    alert(this.name);
+                }
+            }
+        }
+
+        var person=new Person("fang",22,"男");
+
+
+        //寄生构造函数模式
+        function Person(name,age,sex){
+            var o=new Object();
+            o.name=name;
+            o.sex=sex;
+            o.age=age;
+            o.sayName=function (){
+                alert(this.name);
+
+            }
+
+            return o;
+        }
+
+         //原型链
+     function SuperType() {
+         this.property=true;
+     }
+
+     SuperType.prototype.getSuperValue=function(){
+       return this.property;
+     };
+
+        function SubType(){
+            this.property=false;
+        }
+        //继承SuperType
+
+        SubType.prototype.getSubValue=function () {
+          return this.property;
+        };
+    }
+
+
+
+
+
+</script>
+<body>
+
+</body>
+</html>

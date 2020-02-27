@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>暖云音乐，一个音频下载网站，提供最新的音乐</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--    <script type="javascript" src="../js/jquery-3.3.1.min.js"></script>-->
+    <!--    <script type="javascript" src="../js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/publish.css" type="text/css">
+
+    <style>
+
+
+
+
+
+        /**
+
+        分类信息部分
+        */
+
+
+        .ny-classfy {
+            display: flex;
+            flex-direction: row;
+            height: 80px;
+            align-items: center;
+            border-bottom: 1px solid #dddddd;
+        }
+
+
+        .ny-classfy li {
+            margin-right: 20px;
+            padding: 3px 5px;
+            cursor: pointer;
+        }
+
+        /**
+        显示内容部分
+        */
+        .ny-content {
+            background: #f5f5f5;
+            overflow: hidden;
+            padding-bottom: 1%;
+        }
+
+        .ny-content div.data:first-child {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .ny-content .itemRow {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .ny-content .itemRow div:last-child {
+            margin-right: 0px;
+        }
+
+        .ny-content .itemView {
+            margin-right: 5%;
+            margin-top: 1%;
+            margin-bottom: 1%;
+            background-color: #ffffff;
+            border-radius: 3px;
+            border: 1px solid #e6e6e6;
+            padding: 20px;
+            padding-bottom: 10px;
+            width: 21%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ny-content .itemView .head {
+            display: flex;
+
+            flex-direction: row;
+        }
+
+        .bg {
+            width: 160px;
+            height: 100px;
+            display: inline-block;
+            background: url("../image/voice.png");
+            background-position: -130px 212px;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #666666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .format {
+            font-size: 14px;
+            color: #999999;
+            margin: 15px 0;
+        }
+
+        .button {
+            display: inline-block;
+            width: 110px;
+            height: 30px;
+            line-height: 28px;
+            background-image: linear-gradient(-90deg, #E1ACF5 0%, #ADD6FF 100%);
+            border-radius: 2px;
+            text-align: center;
+            font-size: 14px;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .collectLogo {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            background: url("../image/voice.png");
+            background-position: -250px -35px;
+        }
+
+        .bofangLogo {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-image: url("../image/voice.png");
+            background-position: -30px -125px;
+        }
+
+        .progressLogo {
+            display: inline-block;
+            flex-grow: 1;
+            margin-left: 5px;
+            margin-right: 5px;
+            height: 24px;
+            background-image: url("../image/voice.png");
+            background-position: 0px -100px;
+            background-color: #CCCCCC;
+        }
+
+        .bottom {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formatBox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        /**
+        分页的实现
+        */
+
+        div.splitPageBox {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+
+        .splitPage {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .splitPage span {
+            display: inline-block;
+            height: 35px;
+            line-height: 35px;
+            padding: 0 20px;
+            margin-right: 20px;
+            border-radius: 3px;
+            border: 1px solid #CCCCCC;
+        }
+
+        .splitPage .btn-input {
+            display: inline-block;
+            height: 35px;
+            width: 50px;
+            line-height: 35px;
+        }
+
+        .splitPage .btn {
+            border: 1px solid #0C77CF;
+            color: #0C77CF;
+        }
+
+
+
+        .secondFt {
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+        .login {
+            top: 30%;
+        }
+
+
+        .touxiang {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+
+        .register {
+            top: 27%;
+        }
+
+        .classfy-list {
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-left: 20px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .classfy-list span {
+            margin-right: 30px;
+            height: 25px;
+            padding: 3px 5px;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-default ny-nav">
+    <div class="box">
+        <div>
+            <img src="../image/Creative-logo.png" class="logo">
+            <span class="fs-24">音频库</span>
+        </div>
+        <div>
+            <input class="cancelBorder">
+            <button class="cancelBorder">搜索</button>
+        </div>
+
+        <div>
+
+            <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录</span>
+            <a href="#">
+                <span data-toggle="modal" data-target="#myModal1">注册</span>
+            </a>
+
+            <!--登录的显示-->
+            <div style="position: relative">
+                <img src="../image/gedan2.jpg" class="touxiang-small dropdown-toggle" data-toggle="dropdown">
+                &nbsp; &nbsp;
+                <a href="#">
+                    <span data-toggle="modal" data-target="#myModal1">退出登录</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="./manager.html">管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!--
+下面是分类推荐
+-->
+<div class="ny-classfy container-fluid">
+    <div>分类:</div>
+    <ul>
+        <li class="select">民族风</li>
+        <li class="downBtn"><span class="glyphicon glyphicon-chevron-down"></span></li>
+    </ul>
+
+</div>
+
+
+<!--
+   显示所有的分类列表数据
+   ，默认不显示，，点击才会显示出来
+   通过动画显示出来
+-->
+<div class="classfy-list" style="overflow: hidden">
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+    <span>嘻哈</span>
+</div>
+
+
+<!--下面是列表数据的实现-->
+<div class="ny-content">
+    <!--数据分类-->
+    <div class="data">
+        <div class="itemRow">
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="itemRow">
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+            <div class="itemView">
+                <div class="head">
+                    <div>
+                        <div class="bg">
+                            <img src="../image/south.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4 class="title">励志明亮的企业背景</h4>
+                        <div class="formatBox">
+                            <span class="format">格式:mp3</span>
+                            <span class="format td-unline">详情</span>
+                        </div>
+                        <div class="formatBox">
+                            <div class="button">
+                                <span class="glyphicon glyphicon-save">立即下载</span>
+                            </div>
+                            <div>
+                                <span class="collectLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <span class="bofangLogo"></span>
+                    <span>00:00</span>
+                    <span class="progressLogo"></span>
+                    <span>02:35</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--分页的实现-->
+    <div class="splitPageBox">
+        <div class="splitPage">
+            <div>
+                <span class="select">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>4</span>
+            </div>
+            <div>
+                <span>下一页</span>
+                到第&nbsp;<input type="text" class="btn-input">&nbsp;页
+                <span class="btn">确定</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--版权等-->
+<footer class="nv-copyright">
+    <ul>
+        <li>关于我们</li>
+        <li>版权保障</li>
+        <li>VIP介绍</li>
+        <li>热门搜索</li>
+        <li>官方微博</li>
+        <li>联系客户</li>
+        <li>客户电话：021-2312234444</li>
+    </ul>
+    <p>暖云音乐，为你提供高质量音乐在线播放以及下载，免除版权困扰。</p>
+
+    <p class="copyright">
+        Copyright 2015摄图网 沪ICP备15050430号 ，
+        <span class="logo1">沪公网安备 31011502008153号</span>
+        <span class="logo2"></span><span class="logo3"></span>
+        用时：0.0319 秒
+    </p>
+</footer>
+
+<div class="playBar">
+    <audio controls autoplay class="bopfangBar">
+        <source src="../music/鞠婧祎 - 听到请回答.mp3">
+    </audio>
+    <div class="playInfo">
+        <img src="../image/gedan1.jpg">
+        <div>
+            <span>听到请回答</span>
+            <span class="secondFt">鞠婧祎</span>
+        </div>
+    </div>
+</div>
+
+
+<!--登录的模态框-->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    登录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    <img src="../image/gedan4.jpg" class="touxiang">
+                </div>
+
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户</span>
+                        <input type="text" class="form-control" placeholder="用户名">
+                    </div>
+                    <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input type="text" class="form-control" placeholder="密码">
+                    </div>
+                    <br>
+
+                    <button class="btn btn-info btn-block">登录</button>
+
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm register">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    注册
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    <img src="../image/gedan4.jpg" class="touxiang">
+                </div>
+
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户</span>
+                        <input type="text" class="form-control" placeholder="用户名">
+                    </div>
+                    <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input type="text" class="form-control" placeholder="密码">
+                    </div>
+                    <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input type="text" class="form-control" placeholder="再次输入">
+                    </div>
+                    <br>
+
+                    <button class="btn btn-info btn-block">注册</button>
+
+                    <input type="reset" value="重置" class="btn btn-success btn-block">
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<script>
+
+    $(document).ready(function (e) {
+
+
+        /**
+         * 菜单默认的选中
+         */
+        var defaultSelectIndex=1;
+
+       $(".classfy-list span:nth-child("+defaultSelectIndex+")").addClass("select")
+
+
+        var downMenuHeight = $(".classfy-list").css("height");
+
+        $(".classfy-list").css("height", 0);
+
+        $(".downBtn").click(function () {
+            if ($(".classfy-list").css("height") == "0px") {
+                $(".classfy-list").css("height", downMenuHeight)
+            } else {
+                $(".classfy-list").css("height", 0)
+            }
+        })
+
+
+        $(".title").hover(function (e) {
+            $(this).css("color", "#0C77CF")
+        })
+        $(".title").mouseleave(function (e) {
+            $(this).css("color", "")
+        })
+
+
+        /**
+         * 播放的点击
+         */
+        $(".bofangLogo").click(function () {
+            //进行播放
+            /**
+             * 如果没有登录，点击播放无效，会进入登录的界面
+             */
+
+        })
+
+        /**
+         * 立即下载的播放的点击
+         */
+        $(".button").click(function () {
+            /**
+             * 如果没有登录，就去登录，反之返回当前的MP3的服务器地址
+             */
+        })
+
+
+        /**
+         *
+         * 分类的点击时间
+         */
+
+        $(".classfy-list span").click(function () {
+            $(".classfy-list span:nth-child("+defaultSelectIndex+")").removeClass("select")
+            defaultSelectIndex=$(this).index()+1;
+            console.log(defaultSelectIndex)
+            $(this).addClass("select")
+            $(".classfy-list").css("height", 0)
+            $(".ny-classfy .select").text($(this).text())
+        })
+
+
+
+
+
+
+
+
+
+
+    })
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function demo1(){
+           // var ele=document.getElementById("draw");
+           // var draw=ele.getContext("2d");
+         //   alert(typeof draw);
+           // draw.fillStyle="#352";
+           // draw.fillStyle="#633";
+           // draw.strokeStyle="#345";
+           // draw.fillRect(10,10,100,100);
+           // draw.beginPath();
+          //  draw.arc(0,0,40,90,2*Math.PI,false);
+            //draw.lineTo(100,100);
+            //draw.fill();
+
+           // draw.arcTo(10,10,20,20,10);
+            //draw.stroke();
+          //  draw.fill();
+          //  var drawing = document.getElementById("draw");
+
+          //  var context = drawing.getContext("2d");
+
+            //start the path
+          //  context.beginPath();
+
+            //draw outer circle
+          //  context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+
+           // context.stroke();
+           // context.fill();
+
+            var ele=document.getElementById("draw");
+            var draw=ele.getContext("2d");
+            draw.beginPath();
+            draw.arc(100,100,99,0,2*Math.PI,false);
+            draw.arc(100,100,94,0,2*Math.PI,false);
+            draw.rect(240,320,100,100);
+            draw.stroke();
+        }
+
+        function test(){
+            var iframeWindow=frames["frame"].contentWindow;
+            iframeWindow.postMessage("你好","demo1.html");
+        }
+
+    </script>
+</head>
+<body>
+<iframe src="demo2.html" width="200px;" height="200px;" name="frame"></iframe>
+<script>
+    test();
+</script>
+</body>
+</html>

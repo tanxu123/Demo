@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function demo1(){
+            var bool=Boolean();
+        }
+
+        var obj=new Object();
+
+        function Person(name){
+        this.name=name;
+        }
+
+        function demo2()
+        {
+            arguments.callee;//demo2
+            arguments.callee.caller;//调用者函数的函数入口
+            demo2.caller;//同上
+
+            Person.call(this,"fang");//在特定域中调用函数
+          //  alert(window.name);
+            var bool=Person.hasOwnProperty("name");
+            var person=new Person("cheng");
+            bool=person.hasOwnProperty("name");
+            /*
+            在这里我们发现，不管是实例还是对象本身，都可以调用object的那些方法和属性
+             */
+
+           // alert(bool);
+            //alert(bool);
+
+            //创建对象
+          var person=new Person("fang");
+          person.address="anhui";
+           //alert(person.address);
+
+           function InputStream(size){
+
+           }
+           InputStream.format="text";
+
+           var input=new InputStream();
+           input.size="4k";
+           input.type="char";
+           // alert(input.format);
+           // alert(InputStream.format);
+           /*
+           我们发现不管向函数上面直接添加属性，还是向对象上添加属性，之后直接使用是可以的
+           一般来说，我们向对象上添加属性时，才能够使用，我们猜测Person与实例person都是对象，也就是都
+           会返回object
+            */
+
+           alert(Person instanceof Object);
+           alert(person instanceof Object);
+
+        }
+
+        function demo3(){
+
+            var number=20;
+            number.sex="女";
+            alert(number.sex);
+        }
+
+
+    </script>
+</head>
+<body>
+<script>
+
+   // demo2();
+    //demo3();
+</script>
+<script>
+  //   var name="fang";
+  // window.age=11;
+  //  alert(name);
+  // alert(window.name);
+  // alert(age);
+  // alert(this.age);
+  // alert(window.age);
+    function Person(){};
+
+  Person.sex="fang";
+
+  //alert(Person.sex);
+
+ // alert(Person instanceof Object);//true
+
+    //通过function.call实现继承
+  function Person(name){
+      this.name=name;
+      this.sayName=function(){
+          alert(this.name);
+      };
+      this.canCanvas=function(){
+          alert("我能画画");
+      };
+  }
+
+  function Child(){
+      Person.call(this,"fang");
+      this.readable=function () {
+          alert("我会读书了");
+      };
+  }
+  var child=new Child();
+  alert(child.name);
+  alert(child.canCanvas());
+
+
+
+</script>
+</body>
+</html>

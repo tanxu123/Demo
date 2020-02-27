@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .box {
+
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: relative;
+            /*-webkit-transition: width 2s; !* Safari *!*/
+            /*transition: width 2s;*/
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="box"></div>
+
+
+<script>
+
+
+    window.onload = function () {
+
+
+        var divBox = document.getElementsByClassName("box")[0];
+        var defaultOffsetDistance = 200;
+        var time = 30;
+        var index = 1;
+        var speed = 15;
+        var inter;
+        var inter2;
+
+
+        inter2 = setInterval(function () {
+
+            index++
+            var move = function () {
+
+                var speed = (defaultOffsetDistance * index - divBox.offsetLeft) / time
+
+                if (Math.floor(speed) == 0) {
+                    clearInterval(inter)
+                }
+
+                console.log(speed)
+
+                /**
+                 * 这里执行的是动画的效果
+                 */
+                divBox.style.left = divBox.offsetLeft + speed + "px"
+
+                // console.log(divBox.style.left)
+
+
+            }
+            inter = setInterval(move, 10)
+
+        }, 2000)
+    }
+
+
+</script>
+
+
+</body>
+</html>

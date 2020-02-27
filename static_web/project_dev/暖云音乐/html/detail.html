@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>歌曲详细信息的显示界面</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--    <script type="javascript" src="../js/jquery-3.3.1.min.js"></script>-->
+    <!--    <script type="javascript" src="../js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/publish.css" type="text/css">
+
+    <style>
+        /**
+  显示内容部分
+  */
+        div.data {
+            clear: both;
+        }
+
+        div.data:first-child {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .itemRow {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .ny-content .itemRow div:last-child {
+            margin-right: 0px;
+        }
+
+        .itemView {
+            margin-right: 1%;
+            margin-top: 1%;
+            margin-bottom: 1%;
+            background-color: #ffffff;
+            border-radius: 3px;
+            border: 1px solid #e6e6e6;
+            padding: 20px;
+            padding-bottom: 10px;
+            width: 32%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .itemView .head {
+            display: flex;
+
+            flex-direction: row;
+        }
+
+        .bg {
+            width: 160px;
+            height: 100px;
+            display: inline-block;
+            background: url("../image/voice.png");
+            background-position: -130px 212px;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #666666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .format {
+            font-size: 14px;
+            color: #999999;
+            margin: 15px 0;
+        }
+
+        .button {
+            display: inline-block;
+            width: 110px;
+            height: 30px;
+            line-height: 28px;
+            background-image: linear-gradient(-90deg, #E1ACF5 0%, #ADD6FF 100%);
+            border-radius: 2px;
+            text-align: center;
+            font-size: 14px;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .collectLogo {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            background: url("../image/voice.png");
+            background-position: -250px -35px;
+        }
+
+        .bofangLogo {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-image: url("../image/voice.png");
+            background-position: -30px -125px;
+        }
+
+        .progressLogo {
+            display: inline-block;
+            flex-grow: 1;
+            margin-left: 5px;
+            margin-right: 5px;
+            height: 24px;
+            background-image: url("../image/voice.png");
+            background-position: 0px -100px;
+            background-color: #CCCCCC;
+        }
+
+        .bottom {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+
+        .formatBox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /**
+          路径导航的实现
+         */
+        .breadcrumb {
+            background-color: #ffffff;
+            border-radius: 0px;
+        }
+
+        .container {
+            /*background-color: #ffffff;*/
+        }
+
+        .contentCenter {
+            background: #f5f5f5;
+            border-radius: 0px;
+        }
+
+        .contentBox {
+            box-sizing: border-box;
+        }
+
+        .left {
+            width: 60%;
+            position: relative;
+            background-color: #ffffff;
+            float: left;
+        }
+
+        .left h4 {
+            padding: 10px;
+        }
+
+        .right {
+            float: right;
+            width: 38%;
+            margin-left: 2%;
+        }
+
+        .leftPlayBox {
+            width: 100%;
+            background-image: url("../image/audio-bg.jpg");
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+
+
+        .leftPlayBox div {
+            height: 140px;
+            width: 70px;
+            background-image: url("../image/voice.png");
+            background-position: -140px -290px;
+        }
+
+        .leftPlayBox span {
+            display: inline-block;
+            height: 200px;
+            width: 80px;
+            background-image: url("../image/voice.png");
+            background-position: -300px -260px;
+            transform: rotate(-24deg);
+            transition: all 0.6s ease-in-out;
+            transform-origin: right top;
+        }
+
+        .playBox {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            box-sizing: border-box;
+            justify-content: start;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 2;
+            top: 380px;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .playBox span:nth-child(1) {
+            display: inline-block;
+            height: 60px;
+            width: 60px;
+            background: url("../image/voice.png");
+            background-position: -100px -125px;
+        }
+
+        .playBox span:nth-child(3) {
+            display: inline-block;
+            flex-grow: 1;
+            height: 50px;
+            margin: 0 10px;
+            background: url("../image/voice.png");
+            background-position: -0px -202px;
+            background-color: #ffffff;
+        }
+
+
+        .tag {
+            font-size: 14px;
+            font-family: "微软雅黑", Microsoft YaHei, Arial, Verdana;
+            color: #999;
+        }
+
+        .tag span {
+            margin-right: 20px;
+        }
+
+        .classfyBox {
+            padding: 10px;
+        }
+
+        .cl-bbb {
+            color: #BBBBBB;
+        }
+
+
+        .right {
+        }
+
+        .right div:first-child {
+            padding: 15px;
+            background-color: #ffffff;
+            overflow: hidden;
+            clear: both;
+        }
+
+
+        .right div:first-child div:nth-child(2) {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .right div:first-child div:nth-child(2) div {
+            width: 45%;
+            text-align: center;
+            border: 1px solid #eeeeee;
+            border-radius: 2px;
+            height: 35px;
+            margin: 0px;
+            float: left;
+        }
+
+        .right div:first-child div:nth-child(2) div:first-child {
+            margin-right: 10%;
+        }
+
+        .right .copy {
+            clear: both;
+            margin-top: 15px;
+            background-color: #ffffff;
+        }
+
+        .div_center {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .copy_one1{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .copy_temp{
+            padding:5px 15px;
+        }
+        .copy_temp span:first-child{
+            color: #999;
+            width: 85px;
+            display: inline-block;
+            padding-left: 0px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default ny-nav">
+    <div class="box">
+        <div>
+            <img src="../image/Creative-logo.png" class="logo">
+            <span class="fs-24">音频库</span>
+        </div>
+        <div>
+            <input class="cancelBorder">
+            <button class="cancelBorder">搜索</button>
+        </div>
+
+        <div>
+
+            <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录</span>
+            <a href="#">
+                <span data-toggle="modal" data-target="#myModal1">注册</span>
+            </a>
+
+            <!--登录的显示-->
+            <div style="position: relative">
+                <img src="../image/gedan2.jpg" class="touxiang-small dropdown-toggle" data-toggle="dropdown">
+                &nbsp; &nbsp;
+                <a href="#">
+                    <span data-toggle="modal" data-target="#myModal1">退出登录</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="./manager.html">管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!--
+  定义的中间内容部分
+-->
+<div class="contentCenter">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="./index.html">Index</a></li>
+            <li><a href="#">Detail</a></li>
+            <li class="active">Data</li>
+        </ol>
+
+
+        <!--定义中间的实际部分-->
+        <div class="contentBox">
+
+            <div class="left">
+                <h4>节奏鲜明的轻快伴奏</h4>
+                <hr/>
+                <div class="leftPlayBox">
+                    <img src="../image/gedan4.jpg">
+                    <div></div>
+                    <span></span>
+                </div>
+
+                <!--播放进度以及显示-->
+                <div class="playBox">
+                    <span class="playClick"></span>
+                    <span>00:00</span>
+                    <span></span>
+                    <span>03:00</span>
+                </div>
+
+
+                <hr/>
+                <div class="classfyBox tag">
+                    <span>分享:</span>
+                    <span>qq音乐:</span>
+                    <span>微信朋友圈:</span>
+                    <span>qq空间:</span>
+                    <span>新浪微博:</span>
+                    <span>花瓣:</span>
+                </div>
+
+                <div class="classfyBox tag">
+                    <span>标签:</span>
+                    <span>免费背景音乐</span>
+                    <span>其他</span>
+                    <span>婚礼配乐</span>
+                    <span>影视配乐</span>
+                    <span>浪漫背景音乐</span>
+                    <span>舒缓配乐</span>
+                    <span>舒缓背景音乐</span>
+
+                </div>
+
+                <hr/>
+
+                <p class="cl-bbb classfyBox">
+                    版权申明：本网站所有VRF协议音频及素材均由本公司或版权所有人授权发布，如果您侵犯了该音频素材或素材的知识产权，上海韩众网络科技有限公司有权依据著作权侵权惩罚性赔偿标准或最高达50万元人民币的法定标准要求赔偿，且有权不以本网站发布的音频授权价格作为参考标准。
+                </p>
+            </div>
+
+            <div class="right">
+                <div>
+                    <button class="btn btn-success btn-block">立即下载</button>
+                    <div>
+                        <div class="div_center">
+                            <span></span><span>赞</span>
+                        </div>
+
+                        <div class="div_center">
+                            <span></span>收藏
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy">
+                    <div class="copy_one1">
+                        <span>音频</span>
+                        <span>原创正版授权 </span>
+                        <span class="float-right">了解详细>></span>
+                    </div>
+                    <hr/>
+                    <p class="mg-l-10">版权问题</p>
+                    <hr/>
+                    <div class="copy_temp">
+                        <span>授权方式</span>
+                        <span>VRF授权(会员免费版权授权)</span>
+                    </div>
+                    <div class="copy_temp">
+                        <span>使用范围</span>
+                        <span> 商业用途 授权范围最广的全用途授权</span>
+                    </div>
+
+                    <div class="pd-10">
+                        <button class="btn  btn-success btn-block">
+                            <span>了解商用版权</span>
+                        </button>
+                    </div>
+
+                    <div class="copy_temp">
+                        <span>版权所有</span>
+                        <span>摄图网 </span>
+                    </div>
+
+                    <div class="mg-t-20">
+                        <span class="pd-l-15">配乐信息</span>
+                    </div>
+                    <hr/>
+
+                    <div class="copy_temp">
+                        <span>编号</span>
+                        <span>2</span>
+                    </div>
+
+                    <div class="copy_temp">
+                        <span>分类</span>
+                        <span> 配乐 </span>
+                    </div>
+
+                    <div class="copy_temp">
+                        <span>文件体积</span>
+                        <span>	4.7 MB</span>
+                    </div>
+
+                    <div class="copy_temp">
+                        <span>格式</span>
+                        <span> mp3</span>
+                    </div>
+
+                    <div class="copy_temp">
+                        <span>音频时长</span>
+                        <span>  02:03</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clear-both classfyBox">
+            <span>更多相似配乐</span>
+            <div class="data">
+                <div class="itemRow">
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itemRow">
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                    <div class="itemView">
+                        <div class="head">
+                            <div>
+                                <div class="bg">
+                                    <img src="../image/south.png" alt="">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h4 class="title">励志明亮的企业背景</h4>
+                                <div class="formatBox">
+                                    <span class="format">格式:mp3</span>
+                                    <span class="format td-unline">详情</span>
+                                </div>
+                                <div class="formatBox">
+                                    <div class="button">
+                                        <span class="glyphicon glyphicon-save">立即下载</span>
+                                    </div>
+                                    <div>
+                                        <span class="collectLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <span class="bofangLogo"></span>
+                            <span>00:00</span>
+                            <span class="progressLogo"></span>
+                            <span>02:35</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--版权等-->
+<footer class="nv-copyright">
+    <ul>
+        <li>关于我们</li>
+        <li>版权保障</li>
+        <li>VIP介绍</li>
+        <li>热门搜索</li>
+        <li>官方微博</li>
+        <li>联系客户</li>
+        <li>客户电话：021-2312234444</li>
+    </ul>
+    <p>暖云音乐，为你提供高质量音乐在线播放以及下载，免除版权困扰。</p>
+
+    <p class="copyright">
+        Copyright 2015摄图网 沪ICP备15050430号 ，
+        <span class="logo1">沪公网安备 31011502008153号</span>
+        <span class="logo2"></span><span class="logo3"></span>
+        用时：0.0319 秒
+    </p>
+</footer>
+
+<div class="playBar">
+    <audio controls autoplay class="bopfangBar">
+        <source src="../music/鞠婧祎 - 听到请回答.mp3">
+    </audio>
+    <div class="playInfo">
+        <img src="../image/gedan1.jpg">
+        <div>
+            <span>听到请回答</span>
+            <span class="secondFt">鞠婧祎</span>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    /**
+     * 文档加载完成后使用
+     */
+    $(document).ready(function () {
+
+    })
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        div {
+            height: 400px;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+    </style>
+    <script>
+
+
+        function sendAjax(url, response) {
+            var xhr;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    response(xhr.responseText);
+                }
+            }
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+
+        window.onload = function () {
+            change();
+        }
+
+        function change() {
+
+            var submit = document.getElementById("submit");
+            var user = document.getElementById("user")
+            var password = document.getElementById("password");
+
+            submit.onclick = function (ev) {
+                if (user.value.length == 0 || password.value.length == 0) {
+                    alert("请输入有效数据")
+                    return;
+                }
+                var param = "?user=" + user.value + "&password=" + password.value;
+
+                sendAjax("http://localhost:8080/music/UserLoginAction" + param, function (response) {
+
+                    var responseObj = JSON.parse(response);
+
+                    if (responseObj.responseCode == 0) {
+
+                        location.href = "../../../htmlStudy/index.html";
+                    } else {
+                        alert("登录名或密码错误");
+                    }
+
+                });
+
+
+            }
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div>
+    <h1>登录界面</h1>
+    <form method="get">
+        <table>
+            <tr>
+                <td>用户名</td>
+                <td><input type="text" name="user" placeholder="输入用户名" id="user"></td>
+            </tr>
+
+            <tr>
+                <td>密码</td>
+                <td><input type="text" name="password" placeholder="输入密码" id="password"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="button" value="提交" id="submit"></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

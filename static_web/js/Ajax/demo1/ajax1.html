@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+
+    <script>
+        var url = "http://api.help.bj.cn/apis/weather/?id=101060101";
+
+
+        function sendAjax(url, success, error) {
+
+            var xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            if (window.ActiveXObject) {
+                xhr = new ActiveXObject("microsoft-xmlhttp");
+            }
+
+            xhr.open("get", url, false);
+            xhr.send(null)
+
+            xhr.onreadystatechange = function (ev) {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    success(xhr.responseText);
+
+                    console.log(xhr.responseText);
+
+                } else {
+                    error();
+                }
+            }
+
+
+        }
+
+
+        sendAjax(url, function (responseData) {
+
+
+        }, function () {
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

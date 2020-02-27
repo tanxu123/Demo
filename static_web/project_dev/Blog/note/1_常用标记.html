@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>1_常用标记</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">1_常用标记</h1>
+		<div class="content-html" id="leanote-content"><h3>1.定义页面元信息标记&lt;meta&gt;</h3><pre id="leanote_ace_1539419162859_0" class="brush:html ace-tomorrow">&lt;!--设置网页的关键字--&gt;
+&lt;meta&nbsp;name="keywords"&nbsp;content="java培训。。。.net培训。。。"/&gt;
+&lt;!--设置网页描述--&gt;
+&lt;meta&nbsp;name="destribution"&nbsp;content="IT培训的龙头老大。。口碑最好"/&gt;
+&lt;!--设置网页作者--&gt;
+&lt;meta&nbsp;name="author"&nbsp;content="方志月"/&gt;
+&lt;!--设置服务器发送的给浏览器的http头部的信息--&gt;
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;charset=utf-8"/&gt;
+&lt;!--设置页面自动刷新与跳转--&gt;
+&lt;meta&nbsp;http-equiv="refresh"&nbsp;content="10;url=http://www.itcast.cn"/&gt;
+</pre><h3>&nbsp; &nbsp;2.引用外部文件的标记&lt;Link&gt;</h3><pre id="leanote_ace_1539419747259_0" class="brush:html ace-tomorrow">&lt;!--引入外部css样式表文件--&gt;
+&lt;link&nbsp;rel="stylesheet"&nbsp;type="text/css"&nbsp;href="style.css"/&gt;&nbsp;
+</pre><h3>&nbsp; &nbsp; 3.&lt;font&gt;&lt;/font&gt;标记 &nbsp;可以设置文本的样式，但是html5不在推荐使用</h3><h3>&nbsp; &nbsp; 4.文本格式化标签</h3><pre id="leanote_ace_1539419856176_0" class="brush:html ace-tomorrow">&lt;strong&gt;加粗&lt;/strong&gt;
+&lt;em&gt;斜体方式显示&lt;/em&gt;
+&lt;del&gt;加删除线显示&lt;/del&gt;
+&lt;ins&gt;加下划线显示&lt;/ins&gt;</pre><h3>&nbsp; &nbsp; 5.css属性align的使用</h3><pre id="leanote_ace_1539420008275_0" class="brush:html ace-tomorrow">&lt;p&nbsp;align="center"&gt;这是一个段落&lt;/p&gt;&nbsp;&nbsp;&nbsp;&nbsp;</pre><p>&nbsp; &nbsp; &nbsp;align属性在很多标记都能使用，不仅仅是段落 &nbsp;，一般是只能在块级元素里面使用，具体在行内块里使用下面进行测试</p><pre id="leanote_ace_1539505382081_0" class="brush:html ace-tomorrow">&lt;!DOCTYPE html&gt;    &lt;!--界面使用的是标准的html5标准--&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        * {   &lt;!--这个的作用是清除标记的原有的margin和padding以及border，因为部分标记会影响我们对整个网页的布局的判断--&gt;
+            margin: 0px;
+            padding: 0px;
+            border: none;
+        }
+        li {   &lt;!--这个我们设置li为行内元素，就会不在独占一行--&gt;
+            display: inline;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;div&gt;
+    &lt;!---下面的标记使用的宽度的值使用的是%的比例值，为了三个元素占一行，我们使用的是行内块，
+    没有使用行内元素的原因是行内元素不能使用text-align属性，这个和align属性是一样的--&gt;
+    &lt;ul style="display: inline-block;width: 10%;"&gt;
+        &lt;li&gt;点击&lt;/li&gt;
+        &lt;li&gt;注册&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul style="display: inline-block;width:80%;text-align: center"&gt;
+        &lt;li&gt;我们的实现基本的功能&lt;/li&gt;
+        &lt;li&gt;注册&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul style="display: inline-block;width:9%;text-align: right"&gt;
+        &lt;li&gt;点击&lt;/li&gt;
+        &lt;li&gt;注册&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;  &lt;!--上面可以作为一个模板，用来实现一行三块元素的不同显示方向--&gt;</pre><h3>&nbsp; &nbsp; 6.&lt;img/&gt;的使用</h3><pre id="leanote_ace_1539420253888_0" class="brush:html ace-tomorrow">&lt;img&nbsp;src="name.jpg"&nbsp;alt="替换文本"&nbsp;title="鼠标悬停时显示的文字"&nbsp;width="宽"&nbsp;heigh="高"&nbsp;border="边框int"&nbsp;vsace="顶部和底部的留白px"
+&nbsp;&nbsp;&nbsp;&nbsp;hspace="左边到右边的留白px"&nbsp;align="对其方式"&nbsp;/&gt;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--在这里vspace和hspace应该和align一起使用，来达到页面布局的目的--&gt;</pre><h3>&nbsp; &nbsp; 7.特殊字符</h3><p>&nbsp; &nbsp;&nbsp;<a href="http://tool.oschina.net/commons?type=2" data-mce-href="http://tool.oschina.net/commons?type=2">常用html转义字符</a>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;<br></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

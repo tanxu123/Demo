@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+        var time1;
+        var time2;
+        function demo2(){
+            var ele=document.getElementById("box2");
+            ele.style.display="block";
+        }
+        function demo3(){
+            var ele=document.getElementById("box2");
+            ele.style.display="none";
+        }
+        function demo4(){
+            time2=setTimeout(demo3,600);
+        }
+        function demo5(ev) {
+            clearTimeout(time2);
+            time1=setTimeout(demo2,300);
+        }
+        function demo1(){
+            var ele=document.getElementById("box1");
+            var box1=document.getElementById("box2");
+            ele.onmouseover=box1.onmouseover=demo5;
+            ele.onmouseout= box1.onmouseout=demo4;
+        }
+
+    </script>
+    <style>
+       #box1{
+           width:200px;height:50px;background-color: red;
+       }
+        #box2{
+            width:150px;height:40px;background-color: #FFCC00;
+            display: none;
+            margin-top:20px;
+        }
+    </style>
+</head>
+<body>
+<div id="box1">点击</div>
+<div id="box2"></div>
+<script>
+    demo1();
+</script>
+</body>
+</html>

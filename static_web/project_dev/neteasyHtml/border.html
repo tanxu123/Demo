@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+        div.logcatSingle {
+            height: 120px;
+            position: relative;
+        }
+
+        div div.rightTalkBox {
+            float: left;
+            margin-left: 50px;
+            width: 800px;
+            padding: 10px;
+            height: 80px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-family: "Microsoft YaHei";
+            border: 1px solid #a1a2a0;
+
+        }
+
+        div img.logcatImg {
+            border-radius: 50px;
+            height: 100px;
+            width: 100px;
+        }
+
+        div div.imgHeadBgBox {
+            height: 120px;
+            float: left;
+            display: inline-block;
+        }
+
+        div div.indicator {
+            width: 0px;
+            left: 50px;
+            top: 25px;
+            position: absolute;
+            z-index: -1;
+            height: 0px;
+            border-width: 40px;
+            border-style: solid;
+            border-color: #FFFFFF transparent transparent transparent;
+
+        }
+
+        div.logcatSingle div.rightTalkBox p.talk {
+            border: 10px;
+        }
+
+        div.logcatSingle div.rightTalkBox span.upgradeTime {
+            display: inline-block;
+            float: right;
+            color: #FFFFFF;
+            padding: 5px;
+            background-color: #ff5769;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        div.imgHeadBg {
+            height: 120px;
+            position: absolute;
+            z-index: -1;
+            left: 50px;
+            width: 5px;
+            background-image: url("images/headImgBg.jpeg");
+        }
+
+    </style>
+
+    <script>
+        window.onload = function (ev) {
+
+            // (function () {
+            //
+            //     var logbatBox = document.getElementById("logcatBox");
+            //     var innerHtml = "<div class=\"logcatSingle\">\n" +
+            //         "        <div class=\"imgHeadBgBox\">\n" +
+            //         "            <div class=\"imgHeadBg\"></div>\n" +
+            //         "            <img src=\"logcat.jpeg\" class=\"logcatImg\"/>\n" +
+            //         "        </div>\n" +
+            //         "        <!--这个用于显示尖角-->\n" +
+            //         "        <div class=\"indicator\">\n" +
+            //         "        </div>\n" +
+            //         "        <!--说的话-->\n" +
+            //         "        <div class=\"rightTalkBox\">\n" +
+            //         "            <p class=\"talk\">人不可缺少自己的道，要有一颗“利他之心” </p><br/>\n" +
+            //         "            <span class=\"upgradeTime\">2018-09-16</span>\n" +
+            //         "        </div>\n" +
+            //         "    </div>";
+            //     for (var i = 0; i < 10; i++) {
+            //         logbatBox.innerHTML += innerHtml;
+            //     }
+            // })();
+
+
+            var innerHtml="<div class=\"leftArticleSingle\">\n" +
+                "     <a href=\"#\">\n" +
+                "      <div class=\"leftArticleImg\"><img src=\"../img/articleListSingleImg.jpg\"/></div>\n" +
+                "      <div class=\"rightContent\">\n" +
+                "       <h3 class=\"headFontColor\">Javascript设计模式之\"观察者模式\"</h3>\n" +
+                "                          <ul>\n" +
+                "                           <li><img alt=\"\" src=\"../img/author.png\" width=\"25px\"></li>\n" +
+                "                           <li>\n" +
+                "                            <span class=\"contentFontColor\">段亮</span>\n" +
+                "                            <span class=\"contentFontColor\">&nbsp;&nbsp;发布时间:&nbsp;2018-10-12 20:45</span> \n" +
+                "                            <span class=\"contentFontColor\">&nbsp;&nbsp;分类:&nbsp;Web前端</span>\n" +
+                "                           </li>\n" +
+                "                          </ul>\n" +
+                "                          <div class=\"articleDestribute contentFontColor\">前言：最近在看相关源码的时候发现，有个词语反复的出现在自己的脑海里。那么是哪个神奇的词语呢？就是大家经常听到的“观察者模式\" ，对于前端而言用（发布-订阅）模式，来描述它更加亲切。 一、什么是观察者模式？... </div>\n" +
+                "      </div>\n" +
+                "     </a>\n" +
+                "    </div>\n";
+
+
+     var inner="<div class=\"logcatSingle\">\n" +
+         "            <div class=\"imgHeadBgBox\">\n" +
+         "                <div class=\"imgHeadBg\"></div>\n" +
+         "                <img src=\"../img/logcat.jpeg\" class=\"logcatImg\"/>\n" +
+         "             </div>\n" +
+         "             <!--这个用于显示尖角-->\n" +
+         "             <div class=\"indicator\">\n" +
+         "             </div>\n" +
+         "             <!--说的话-->\n" +
+         "             <div class=\"rightTalkBox\">\n" +
+         "                <p class=\"talk\">人不可缺少自己的道，要有一颗“利他之心” </p><br/>\n" +
+         "                <span class=\"upgradeTime\">2018-09-16</span>\n" +
+         "            </div>\n" +
+         "        </div>\n";
+
+
+
+
+
+     var innerHtml="  <p>姓名:</p>\n" +
+         "                      <p>QQ:</p>\n" +
+         "                      <p>职业:</p>\n" +
+         "                      <p>爱好:</p>\n" +
+         "                      <p>喜欢的歌手:</p>\n" +
+         "                      <p>喜欢的音乐:</p>\n" +
+         "                      <p>座右铭:</p>";
+
+
+
+
+            /**
+             * 动态改变指示器的颜色
+             */
+            (function () {
+                var logcatImgObj = document.getElementsByClassName("logcatImg");
+                var indicatorObj = document.getElementsByClassName("indicator");
+                for (var i = 0; i < logcatImgObj.length; i++) {
+                    logcatImgObj[i].index = i;
+                    logcatImgObj[i].onmouseover = function (ev) {
+                        indicatorObj[this.index].style.borderTopColor = "#cecdd2";
+                    }
+                    logcatImgObj[i].onmouseout = function (ev) {
+                        indicatorObj[this.index].style.borderTopColor = "";
+                    }
+                }
+            })();
+
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+<div id="logcatBox">
+    <div class="logcatSingle">
+        <div class="imgHeadBgBox">
+            <div class="imgHeadBg"></div>
+            <img src="logcat.jpeg" class="logcatImg"/>
+        </div>
+        <!--这个用于显示尖角-->
+        <div class="indicator">
+        </div>
+        <!--说的话-->
+        <div class="rightTalkBox">
+            <p class="talk">人不可缺少自己的道，要有一颗“利他之心” </p><br/>
+            <span class="upgradeTime">2018-09-16</span>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

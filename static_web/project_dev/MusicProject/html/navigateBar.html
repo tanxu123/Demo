@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--这个页面是导航条的设置-->
+
+    <script src="../template/mode/model.js"></script>
+    <script>
+
+        //定义全局的img的图片地址
+        var imgAddress = "../images/logo.png";
+
+        var clickItems;
+
+        var navigateItemUL;
+
+        /**
+         * 默认选中的index
+         */
+        var defalutSelectIndex = 0;
+
+        var spanSet;
+
+        var registerAddress;
+        var loginAddress;
+
+
+        /**
+         *加载数据
+         */
+        function onloadData() {
+            var logo = document.getElementById("logo");
+            logo.src = window.imgAddress;
+
+            navigateItemUL = document.getElementById("navigateItemUl");
+            //加载其他的item数据
+            for (var i = 0; i < clickItems.length; i++) {
+
+                var itemName = clickItems[i].itemName;
+                var linkAddress = clickItems[i].linkAddress;
+                navigateItemUL.innerHTML
+                    += "<li><a href=\"" + linkAddress +
+                    "\"><span class=\"navigateItm\">"
+                    + itemName + "</span></a></li>";
+            }
+
+        }
+
+        /**
+         */
+        function addMouseEvent() {
+
+            spanSet = navigateItemUL.getElementsByClassName("navigateItm");
+            for (var i = 0; i < spanSet.length; i++) {
+                spanSet[i].onmouseover = function (ev) {
+                    this.beforeColor = this.style.color;
+                    this.style.color = "#fe9e00"
+                }
+                spanSet[i].onmouseout = function (ev) {
+                    this.style.color = this.beforeColor;
+                }
+
+            }
+
+        }
+
+        /**
+         *  用来创建给一个导航条
+         * @param imageAddress 图片的地址
+         * @param itemArray 点击的对象数组
+         */
+        function createNavigate(imageAddress, clickItems, loginAddress, registerAddress) {
+            if (imageAddress != null) {
+                window.imgAddress = imgAddress;
+            }
+            window.clickItems = clickItems;
+
+            window.loginAddress = loginAddress;
+            window.registerAddress = registerAddress;
+
+            onloadData();
+
+            setSelect(defalutSelectIndex);
+
+            addMouseEvent();
+        }
+
+
+        /**
+         * 设置默认的选中
+         * @param int
+         */
+        function setSelect(index) {
+
+            spanSet = navigateItemUL.getElementsByTagName("li")
+            spanSet[index].className = "selectStyle";
+
+        }
+
+
+        function register() {
+            location.href = registerAddress;
+        }
+
+        function login() {
+
+            location.href = loginAddress;
+
+        }
+
+
+    </script>
+
+
+    <style>
+
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        img#logo {
+            position: relative;
+            top: 11px;
+            height: 30px;
+
+        }
+
+        div.navigateBarContainer {
+
+            width: 1000px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        ul {
+            display: inline-block;
+        }
+
+        li {
+            display: inline-block;
+            list-style: none;
+        }
+
+        li a span.navigateItm {
+            color: #4a4a4a;
+            margin-left: 20px;
+        }
+
+        div.navigateBarContainer li a {
+            text-decoration: none
+        }
+
+        /**
+        选中设置的style
+         */
+        .selectStyle {
+            color: #000;
+            font-weight: bold;
+        }
+
+        /**
+        下面是搜索的style
+         */
+        div.searchArea {
+            float: right;
+            overflow: hidden;
+        }
+
+        div.searchArea input.input {
+            background: #fbfbfb;
+            margin-top: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            border: none;
+            height: 30px;
+            font-size: 14px;
+            border-radius: 1px;
+            width: 100px;
+            margin-right: 20px;
+            border-bottom: 1px solid #4a4a4a;
+        }
+
+        div.navigateBarContainer div.user {
+            float: right;
+            font-size: 14px;
+            position: relative;
+            top: 18px;
+            font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="navigateBarContainer">
+    <img id="logo"/>
+    <ul id="navigateItemUl">
+    </ul>
+    <!--用户登录的显示-->
+    <div class="user">
+        <span onclick="login()">登录</span>
+        /
+        <span onclick="register()">注册</span>
+    </div>
+    <!--搜索区域-->
+    <div class="searchArea">
+        <input class="input" placeholder="输入歌名或歌手"/>
+    </div>
+</div>
+</body>
+</html>

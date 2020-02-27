@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style>
+        .wrap{
+            width:728px;height:108px;
+            overflow: hidden;
+            /*margin:50px auto 0px;*/
+        }
+        /*ul{*/
+            /*position: absolute;*/
+            /*left:0px;*/
+            /*top:0px;*/
+        /*}*/
+        .wrap ul li{
+            list-style-type: none;
+            /*text-align: center;*/
+            width:182px;
+            height:108px;
+            float:left;
+        }
+
+    </style>
+    <script>
+       function move(){
+            var box=document.getElementById("wrap");
+            var ul=document.getElementsByTagName("ul")[0];
+            var li=document.getElementsByTagName("li");
+            ul.innerHTML+=ul.innerHTML;
+            ul.style.width=li[0].offsetWidth*li.length+"px";
+            function (){
+
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/3.jpg" alt=""></li>
+        <li><img src="images/4.jpg" alt=""></li>
+    </ul>
+</div>
+<script>
+    move();
+</script>
+</body>
+</html>

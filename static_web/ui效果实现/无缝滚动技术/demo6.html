@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style>
+        #demo{
+            width:1000px;
+            height:30px;
+            overflow:hidden;
+            line-height:30px;
+            font-size:13px;
+            font-family:'宋体';
+            background:#ddd url(images/notice.png) no-repeat 25px center;
+            color:#0C77CF;
+            font-weight:bold;
+            margin: 0 auto;
+        }
+        #demoin {
+            width: 900px;
+            height: 30px;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #demo #demo1, #demo #demo2{display:inline}
+    </style>
+</head>
+<body>
+
+<div id="demo"><!-- width:1000px;
+            height:30px;
+            overflow:hidden;-->
+    <div id="demoin">
+        <!--
+         width: 900px;
+            height: 30px;
+            margin: 0 auto;-->
+        <div id="demo1">
+            <a href="">测试文字1</a>
+            <a href="">测试文字2</a>
+            <a href="">测试文字3</a>
+            <a href="">测试文字4</a>
+            <a href="">测试文字5</a>
+            <a href="">测试文字7</a>
+            <a href="">测试文字8</a>
+            <a href="">测试文字9</a>
+            <a href="">测试文字10</a>
+            <a href="">测试文字11</a>
+            <a href="">测试文字12</a>
+            <a href="">测试文字13</a>
+            <a href="">测试文字14</a>
+            <a href="">测试文字15</a>
+            <a href="">测试文字16</a>
+            <a href="">测试文字17</a>
+        </div>
+        <div id="demo2"></div>
+    </div>
+</div>
+
+<script>
+    window.onload = function(){
+        scrollLeft();
+    };
+    function scrollLeft(){
+        var speed = 10;
+        var tab = document.getElementById('demoin');//被滚动的元素
+        var tab1 = document.getElementById('demo1');
+        var tab2 = document.getElementById('demo2');
+        tab2.innerHTML = tab1.innerHTML;
+        function Marquee(){
+            if(tab1.offsetWidth - tab.scrollLeft <=0) {
+                alert(tab.scrollLeft);
+                tab.scrollLeft = 0;
+            }else{
+                tab.scrollLeft +=speed;
+            }
+
+        }
+        var timer = setInterval(Marquee,speed);
+        tab.onmouseover = function(){
+            clearInterval(timer);
+        };
+        tab.onmouseout = function(){
+            timer = setInterval(Marquee,speed);
+        }
+    }
+</script>
+</body>
+</html>

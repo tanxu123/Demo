@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+        var globalArticleListInfo = [{
+            "user": {
+                "name": "无名帅蟀",
+                "userid": 123456,
+                "picture": "http://localhost:8080/Blog/userHeadPortrait/usepricture.jpeg"
+            },
+            "articleDestribute": "1_常见标记",
+            "articleName": "html里面的常用标记",
+            "articlePublishTime": "201811141808",
+            "authorid": 111111,
+            "articleAddress": "http://localhost:8080/Blog/article/1_common_mark.html",
+            "classfy": "html基础入门",
+            "articlePictureAddress": "http://localhost:8080/Blog/html/img/one.jpeg"
+        }, {
+            "user": {
+                "name": "无名帅蟀",
+                "userid": 123456,
+                "picture": "http://localhost:8080/Blog/userHeadPortrait/usepricture.jpeg"
+            },
+            "articleDestribute": "2_css技术美化网页",
+            "articleName": "使用css样式修饰，让你的html网页更加美观",
+            "articlePublishTime": "201811141810",
+            "authorid": 111111,
+            "articleAddress": "http://localhost:8080/Blog/article/2_css_technology_beautifies_webpage.html",
+            "classfy": "html基础入门",
+            "articlePictureAddress": "http://localhost:8080/Blog/html/img/two.jpeg"
+        }, {
+            "user": {
+                "name": "无名帅蟀",
+                "userid": 123456,
+                "picture": "http://localhost:8080/Blog/userHeadPortrait/usepricture.jpeg"
+            },
+            "articleDestribute": "3_css的-div-盒子模型 ",
+            "articleName": "使用div实现网页的复杂布局",
+            "articlePublishTime": "201811141811",
+            "authorid": 111111,
+            "articleAddress": "http://localhost:8080/Blog/article/3_css_division_box_model.html",
+            "classfy": "html基础入门",
+            "articlePictureAddress": "http://localhost:8080/Blog/html/img/three.jpeg"
+        }, {
+            "user": {
+                "name": "无名帅蟀",
+                "userid": 123456,
+                "picture": "http://localhost:8080/Blog/userHeadPortrait/usepricture.jpeg"
+            },
+            "articleDestribute": "4_列表与超链接 ",
+            "articleName": "使用常见列表超链接，使你的网页不在孤单",
+            "articlePublishTime": "201811141812",
+            "authorid": 111111,
+            "articleAddress": "http://localhost:8080/Blog/article/4_list_and_link.html",
+            "classfy": "html基础入门",
+            "articlePictureAddress": "http://localhost:8080/Blog/html/img/four.jpeg"
+        }, {
+            "user": {
+                "name": "无名帅蟀",
+                "userid": 123456,
+                "picture": "http://localhost:8080/Blog/userHeadPortrait/usepricture.jpeg"
+            },
+            "articleDestribute": "5_js简单入门，了解js的发展历史，js的简单运算，定义变量，赋值等操作，了解js的基本组成部分",
+            "articleName": "5_js简单入门",
+            "articlePublishTime": "201811151354",
+            "authorid": 111111,
+            "articleAddress": "http://localhost:8080/Blog/article/float_and_position.html",
+            "classfy": "js入门学习",
+            "articlePictureAddress": "http://localhost:8080/Blog/html/img/five.jpeg"
+        }];
+
+
+        var articleList=JSON.parse(globalArticleListInfo);
+        //检索出文章分类的种类
+        var classfyArray=new Array();
+        classfyArray[0]=articleList[0].classfy;
+        for(var j=0;j<articleList.length;j++){
+            for(var i=0;i<classfyArray.length;i++){
+                if(articleList[j].classfy!=classfyArray[i]){
+                    classfyArray[classfyArray.length]=articleList[j].classfy;
+                }
+            }
+        }
+
+        function ClassfyObj(classfyArray,arrayArticleInfo){
+            this.classfy=classfyArray;
+            this.articles=arrayArticleInfo;
+        }
+
+        var classfyObjList=new Array();
+        //下面进行数据的从新排序
+        for(j=0;j<classfyArray.length;j++){
+            var arrayArticleInfo=new Array();
+            for(i=0;i<articleList.length;i++){
+                if(articleList[i].classfy==classfyArray[j]){
+                    arrayArticleInfo[arrayArticleInfo.length]=articleList[i];
+                }
+            }
+            var classfyObj=new ClassfyObj(classfyArray[j],arrayArticleInfo);
+            classfyObjList[classfyObjList.length]=classfyObj;
+        }
+
+
+    </script>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            background-color: #00CC33;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="one">
+    世界你好
+
+</div>
+
+</body>
+</html>

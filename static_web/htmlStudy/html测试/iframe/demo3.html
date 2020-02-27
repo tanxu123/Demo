@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta content="text/html charset=utf-8" http-equiv="Content-Type">
+    <script>
+
+
+        function Child(){
+            Person.call(this,"fang");
+            this.readable=function () {
+                alert("我会读书了");
+            };
+        }
+        // var child=new Child();
+        // alert(child.name);
+        // alert(child.canCanvas());
+
+        var person={
+          name:"fang",
+          age:12,
+          sex:"woman",
+            person:Person
+        };
+
+        //数组
+        function demo1(){
+            var arr=new Array();
+            arr[0]="gsg";
+            arr[1]="wee";
+            for(var i=0;i<arr.length;i++){
+                alert(arr[i]);
+            }
+        }
+
+        //使用argumebnts来实现递归
+        var result=function (num){
+            if(num<1){
+                return 1;
+            }
+          return num*arguments.callee(num-1);
+        }
+
+        //alert(result(5));
+
+         function Demo1(name){
+            this.name=name;
+         }
+         function Demo2(){
+            this.demo1=Demo1;
+            this.sex="nan";
+         }
+
+         var demo2=new Demo2();
+        //demo2.demo1.call(this,"fang");
+         demo2.demo1=new Demo1("fang");
+         // alert(name);
+
+        /**
+         * 创建引擎类
+         * @param speed
+         * @param weight
+         * @constructor
+         */
+        function Engine(speed,weight){
+            this.speed=speed;
+            this.weight=weight;
+            if(typeof speed==undefined){
+                this.speed=160;
+                this.weight=500;
+            }
+        }
+
+        /**
+         * 车子的类
+         * @param type
+         * @param county
+         * @param price
+         * @constructor
+         */
+        function Car(type,county,price){
+           this.engine=new Engine();
+            this.type=type;
+            this.county=county;
+            this.price=price;
+        }
+
+
+        function CarFoctory(county,scale,carNumber,type){
+         this.cars=new Array();
+         for(var i=0;i<carNumber;i++){
+             cars[i]=new Car(type,county,200000);
+             cars[i].id=i;
+         }
+
+        }
+
+        /*
+        创建对象
+         */
+        // function demo5(){
+        //     var car=new Car("皮卡","US","400000");
+        //     car.engine=new Engine(180,500);
+        //     alert(car.engine.speed);//汽车的速度
+        // }
+
+      //  demo5.bind();
+
+       //eval("alert(\"你好\")");
+
+        var global=function(){
+            return this;
+        }();
+
+        //alert(global);window
+
+        var paper={
+            rule:"56x12",
+            color:"白色",
+            fontColor:"黑色"
+        }
+
+        function Page(){
+            this.name="sdgg";
+        }
+
+        var book={
+            pageCount:600,
+            author:"fang",
+            type:"计算机",
+            paper:paper,
+            page:Page//这样这是绑定了一个动作
+        }
+          // if(Page.getOwnPropertyDescriptor)
+          // {
+          //     alert("gwegweg");
+          // }else{
+          //   alert("不存在的");//不存在
+          // }
+
+          Page.setname=function(){
+          }//等同于静态方法，不依赖具体的实现
+
+          var page=new Page();
+           Page.prototype.color=function(){
+               alert("是白的");
+           }
+
+           //alert(Page.prototype.isPrototypeOf(page));
+
+       // alert(Object.getPrototypeOf(page).color);
+
+        Person.prototype={
+               name:"fang",
+                sex:22,
+               age:"男"
+        }
+        var person=new Person();
+        //alert(person.constructor);//Object
+
+       // alert(Person.prototype.constructor);//Object
+
+        function Person(name){
+            this.name=name;
+            this.sayName=function(){
+                alert(this.name);
+            };
+            this.canCanvas=function(){
+                alert("我能画画");
+            };
+        }
+        Person.prototype.sayName=function(){
+            alert(this.name);
+        };
+        Person.prototype.sayHello=function(){
+            alert("HelloWorld");
+        };
+
+        //组合继承
+        function SuperType(name){
+            this.name=name;
+            this.color=["red","blue","green"];
+        }
+        SuperType.prototype.sayName=function(){
+            alert("世界你好");
+        }
+        function SubType(age,name) {
+            SuperType.call(this, name);
+            this.age = age;
+        }
+        SubType.prototype=new SubType();
+        SubType.prototype.constructor=SubType;
+        SubType.prototype.sayAge=function(){
+        alert(this.age);
+        }
+
+        function Smallsub(age,name,address){
+            SubType.call(this,age,name);
+            this.address=address;
+        }
+        Smallsub.prototype=new SubType();
+        Smallsub.prototype.constructor=Smallsub;
+        Smallsub.prototype.seeView=function(){
+            alert(this.age+"xiaoxiao");
+        }
+
+        //函数表达式
+        function getClick(){
+          var ols=document.getElementsByTagName("ol");
+          var li=ols[0].children;
+          for(var i=0;i<li.length;i++){
+              li[i].index=i;
+             li[i].onclick=function(ev){
+                alert(this.index);
+             }
+          }
+        }
+    //私有作用域
+        (function get(){
+            var i=20;
+            alert("世界你好");
+        })();
+
+        function MyObject(){
+            var privateVariable=10;
+            function getPrivateVariable(){
+                return privateVariable;
+            }
+            this.getPrivateVariable=getPrivateVariable;
+        }
+        var obj=new MyObject();
+        var getPrivateVariable=obj.getPrivateVariable;
+      alert(getPrivateVariable());
+
+
+
+
+
+    </script>
+</head>
+<body>
+<!--<ol>-->
+    <!--&lt;!&ndash;<li>项目一</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li>项目二</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li>项目三</li>&ndash;&gt;-->
+<!--</ol>-->
+<script>
+    // getClick();
+</script>
+</body>
+</html>

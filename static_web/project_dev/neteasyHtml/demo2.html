@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="demo.js" type="text/javascript" rel="script"></script>
+    <script>
+        var demo = {
+            name: "fang",
+            age: 12,
+            address: function () {
+
+            }
+
+        }
+
+    </script>
+    <script>
+
+        var serverUrl = "http://localhost:8080/VideoServlet?videoAddress=" + videoAddress;
+        var innerHtml = "<div class=\"contentBoxVideoBox_item\">\n" +
+            "     <a href=\"" + serverUrl + "\">\n" +
+            "      <!-- 视频列表图片 -->\n" +
+            "      <div class=\"contentBoxVideoBox_item_imgBox\"><img class=\"contentBoxVideoBox_item_img\" src=\"http://localhost:8080/Blog/html/img/videoListBg.jpg\"/></div>\n" +
+            "      <!-- 视频的标题 -->\n" +
+            "      <p class=\"contentBoxVideoBox_item_title\">" + videoName + "</p>\n" +
+            "      <!-- 视频的一些描述 -->\n" +
+            "      <p class=\"contentBoxVideoBox_itemDestribute\">\n" +
+            "      " + videoDestribute + "\n" +
+            "      </p>\n" +
+            "     </a>\n" +
+            "    </div>";
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        .box {
+            position: absolute;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        li {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+
+        .coverdiv {
+            width: 100%;
+            position: relative;
+            left: 200px;
+            height: 200px;
+            z-index: 5;
+            background-color: #FFFFFF;
+        }
+
+    </style>
+
+    <script>
+
+        var progress = 0;
+
+
+
+        function change() {
+
+            var liSet = document.getElementsByTagName("li");
+            progress++;
+            for (var i = 0; i < liSet.length; i++) {
+                liSet[i].style.right = progress + "px";
+            }
+            if ((-liSet[0].offsetLeft) >= 1000) {
+                progress = 0;
+            }
+
+
+        }
+
+
+        function move(obj) {
+            setInterval(change, 5);
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div class="box" onclick="move(this)">
+    <li style="background-color: blue"></li>
+    <li style="background-color: orange"></li>
+    <li style="background-color: yellow"></li>
+    <li style="background-color: red"></li>
+    <li style="background-color: green"></li>
+    <li style="background-color: blue"></li>
+    <font color="#ff3718"></font>
+</div>
+
+<div class="coverdiv">
+
+
+</div>
+
+</body>
+</html>

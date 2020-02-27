@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+             // //检测插件
+        // function pluginTesting(name){
+        //     name=name.toLowerCase();
+        //     if( navigator.plugins instanceof PluginArray) {
+        //         for (var i = 0; i < navigator.plugins.length; i++) {
+        //             if (navigator.plugins[i].name.toLowerCase().indexOf(name) > -1) {
+        //                 return true;
+        //             } else {
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
+        // alert("Flash:"+pluginTesting("Flash"));
+        // alert("QuickTime:"+pluginTesting("QuickTime"));
+        // alert("Flash:"+hasPlugin("ShockwaveFlash.ShockwaveFlash"));
+        //
+        // function hasPlugin(name){
+        //     try {
+        //         new ActiveXObject(name);
+        //         return true;
+        //     }catch (e){
+        //         return false;
+        //     }finally {
+        //     }
+        // }
+
+     //  alert("Flash:"+hasPlugin("ShockwaveFlash.ShockwaveFlash"));
+        //alert("QuickTime:"+hasPlugin("QuickTime"));
+
+        function demo1(){
+            frames["frame"].document.designMode="on";
+        }
+
+    </script>
+</head>
+<body>
+<iframe src="demo7.html" name="frame" width="200px" height="200px;"></iframe>
+<script>
+    window.onload=demo1;
+</script>
+</body>
+</html>

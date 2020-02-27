@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+
+        var url = "http://api.help.bj.cn/apis/weather/?id=101060101";
+
+
+        function sendAjax(url, success, error) {
+
+            var xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            if (window.ActiveXObject) {
+                xhr = new ActiveXObject("microsoft-xmlhttp");
+            }
+
+            xhr.open("get", url, false);
+            xhr.send(null)
+
+            xhr.onreadystatechange = function (ev) {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    success(xhr.responseText);
+
+                    alert("asfaf" + xhr.responseText);
+
+                } else {
+                    error();
+                }
+            }
+
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+
+<script>
+    sendAjax(url, function (responseData) {
+
+    }, function () {
+
+    });
+
+
+</script>
+</body>
+</html>

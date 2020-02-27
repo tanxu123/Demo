@@ -1,0 +1,94 @@
+div.contentBox div.rightPlayBox {
+    overflow: hidden;
+    width: 30%;
+    margin-top: 20px;
+    float: right;
+}
+
+div.contentBox div.rightPlayBox div.searchArea {
+    height: 40px;
+    background-color: #ffffff;
+}
+
+div.contentBox div.rightPlayBox div.searchArea div.searchBox {
+    border: 1px solid #a9a9a9;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 10px;
+    position: relative;
+    top: 5px;
+}
+
+div.contentBox div.rightPlayBox div.searchArea div.searchBox input.inputSearch {
+    height: 27px;
+}
+
+div.contentBox div.rightPlayBox div.searchArea div.searchBox img.searchIcon {
+    position: relative;
+    top: 5px;
+}
+
+div.contentBox div.rightPlayBox li.nav-1 {
+    width: 40%;
+    height: 40px;
+    text-align: center;
+    float: left;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+div.contentBox div.rightPlayBox li.nav-2 {
+    width: 40%;
+    height: 40px;
+    float: right;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+div.contentBox div.rightPlayBox div.side-nav {
+    overflow: hidden;
+    color: #ffffff;
+}
+
+div.contentBox div.rightPlayBox div.side-nav ul.clearfix {
+    overflow: hidden;
+    width: 320px;
+    margin: 20px auto;
+}
+
+div.contentBox div.rightPlayBox div.classMenu {
+    margin-top: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.bgcolor_1 {
+    border: 1px solid #0C77CF;
+    background-color: #0C77CF;
+}
+
+.bgcolor_2 {
+    border: 1px solid #ff5ecf;
+    background-color: #ff5ecf;
+}
+
+.bgcolor_3 {
+    border: 1px solid #00cf0c;
+    background-color: #00cf0c;
+}
+
+.bgcolor_4{
+    border: 1px solid #cfb700;
+    background-color: #cfb700;
+}
+
+.fontColor{
+    color: #ffffff;
+}

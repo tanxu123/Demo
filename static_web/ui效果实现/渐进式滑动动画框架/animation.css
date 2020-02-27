@@ -1,0 +1,158 @@
+.gs {
+    position: relative;
+    top: 100px;
+    font-weight: bold;
+}
+
+
+/**
+ x轴的左平移进入动画
+ */
+.xz {
+    animation: translateX1 1.5s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+}
+
+
+.translateRoot {
+    clear: both;
+    overflow: hidden
+}
+
+/**
+
+左边到右边平移动画的布局容器
+
+ */
+
+.l2rTranslateRoot {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/**
+左边到右边平移动画的布局容器
+ */
+.l2rTranslateContainer {
+    left: -100%;
+    position: relative;
+    width: 100%;
+}
+
+/**
+右边到左边平移动画的布局容器
+ */
+.r2lTranContainer {
+    right: -100%;
+    position: relative;
+    width: 100%;
+}
+
+
+/**
+    左右两边同时进入布局容器
+ */
+
+.lrTransRoot {
+
+}
+
+/**
+    左右两边同时进入的左边的布局容器
+ */
+
+
+.leftTranContainer {
+    position: relative;
+    left: -50%;
+    width: 50%;
+    float: left;
+}
+
+/**
+    左右两边同时进入的右边的布局容器
+ */
+.rightTranContainer {
+    position: relative;
+    right: -50%;
+    width: 50%;
+}
+
+
+/*
+
+x轴的右平移进入动画
+
+ */
+.xz1 {
+    animation: translateX2 1.5s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+}
+
+/**
+  y轴的上边进入平移动画
+ */
+
+.xz2 {
+    animation: translateY1 1.5s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+}
+
+
+/*
+ y轴的上边进入的布局容器
+
+ 使用该 布局容器的时候，需要在 文档加载完成测量 当前容器的高度
+
+ */
+.downTranContainer {
+    width: 100%;
+    position: relative;
+}
+
+/**
+上边进入 的布局的根节点
+ */
+.downTranRoot {
+
+}
+
+
+.gs {
+    float: left;
+}
+
+@keyframes translateX1 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+@keyframes translateX2 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+@keyframes translateY1 {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+

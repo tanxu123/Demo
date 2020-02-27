@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+        window.onload = function (ev) {
+
+            var obj = document.getElementsByClassName("box")[0]
+            obj.onmouseover = function (ev) {
+                this.style.width = "200px";
+                this.style.height = "300px";
+                this.style.color = "#462";
+            };
+
+            obj.onmouseout = function (ev) {
+                this.style.width = "";
+                this.style.height = "";
+                this.style.color = "";
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div class="box" style="border: 1px solid #ff5ecf;">awfgeqwgeqgqegq</div>
+
+</body>
+</html>

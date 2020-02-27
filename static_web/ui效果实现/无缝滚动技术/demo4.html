@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style>
+        .wrap{
+            width:640px;
+            height:100px;
+            overflow: hidden;
+        }
+        /*ul{*/
+            /*position: absolute;*/
+            /*left:0px;*/
+            /*top:0px;*/
+        /*}*/
+
+       li{
+           /*witdh:160px;height:100px;background-color: #eeeeee;margin:10px;list-style-type: none;float: left;*/
+           /*width:160px;height:100px;background-color: #FFCC00;list-style-type: none;float: left;*/
+           list-style-type: none;
+           /*text-align: center;*/
+           width:160px;
+           height:100px;
+           float:left;
+           background-color: #cde6ff;
+           border: 1px solid #cccccc;
+       }
+
+    </style>
+    <script>
+        function move(){
+            var speed=5;
+            var box=document.getElementById("box");
+            var move=document.getElementById("move");
+            var li=box.getElementsByTagName("li");
+            move.innerHTML+=move.innerHTML;
+            //alert(box.offsetWidth);720不变
+            move.style.width=li[0].offsetWidth*li.length+"px";
+            move.style.position="absolute";
+            move.style.left="0px";
+            move.style.left="0px";
+            //右移动
+            function move1(){
+                move.style.left=move.offsetLeft+speed+"px";
+                if(move.offsetLeft>=0){
+                    move.style.left=-move.offsetWidth/2+"px";
+                }
+            }
+            //左移动
+            function move2(){
+                move.style.left=move.offsetLeft-speed+"px";
+                if(move.offsetLeft<=move.offsetWidth/2){
+                    move.style.left="0px";
+                }
+            }
+            //setInterval(move1,200);
+            setInterval(move2,200);
+        }
+    </script>
+</head>
+<body>
+<div class="wrap" id="box">
+    <ul id="move">
+        <li id="li"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+   move();
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        p{
+            color:#46abff;
+        }
+
+        .fsfs{
+
+        }
+
+        #one{
+
+        }
+      #header{
+
+          color: #ff5707;
+
+      }
+
+        .two{
+
+            color: #000;
+        }
+
+        strong{
+            color: #10ff00 !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--
+标记选择器的权重为1
+类选择器为10
+id选择器为100
+
+
+继承样式的权重为0
+
+父标签设置的样式不管使用的是什么选择器，都不会对子标签进行影响
+就算是说子节点使用的是权重最低的标记选择器记性修饰，那么依旧会按照标记选择器设置的属性来显示
+
+
+行内式优先
+链入式
+头部修饰
+
+
+
+css提供了一个！important
+-->
+
+<p class="fsfs" id="one"></p>
+
+<P id="header" class="blue">
+    <strong class="two" style="color:#ffc62a;">继承样式</strong>
+</P>
+
+
+</body>
+</html>

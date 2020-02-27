@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>无需刷新整个web页面显示服务器响应时间</title>
+</head>
+<body>
+当前时间
+<span id = "time"></span> <br>
+
+<input id="buttonID" type="button" value="获取当前时间">
+
+<br>
+
+<script type="text/javascript">
+
+    //创建ajax对象
+    function createAJAX() {
+
+        var ajax = null;
+
+        try {
+            ajax = new ActiveXObject("microsoft.xmlhttp");
+
+        }catch (e1){
+
+            try {
+                ajax = new XMLHttpRequest();
+            }catch (e2){
+
+                alert("你的浏览器不支持异步对象,请更换浏览器");
+            }
+
+        }
+
+        return ajax;
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+    document.getElementById("buttonID").onclick = function () {
+        //1.创建ajax异步对象
+        var ajax = createAJAX();
+        //2.准备发送请求
+        var method = "GET";
+        var url = "http://localhost/demo2/AjaxTimeServlet?time="+new Date().getTime();
+        ajax.open(method,url);
+        //3.真正发送请求体数据到服务器，如果请求体中没有内容,用null表示
+        ajax.send(null);
+
+        //==========等待
+
+
+        //4.ajax异步对象不断监听服务器的状态0-1-2-3-[4]
+        // 一定要状态变化后，才触发function函数
+        // 如果状态永远时4-4-4-4-4,不会触发function(){}函数
+        ajax.onreadystatechange = function () {
+            //如果状态码是4
+            if (ajax.readyState == 4){
+                //如果响应码是200
+                if (ajax.status == 200){
+                    //5.用ajax异步对象中获取数据
+                    var nowStr = ajax.responseText;
+                    var spanElement = document.getElementById("time");
+                    spanElement.innerHTML = nowStr;
+
+                }
+            }
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style>
+        .wrap{ width: 728px; height: 108px; margin: 0 auto; position: relative; overflow: hidden; }
+        /*.roll { width: 880px; height: 108px; margin: 50px auto 0; position: relative; }*/
+        /*.roll ul { position: absolute; top: 0; left: 0; }*/
+        /*.roll li { float: left; width: 182px; height: 108px; text-align: center; }*/
+        .roll li { float: left; width: 182px; height: 108px;}
+        ul{
+            position:absolute;
+            top:0px;
+            left:0px;
+        }
+        /*.roll li a:hover { position: relative; top: 2px; }*/
+    </style>
+</head>
+<body>
+<div class="wrap" id="box">
+    <ul id="move"><!--默认是没有宽高的。通过js动态设置-->
+        <li><a href="http://www.miaov.com/"><img src="images/1.jpg" /></a></li>
+        <li><a href="http://www.miaov.com/"><img src="images/2.jpg" /></a></li>
+        <li><a href="http://www.miaov.com/"><img src="images/3.jpg" /></a></li>
+        <li><a href="http://www.miaov.com/"><img src="images/4.jpg" /></a></li>
+    </ul>
+</div>
+    <script>
+        function move(){
+            var speed=5;
+            var box=document.getElementById("box");
+            var move=document.getElementById("move");
+            var li=box.getElementsByTagName("li");
+            move.innerHTML+=move.innerHTML;
+            //alert(box.offsetWidth);720不变
+            move.style.width=li[0].offsetWidth*li.length+"px";
+            //右移动
+            function move1(){
+                move.style.left=move.offsetLeft+speed+"px";
+                if(move.offsetLeft>=0){
+                    move.style.left=-move.offsetWidth/2+"px";
+                }
+            }
+            //左移动
+            function move2(){
+                move.style.left=move.offsetLeft-speed+"px";
+                if(move.offsetLeft<=move.offsetWidth/2){
+                    move.style.left="0px";
+                }
+            }
+            setInterval(move1,200);
+            //setInterval(move2,200);
+        }
+    </script>
+</body>
+</html>

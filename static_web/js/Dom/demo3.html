@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>这是demo3</title>
+    <!--<script type="text/javascript">-->
+        <!--function damain(){-->
+            <!--alert("url"+document.URL);//http://localhost:63342/js/Dom/demo2.html?_ijt=u1q1qnqv3ee5maa9u3ma9kf36n-->
+            <!--alert("domain"+document.domain);//localhost-->
+            <!--alert("referrer"+document.referrer);//空-->
+        <!--}-->
+        <!--damain();-->
+
+    <!--</script>-->
+    <script type="text/javascript">
+        function damicScript(code){
+            // var script=document.createElement("script");
+            // script.type="text/javascript";
+            var script=document.scripts[0];
+            alert(script);
+            try{
+                script.appendChild(document.createTextNode(code));
+            }catch (e){
+                script.text=code;
+            }
+
+            document.head.appendChild(script);
+        }
+    </script>
+</head>
+<body>
+<h1>这是demo3</h1>
+<script type="text/javascript">
+    damicScript();
+    //sayHi();使用nodeText创建节点内容，但是却不能调用
+
+</script>
+</body>
+</html>

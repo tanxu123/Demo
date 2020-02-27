@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+        var speed=-4;
+        function click(){
+            var ele=document.getElementById("run");
+            ele.onclick=function (ev) {
+              setInterval(ul,50);
+            };
+        }
+     function ul(){
+         var ele=document.getElementById("ul");
+         var lis=document.getElementsByTagName("li");
+         ele.style.width=(lis[0].offsetWidth*lis.length+20)+"px";
+         ele.style.left=ele.offsetLeft+speed+"px";
+         if(ele.offsetLeft<-ele.offsetWidth/2){
+             ele.style.left="0px";
+         }
+     }
+
+    </script>
+    <style>
+        #box{
+            overflow: hidden;
+        }
+        ul{
+            position:absolute;
+            overflow: hidden;
+            float:left;
+        }
+        li{
+            list-style-type: none;
+         float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div style="width:200px;height:200px;float: left;background-color: #eeeeee;position: relative;z-index: 2;"></div>
+    <ul id="ul">
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/3.jpg" alt=""></li>
+        <li><img src="images/4.jpg" alt=""></li>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/3.jpg" alt=""></li>
+    </ul>
+    <div style="width:200px;height:200px;float:left;background-color: #FFCC00;position: relative;z-index: 2;margin-left: 400px;"></div>
+</div>
+<button id="run">运动</button>
+<script>
+    click();
+</script>
+</body>
+</html>

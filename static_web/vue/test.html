@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+    <!-- 引入elementUI样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入Element-ui组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+    <!--引入vue 的路由-->
+    <script src="https://cdn.staticfile.org/vue-router/2.7.0/vue-router.min.js"></script>
+
+    <!--
+      引入vue的ajax
+    -->
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+    <search></search>
+
+</div>
+
+<script>
+
+
+    statistic1:{
+        chart:{
+
+        },
+        title:{
+
+        },
+
+        tooltip:{
+
+        },
+
+        plotOptions:{
+            pie: {
+                allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                    enabled: true,
+                        format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+                        style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Firefox',   45.0],
+                ['IE',       26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Safari',    8.5],
+                ['Opera',     6.2],
+                ['Others',   0.7]
+            ]
+        }]
+
+    }
+
+    var chart = {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+    };
+    var title = {
+        text: '2014 年各浏览器市场占有比例'
+    };
+    var tooltip = {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    };
+    var plotOptions = {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    };
+    var series= [{
+        type: 'pie',
+        name: 'Browser share',
+        data: [
+            ['Firefox',   45.0],
+            ['IE',       26.8],
+            {
+                name: 'Chrome',
+                y: 12.8,
+                sliced: true,
+                selected: true
+            },
+            ['Safari',    8.5],
+            ['Opera',     6.2],
+            ['Others',   0.7]
+        ]
+    }];
+
+
+
+
+
+
+</script>
+</body>
+</html>

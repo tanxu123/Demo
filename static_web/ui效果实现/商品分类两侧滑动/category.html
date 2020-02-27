@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        body {
+
+            width: 100%;
+            min-width: 340px;
+            max-width: 768px;
+
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 0 !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0;
+        }
+
+
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        .left span {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .right span {
+            display: block;
+            margin-bottom: 40px;
+        }
+
+
+        .content {
+
+            display: flex;
+            flex-direction: row
+        }
+
+        .left {
+            position: relative
+        }
+
+
+        .leftContainer {
+            width: 120px;
+            height: 100%;
+            overflow-y: scroll;
+            position: relative;
+            z-index: 1
+        }
+
+        .right {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .rightContainer {
+            height: 100%;
+            overflow: scroll;
+            position: relative;
+            z-index: 1
+        }
+
+        .barHidden {
+            width: 10px;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            background-color: #ffffff;
+            right: 0;
+            z-index: 2;
+        }
+
+
+        /**
+
+
+           下面是菜单具体项的设置
+
+
+         */
+
+
+        .detailItemRow {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .detailItemRow div {
+            width: 33%;
+            text-align: center;
+        }
+
+        .detailItemRow div img {
+            width: 65px;
+        }
+
+        .detailItemRow div span {
+            display: block;
+        }
+
+
+        /**
+
+
+        点击效果实现
+
+
+         */
+
+        .currentIndex::before {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 40px;
+            position: absolute;
+            background-color: #0C88E8;
+        }
+
+        .currentIndex {
+            background-color: #f0f0f0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<div style="height: 100%;position: absolute;z-index: -100" id="bodyBa"></div>
+
+<div class="header" id="header">
+    spanfasfas
+    <span></span>
+    <div>q</div>
+    asfas
+    asfqswavfsagsw
+    afasafqasrasfawst
+</div>
+
+
+<div class="content" id="content">
+
+    <div class="left">
+        <div class="leftContainer">
+            <span class="currentIndex">键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+            <span>键盘</span>
+        </div>
+
+        <div class="barHidden">
+        </div>
+
+    </div>
+
+    <div class="right">
+        <div class="rightContainer">
+
+            <div class="detailItemRow">
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+
+                <div class="detailItem">
+                    <img src="img/youtobe-x.png" alt="">
+                    <span>播放菜单</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="barHidden">
+        </div>
+    </div>
+
+</div>
+
+
+<div class="menu" id="menu"
+>
+
+    撒的风格 十多个晚上
+
+    是德国为 是vasfgwegb
+    asgwegdiv
+    <div></div>
+
+</div>
+
+<script>
+
+    /**
+     *
+     *  商品分类两侧滑动的实现
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
+
+    let bodyHeight = document.getElementById("bodyBa").offsetHeight;
+
+
+    let content = document.getElementById("content");
+
+
+    let headerHeight = document.getElementById("header").offsetHeight;
+
+
+    let menuHeight = document.getElementById("menu").offsetHeight;
+
+
+    var obj = document.getElementsByClassName("leftContainer")[0];
+
+
+    var detailItem = obj.getElementsByTagName("span");
+
+
+    window.onload = () => {
+
+
+        //重置索引
+        let resetIndex = function () {
+            for (var i = 0; i < detailItem.length; i++) {
+                detailItem[i].className = "";
+            }
+        }
+
+
+        //添加监听
+        let res = () => {
+
+            for (var i = 0; i < detailItem.length; i++) {
+
+                let detail = detailItem[i];
+                detail.index = i;
+
+                detail.onclick = function () {
+                    resetIndex();
+                    this.className += " currentIndex"
+                }
+            }
+        };
+        res();
+
+
+        //动态计算中间的内容
+        (() => {
+            content.style.height = (bodyHeight - (headerHeight + menuHeight)) + "px";
+        })();
+
+
+    }
+
+
+</script>
+</body>
+</html>

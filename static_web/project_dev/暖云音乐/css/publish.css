@@ -1,0 +1,217 @@
+.touxiang-small {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+
+ul, li {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+}
+
+.select {
+    background: #0C77CF;
+    color: #ffffff;
+}
+
+
+.cancelBorder {
+    border: none;
+}
+
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+
+.td-unline {
+    text-decoration: underline;
+}
+
+
+.clear-both{
+    clear: both;
+}
+
+
+
+/**
+导航头部部分
+*/
+.ny-nav {
+   margin-bottom: 0px;
+}
+
+.ny-nav .box {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ny-nav .box div {
+    display: flex;
+    flex-direction: row;
+}
+
+.ny-nav .box div:nth-child(2) {
+    height: 40px;
+    border: 1px solid #0C77CF;
+}
+
+.ny-nav .box div:nth-child(2) input {
+    width: 300px;
+    padding: 0px 20px;
+}
+
+.ny-nav .box div:nth-child(2) button {
+    width: 100px;
+    color: #ffffff;
+    background: #0C77CF;
+
+
+}
+
+.ny-nav .box div:nth-child(3) {
+    padding-right: 20px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.ny-nav .box div:nth-child(3) span:first-child {
+    margin-right: 20px;
+}
+
+
+.logo {
+    width: 261px;
+    margin-right: 20px;
+}
+
+
+/**
+     版权部分
+      */
+
+.nv-copyright {
+    height: 128px;
+    background-color: #222;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.nv-copyright ul {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nv-copyright ul li {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+.nv-copyright p {
+    padding-left: 40px;
+}
+
+.copyright {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo1 {
+    color: #ababab;
+}
+
+.logo1::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url("../image/gonganicon.png");
+}
+
+.logo2 {
+    display: inline-block;
+    height: 30px;
+    width: 83px;
+    background-image: url("../image/footer-sm_83x30.png");
+}
+
+.logo3 {
+    height: 28px;
+    width: 82px;
+    display: inline-block;
+    background-image: url("../image/shgs.jpg");
+}
+
+
+.playBar {
+    height: 60px;
+    width: 100%;
+    background-color: #1B1B1B;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+}
+
+.bopfangBar {
+    width: 600px;
+}
+
+.playInfo {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+}
+
+.playInfo img {
+    height: 40px;
+    width: 40px;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.playInfo div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+
+hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.mg-l-10{
+ margin-left: 10px;
+}
+
+.pd-10{
+    padding: 10px;
+}
+.pd-l-15{
+    padding-left: 15px;
+}
+
+
+.mg-t-20{
+    margin-top: 20px !important;
+
+}

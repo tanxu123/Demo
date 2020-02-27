@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function dom() {
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+
+<input id="tel" style="width:200px;height:35px">
+<button onclick="dom()">点击</button>
+
+
+<script>
+
+
+    var telInput = document.getElementById("tel");
+
+    var tel = "130";
+    var telFear = "4568";
+
+    var index = 0;
+    var inner = "";
+
+    function random() {
+        var indexS = ""
+        index++;
+        indexS = index + ""  //0  1  10
+        if (indexS.length < 4) {
+            var car = 4 - indexS.length;
+            indexS = ""
+            for (var i = 0; i < car; i++) {
+                indexS += "0";
+            }
+            indexS += index;
+        } else {
+            indexS = index;
+        }
+
+        telInput.value= tel + indexS + telFear;
+        dom()
+
+    }
+
+    setInterval(random, 1000)
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       .title{
+           color: #74099b;
+           font-size: 30px;
+           font-family: normal;
+           float: left;
+           margin-left: 50px;
+       }
+
+        li{
+            height:30px;
+            list-style-type: none;
+            float: left;
+            margin-left:50px;
+        }
+        .menu{
+          float: right;
+            margin-right: 50px;
+        }
+        .content{
+            text-align: center;
+            margin:0 auto;
+            width:1000px;
+        }
+
+       .contentBorder{
+          background-color: rgb(82,223,111);
+           width:1000px;
+           height:10px;
+           clear: both;
+           border-radius: 2px;
+       }
+
+        .container{
+            width: 1000px;
+            height:880px;
+            background-color: rgb(116,229,140);
+        }
+        .imageFont{
+            font-size: 30px;
+            color:rgb(255,0,0);
+        }
+        .smallFont{
+            font-size: 22px;
+            color:rgb(255,80,80);
+        }
+
+        .information{
+            width:960px;
+            background-color: #ffffff;
+            height:580px;
+            margin: 0 auto;
+            margin-top: 70px;
+            text-align: left;
+        }
+
+        .monthLeft,.monthRight{
+            float: left;
+        }
+
+        .cenlater{
+            width:60px;height:60px;
+            background-color: #111111;
+            color: #fff;
+            display: inline-block;
+            margin:4px;
+            border:1px solid #fff;
+            margin-left:10px;
+            text-align: center;
+            font-size: 12px;
+            position: relative;
+        }
+
+
+    </style>
+    <script>
+        function calendar(){
+          var ele=document.getElementById("calendarBox");
+          var box=ele.children;
+          for(var i=0;i<12;i++){
+              box[i].index=i;
+              box[i].onmouseover=function (ev) {
+                this.style.borderColor="#111";
+                this.style.backgroundColor="#fff";
+                this.style.color="#c33ca9";
+                var display=document.getElementById("display");
+                switch(this.index){
+                    case 0:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>元旦节，放假与吃都要兼顾</span>";
+                        break;
+                    case 1:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>春节，我觉得自己要胖十斤</span>";
+                        break;
+                    case 2:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>元宵节，我最爱的汤圆。兴奋</span>";
+                        break;
+                    case 3:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>清明节，扫扫墓，踏踏青</span>";
+                        break;
+                    case 4:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>劳动节，名不符其不实，对我来说的</span>";
+                        break;
+                    case 5:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>端午节，粽子，大肉粽子</span>";
+                        break;
+                    case 6:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>没节日了，倒有个鬼节</span>";
+                        break;
+                    case 7:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>热的慌，吃着冰棍的日子</span>";
+                        break;
+                    case 8:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>开学时分,满满的不乐意</span>";
+                        break;
+                    case 9:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>国庆长假，旅游，回家，我要睡的天昏地暗</span>";
+                        break;
+                    case 10:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>天渐冷，没有女朋友，没有围巾</span>";
+                        break;
+                    case 11:
+                        display.innerHTML="<h4>"+(this.index+1)+"月活动</h4><span style='color: #acacac;font-size: 14px;'>圣诞的幻想，自己被人送了礼物，原来是自己的室友</span>";
+                        break;
+                }
+              };
+              box[i].onmouseout=function (ev) {
+                  this.style.backgroundColor="#111";
+                  this.style.borderColor="#fff";
+                  this.style.color="#fff";
+              }
+          }
+        }
+        
+        function change() {
+          var ele=document.getElementsByClassName("menu")[0];
+          var items=ele.children;
+          for(var i=0;i<items.length;i++){
+              items[i].onmouseover=function (ev) {
+                  this.style.backgroundColor="#fdff29";
+              }
+              items[i].onmouseout=function (ev) {
+                  this.style.backgroundColor="#fff";
+              }
+              
+              items[i].onclick=function (ev) {
+                  if(this.innerText=="主页"){
+                      window.open("index.html",null,null,true);
+                  }
+                  if(this.innerText=="成员简介"){
+                      window.open();
+                  }
+                  if(this.innerText=="联系方式"){
+
+                  }
+                  if(this.innerText=="关于"){
+
+                  }
+              }
+          }
+        }
+    </script>
+</head>
+<body>
+<div class="content">
+    <div class="title">My house for Fang</div>
+    <ul class="menu">
+        <li>主页</li>
+        <li>成员简介</li>
+        <li>联系方式</li>
+        <li>关于</li>
+    </ul>
+    <div class="contentBorder"></div>
+    <!--主体部分-->
+    <div class="container">
+        <div><br/><br/>
+            <p class="imageFont">HELLO!</p>
+            <p class="smallFont">This is a person web site ,so<br/>
+            You can learn about my family</p>
+        </div>
+        <div class="information">
+                <div class="monthLeft">
+                    <p style="margin-left: 25px;padding-top:10px;font-size: 20px;color:rgb(255,80,80)">Information</p>
+
+                    <img src="image/image.jpg" width="300px;" style="margin-left: 25px;">
+
+                    <div style="margin-left: 25px;margin-top: 10px;">
+                        <li>Feb<br/>26</li>
+                        <li style="line-height: 40px; border-left: 1px solid #ccc;margin-left: 10px;padding-left: 10px;color:rgb(204,51,513);" >关于图片的描述</li><br/>
+                        <br/>
+                        <div style="width:300px;color:#797979">
+                            这张照片的来历一家第一次 出去旅游拍的，时间是2018年2月26日。 时间是年后的十一号， 一家在安徽金寨县的天堂寨拍的， 拍摄的地点是是在山顶山，当时一家人爬 山山顶，叫弟弟拍的。</div>
+                    </div>
+                </div>
+                <div style="float: left;width:200px;">
+                <div class="monthRight">
+                    <p style="margin-left: 25px;padding-top: 10px;font-size: 20px;color:rgb(255,80,80)">Benediction</p>
+                    <li>Jan<br/>1</li>
+                    <li style="line-height: 40px; border-left: 1px solid #ccc;margin-left: 10px;padding-left: 10px;color:rgb(204,51,513);" >在强者的眼中</li><br/>
+                    <br/>
+                    <div style="width:300px;color:#797979;padding-left: 40px;">
+                     没有最好，只有更好</div>
+                    <br/><br/>
+                </div>
+                <div class="monthRight">
+                    <li>Feb<br/>1</li>
+                    <li style="line-height: 40px; border-left: 1px solid #ccc;margin-left: 10px;padding-left: 10px;color:rgb(204,51,513);" >盆景秀木正因</li><br/>
+                    <br/>
+                    <div style="width:300px;color:#797979;padding-left: 40px;">
+                          为被人溺爱，才破灭了成为<br/>栋梁之才的梦</div>
+                    <br/><br/>
+                </div>
+                <div class="monthRight">
+                    <li>Mar<br/>1</li>
+                    <li style="line-height: 40px; border-left: 1px solid #ccc;margin-left: 10px;padding-left: 10px;color:rgb(204,51,513);" >永远都不要放</li><br/>
+                    <br/>
+                    <div style="width:300px;color:#797979;padding-left: 40px;">
+                        弃自己,勇往直前，直至成功</div>
+                    <br/><br/>
+                </div>
+                <div class="monthRight">
+                    <li>Apr<br/>1</li>
+                    <li style="line-height: 40px; border-left: 1px solid #ccc;margin-left: 10px;padding-left: 10px;color:rgb(204,51,513);" >没有平日的失</li><br/>
+                    <br/>
+                    <div style="width:300px;color:#797979;padding-left: 40px;">
+                        败，就没有最终的成功。重<br/>要的是分析失败原因并吸取<br/>教训</div>
+                    <br/><br/>
+                </div>
+                </div>
+            <div>
+            <p style="text-align:center;padding-top:25px;font-size: 20px;color:rgb(255,80,80)">Calendar</p>
+            <div style="width: 240px;height:410px;background-color: #ccc; float: right;margin-left: 20px;margin-right: 20px;" id="calendarBox">
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">1</li>
+                <li style="position: absolute;left: -28px;top:40px;">JAN</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">2</li>
+                    <li style="position: absolute;left: -28px;top:40px;">FER</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">3</li>
+                    <li style="position: absolute;left: -28px;top:40px;">MAR</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">4</li>
+                    <li style="position: absolute;left: -28px;top:40px;">APR</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">5</li>
+                    <li style="position: absolute;left: -28px;top:40px;">MAY</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">6</li>
+                    <li style="position: absolute;left: -28px;top:40px;">JUN</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">7</li>
+                    <li style="position: absolute;left: -28px;top:40px;">JUL</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">8</li>
+                    <li style="position: absolute;left: -28px;top:40px;">AUG</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -22px;top:10px;font-size: 20px;">9</li>
+                    <li style="position: absolute;left: -28px;top:40px;">SEP</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -27px;top:10px;font-size: 20px;">10</li>
+                    <li style="position: absolute;left: -28px;top:40px;">OCT</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -27px;top:10px;font-size: 20px;">11</li>
+                    <li style="position: absolute;left: -28px;top:40px;">NOV</li>
+                </div>
+                <div class="cenlater"><li style="position: absolute;left: -27px;top:10px;font-size: 20px;">12</li>
+                    <li style="position: absolute;left: -28px;top:40px;">DEC</li>
+                </div>
+                <!--下面是显示具体的月份信息-->
+                <div style="width:218px;height:98px;background-color:#e6e6e6;margin: 0 auto;padding: 5px; border:1px solid #fff;" id="display"></div>
+            </div>
+           </div>
+                </div>
+        </div>
+    </div>
+<div style="margin:0 auto;" align="center">
+<div class="contentBorder" ></div>
+
+    <div style="height:50px;margin-top: 20px;">
+        Copyright © 2018 Fangzhiyue. All rights reserved
+    </div>
+</div>
+</div>
+<script>
+    calendar();
+    change();
+</script>
+</body>
+</html>

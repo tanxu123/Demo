@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+    .div1{
+        position: absolute;
+        width: 300px;
+        height: 300px;
+    }
+    .zhidan{
+     width: 20px;
+        height: 30px;
+        background: antiquewhite;
+        display: none;
+        position: absolute;
+    }
+</style>
+    <script>
+        /***
+         * 测试鼠标的位置
+         */
+        function move(left1,top1) {
+            var div1=document.getElementById("div1");
+            var left=parseInt(div1.style.left);
+            var top=parseInt(div1.style.top);
+           // alert(left);
+           // alert(top);
+            div1.style.left=left+left1+"px";
+            div1.style.top=top+top1+"px";
+
+        }
+        /*
+       发射子弹
+        */
+        var int;
+        function process(){
+            var zhidan=document.getElementById("zhidan");
+            zhidan.style.display="block";
+            var top=parseInt(zhidan.style.top);
+            zhidan.style.top=top-2+"px";
+        //  alert(top);
+          if(0 >= top + 400){
+              zhidan.style.top=0+"px";
+          clearInterval(int);
+         // zhidan.style.display="none";
+          }
+        }
+       function luncher() {
+     int=setInterval(process,1);
+       }
+        /**
+         * 左：37
+         * 上：38
+         * 右：39
+         * 下：40
+         */
+        var speed=5;
+        function scour() {
+            var obj=null;
+            if(document.body==null){
+              obj=document;
+            }else{
+                obj=document.body;
+            }
+            obj.onkeydown=function (ev) {
+           if(ev.keyCode==37){
+               move(-speed,0);
+           }
+           if(ev.keyCode==38){
+               move(0,-speed);
+           }
+           if(ev.keyCode==39){
+               move(speed,0);
+           }
+           if(ev.keyCode==40){
+               move(0,speed);
+           }
+           if(ev.keyCode==13) {
+               //在这里调用对子弹的处理
+               luncher();
+           }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="div1" id="div1" style="left: 20px;top: 20px;">
+    <div style="width:50px;height: 300px; background: yellow;float:left;margin-top: 30px;margin-left: 10px;"></div>
+    <div style="width:50px;height: 300px; background: yellow;float:right;margin-top: 30px;margin-left: 30px;"></div>
+    <div style="width: 20px;height: 100px;background: red; margin: 0 auto;">
+        <div  id="zhidan" class="zhidan" style="top:0px;"></div>
+    </div>
+    <div style="width:200px;height: 200px; background-color: darkorange; margin: 0 auto;"></div>
+</div>
+<script>
+    带发子弹的坦克();
+</script>
+</body>
+</html>

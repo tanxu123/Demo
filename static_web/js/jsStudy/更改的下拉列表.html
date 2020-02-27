@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div1{
+            margin: auto;
+            width: 200px;
+            height:200px;
+            background: #ccc;
+            border: 1px solid #111;
+        }
+        .div_top{
+          background: #acb6c6;
+            font-size: 15px;
+            font-family: '华文宋体';
+            padding-left:10px;
+        }
+        li{
+            list-style: none;
+            font-size: 12px;
+            line-height: 22px;
+        }
+        a:hover{
+            color: #111111;
+            text-decoration:underline;
+        }
+        a:link{
+           color: #cccccc;
+            text-decoration:none;
+        }
+    </style>
+
+    <script>
+        function change(){
+            var turn=document.getElementById("turn");//开关
+            turn.ondblclick=function (ev) {//双击
+                var list=document.getElementById("songList");
+                var div1=document.getElementById("div1");
+                if(list.style.display=="block"){
+                    list.style.display="none";
+                    div1.style.height="25px";
+                }else {
+                    list.style.display="block";
+                    div1.style.height="200px";
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="div1" id="div1">
+    <div class="div_top" id="turn">播放列表</div>
+    <div id="songList">
+    <ul>
+        <li><a href="#">玩爱之徒 - 蔡依林</a></li>
+        <li><a href="#">原谅我就是这样的女生 - 戴佩妮</a></li>
+        <li><a href="#">猜不透 - 丁当</a></li>
+        <li><a href="#">自导自演 - 周杰伦</a></li>
+        <li><a href="#">浪漫窝 - 弦子</a></li>
+        <li><a href="#">流年 - 王非</a></li>
+    </ul>
+    </div>
+</div>
+<script>
+    change();
+</script>
+</body>
+</html>

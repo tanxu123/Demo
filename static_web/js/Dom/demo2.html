@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>this is demo2</title>
+    <script>
+        function userAgent(){
+            alert(navigator.userLanguage);
+        }
+       // userAgent();
+
+        //获得当前的节点类型
+         function getNodeType(id){
+        var ele=document.getElementById(id);
+       if(ele.nodeType==1){//元素节点
+           alert(ele.nodeName);
+       }
+        }
+
+        //节点关系
+       // function Node(){
+       //      var htmlStudy=document.getElementsByTagName("htmlStudy");
+       //     // for(var item in htmlStudy[0].childNodes){
+       //     //    // document.writeln(item+":"+htmlStudy[0]);
+       //     // }
+       //
+       //     for(var i=0;i<htmlStudy[0].childNodes.length;i++){
+       //         document.writeln(htmlStudy[0].childNodes.item(i)+"<br/>");
+       //     }
+       // }
+
+
+       function changeNumber(num){
+           alert("数值为"+(num++));
+       }
+
+     //  setInterval(changeNumber.call(this,5),3000);
+
+       // var c=0;
+       //  function cha(){
+       //      c++;
+       //      changeNumber(c);
+       //  }
+    //    window.onload=function (ev) {
+    // setInterval(cha,3000);
+    //
+    //    }
+     //setInterval(cha,3000);
+
+     //查询node的所有属性
+
+        function nodeTest(){
+            //var node=new Node();
+
+            var node=document.getElementById("qwe");
+            if(!node){
+                alert("dont find");
+                    return;
+            }
+            for(var protoType in node){
+                document.writeln(protoType+":"+node[protoType]+"<br/>");
+            }
+        }
+
+        function docType(){
+            alert(document.doctype.entities);
+        }
+       // docType();
+
+        function damain(){
+        alert("url"+document.URL);//http://localhost:63342/js/Dom/demo2.html?_ijt=u1q1qnqv3ee5maa9u3ma9kf36n
+        alert("domain"+document.domain);//localhost
+        alert("referrer"+document.referrer);//空
+        }
+
+        damain();
+
+
+    </script>
+</head>
+<!--<body>-->
+<!--<h1 id="qwe"></h1>-->
+<!--<script>-->
+    <!--//getNodeType("h1");-->
+    <!--//window.onload=Node;-->
+   <!--// nodeTest();-->
+<!--</script>-->
+<!--</body>-->
+<frameset cols="25%,50%,25%">
+    <frame src="demo3.htm1" />
+    <frame src="demo4.htm1" />
+    <frame src="demo5.htm1" />
+</frameset>
+
+</html>

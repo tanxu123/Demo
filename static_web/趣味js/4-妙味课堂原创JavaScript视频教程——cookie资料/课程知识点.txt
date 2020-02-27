@@ -1,0 +1,11 @@
+cookie.avi	40:04
+
+1. 什么是 cookie、cookie 特性
+2. js 中的 cookie：设置 document.cookie
+3. cookie 不会覆盖
+4. cookie 过期时间：expires、setDate
+5. 封装设置 cookie 函数
+6. 封装获取 cookie 函数
+7. 封装删除 cookie 函数
+8. cookie 接合拖拽实例
+9. cookie 记录用户名实例

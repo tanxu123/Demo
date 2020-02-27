@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .div1{
+            padding-left: 20px;
+            background-color: #cccccc;
+            width: 410px;
+            height:40px;
+            border: 1px solid #35679c;
+        }
+        li{
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            font-size: 14px;
+            font-family: Aharoni;
+            color:#111;
+            border-bottom:1px solid #acb6c6;
+        }
+        .ul1{
+            float: left;
+            width:150px;
+            background-color: #eaeaea;
+            display: none;
+        }
+        .divInner{
+            line-height: 40px;
+         width:80px;
+            height:40px;
+            float: left;
+        }
+        a:link{
+            color:#111111;
+            text-decoration: none;
+        }
+
+        p{
+            margin:0px;
+            border: none;
+            padding: 0px;
+            font-size: 12px;
+            line-height: 20px;
+            padding-left: 20px;
+            font-family: Aharoni;
+            color: #2f3f37;
+        }
+    </style>
+
+    <script>
+        function one() {
+            var obj=document.getElementById("divInner");
+            obj.onmouseover=function (ev) {
+                obj.style.backgroundColor="#eaeaea";
+                //设置右边
+                obj.style.borderRightColor="#7b7c76";
+                obj.style.borderRightStyle="solid";
+                obj.style.borderRightWidth="1px";
+                //设置左边
+                obj.style.borderLeftColor="#7b7c76";
+                obj.style.borderLeftStyle="solid";
+                obj.style.borderLeftWidth="1px";
+                //设置上面
+                obj.style.borderTopColor="#7b7c76";
+                obj.style.borderTopStyle="solid";
+                obj.style.borderTopWidth="1px";
+             var ul1=document.getElementById("ul1");
+             ul1.style.display="block";
+
+                //设置右边
+                ul1.style.borderRightColor="#7b7c76";
+                ul1.style.borderRightStyle="solid";
+                ul1.style.borderRightWidth="1px";
+                //设置左边
+                ul1.style.borderLeftColor="#7b7c76";
+                ul1.style.borderLeftStyle="solid";
+                ul1.style.borderLeftWidth="1px";
+                //设置下面
+                ul1.style.borderBottomColor="#7b7c76";
+                ul1.style.borderBottomStyle="solid";
+                ul1.style.borderBottomWidth="1px";
+            }
+            obj.onmouseout=function (ev) {
+                obj.style.border="none";
+                obj.style.backgroundColor="";
+                var ul1=document.getElementById("ul1");
+                ul1.style.display="none";
+                ul1.style.border="none";
+            }
+        }
+
+
+        function secondMenu(){
+            var obj=document.getElementById("ul1");
+            var array=obj.getElementsByTagName("a");
+            var threeMenu=document.getElementById("threeMenuParent");
+           // alert(array.length);
+            var arrayMenu=threeMenu.getElementsByTagName("div");
+          //  alert(arrayMenu.length);
+                /*进入时的响应*/
+                    array[0].onmouseover = function (ev) {
+                        arrayMenu[0].style.display = "block";
+                        arrayMenu[0].style.borderColor="#838383";
+                        arrayMenu[0].style.borderStyle="solid";
+                        arrayMenu[0].style.borderWidth="2px";
+                        arrayMenu[0].style.backgroundColor = "#ffffff";
+                        arrayMenu[0].style.borderLeft="";
+
+                        array[0].parentElement.style.backgroundColor="#ffffff";
+                        array[0].parentElement.style.borderTopColor="#838383";
+                        array[0].parentElement.style.borderTopStyle="solid";
+                        array[0].parentElement.style.borderTopWidth="2px";
+                        array[0].parentElement.style.borderBottomColor="#838383";
+                        array[0].parentElement.style.borderBottomStyle="solid";
+                        array[0].parentElement.style.borderBottomWidth="2px";
+
+                    }
+                    /*移除时的响应*/
+                    array[0].onmouseout = function (ev2) {
+                        arrayMenu[0].style.display = "none";
+                        array[0].parentElement.style.backgroundColor="";
+                        array[0].parentElement.style.border="none";
+                    }
+
+            /*进入时的响应*/
+            array[1].onmouseover = function (ev) {
+                arrayMenu[1].style.display = "block";
+                arrayMenu[1].style.backgroundColor = "#d4d4d4";
+                arrayMenu[1].style.borderColor="#838383";
+                arrayMenu[1].style.borderStyle="solid";
+                arrayMenu[1].style.borderWidth="2px";
+                arrayMenu[1].style.backgroundColor = "#ffffff";
+                arrayMenu[1].style.borderLeft="";
+
+                array[1].parentElement.style.backgroundColor="#ffffff";
+                array[1].parentElement.style.borderTopColor="#838383";
+                array[1].parentElement.style.borderTopStyle="solid";
+                array[1].parentElement.style.borderTopWidth="2px";
+                array[1].parentElement.style.borderBottomColor="#838383";
+                array[1].parentElement.style.borderBottomStyle="solid";
+                array[1].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[1].onmouseout = function (ev2) {
+                arrayMenu[1].style.display = "none";
+                array[1].parentElement.style.backgroundColor="";
+                array[1].parentElement.style.border="none";
+            }
+
+            /*进入时的响应*/
+            array[2].onmouseover = function (ev) {
+                arrayMenu[2].style.display = "block";
+                arrayMenu[2].style.backgroundColor = "#d4d4d4";
+                arrayMenu[2].style.borderColor="#838383";
+                arrayMenu[2].style.borderStyle="solid";
+                arrayMenu[2].style.borderWidth="2px";
+                arrayMenu[2].style.backgroundColor = "#ffffff";
+                arrayMenu[2].style.borderLeft="";
+
+                array[2].parentElement.style.backgroundColor="#ffffff";
+                array[2].parentElement.style.borderTopColor="#838383";
+                array[2].parentElement.style.borderTopStyle="solid";
+                array[2].parentElement.style.borderTopWidth="2px";
+                array[2].parentElement.style.borderBottomColor="#838383";
+                array[2].parentElement.style.borderBottomStyle="solid";
+                array[2].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[2].onmouseout = function (ev2) {
+                arrayMenu[2].style.display = "none";
+                array[2].parentElement.style.backgroundColor="";
+                array[2].parentElement.style.border="none";
+            }
+
+            /*进入时的响应*/
+            array[3].onmouseover = function (ev) {
+                arrayMenu[3].style.display = "block";
+                arrayMenu[3].style.backgroundColor = "#d4d4d4";
+                arrayMenu[3].style.borderColor="#838383";
+                arrayMenu[3].style.borderStyle="solid";
+                arrayMenu[3].style.borderWidth="2px";
+                arrayMenu[3].style.backgroundColor = "#ffffff";
+                arrayMenu[3].style.borderLeft="";
+
+                array[3].parentElement.style.backgroundColor="#ffffff";
+                array[3].parentElement.style.borderTopColor="#838383";
+                array[3].parentElement.style.borderTopStyle="solid";
+                array[3].parentElement.style.borderTopWidth="2px";
+                array[3].parentElement.style.borderBottomColor="#838383";
+                array[3].parentElement.style.borderBottomStyle="solid";
+                array[3].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[3].onmouseout = function (ev2) {
+                arrayMenu[3].style.display = "none";
+                array[3].parentElement.style.backgroundColor="";
+                array[3].parentElement.style.border="none";
+            }
+
+            /*进入时的响应*/
+            array[4].onmouseover = function (ev) {
+                arrayMenu[4].style.display = "block";
+                arrayMenu[4].style.backgroundColor = "#d4d4d4";
+                arrayMenu[4].style.borderColor="#838383";
+                arrayMenu[4].style.borderStyle="solid";
+                arrayMenu[4].style.borderWidth="2px";
+                arrayMenu[4].style.backgroundColor = "#ffffff";
+                arrayMenu[4].style.borderLeft="";
+
+                array[4].parentElement.style.backgroundColor="#ffffff";
+                array[4].parentElement.style.borderTopColor="#838383";
+                array[4].parentElement.style.borderTopStyle="solid";
+                array[4].parentElement.style.borderTopWidth="2px";
+                array[4].parentElement.style.borderBottomColor="#838383";
+                array[4].parentElement.style.borderBottomStyle="solid";
+                array[4].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[4].onmouseout = function (ev2) {
+                arrayMenu[4].style.display = "none";
+                array[4].parentElement.style.backgroundColor="";
+                array[4].parentElement.style.border="none";
+            }
+
+            /*进入时的响应*/
+            array[5].onmouseover = function (ev) {
+                arrayMenu[5].style.display = "block";
+                arrayMenu[5].style.backgroundColor = "#d4d4d4";
+                arrayMenu[5].style.borderColor="#838383";
+                arrayMenu[5].style.borderStyle="solid";
+                arrayMenu[5].style.borderWidth="2px";
+                arrayMenu[5].style.backgroundColor = "#ffffff";
+                arrayMenu[5].style.borderLeft="";
+
+                array[5].parentElement.style.backgroundColor="#ffffff";
+                array[5].parentElement.style.borderTopColor="#838383";
+                array[5].parentElement.style.borderTopStyle="solid";
+                array[5].parentElement.style.borderTopWidth="2px";
+                array[5].parentElement.style.borderBottomColor="#838383";
+                array[5].parentElement.style.borderBottomStyle="solid";
+                array[5].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[5].onmouseout = function (ev2) {
+                arrayMenu[5].style.display = "none";
+                array[5].parentElement.style.backgroundColor="";
+                array[5].parentElement.style.border="none";
+            }
+
+            /*进入时的响应*/
+            array[6].onmouseover = function (ev) {
+                arrayMenu[6].style.display = "block";
+                arrayMenu[6].style.backgroundColor = "#d4d4d4";
+                arrayMenu[6].style.borderColor="#838383";
+                arrayMenu[6].style.borderStyle="solid";
+                arrayMenu[6].style.borderWidth="2px";
+                arrayMenu[6].style.backgroundColor = "#ffffff";
+                arrayMenu[6].style.borderLeft="";
+
+                array[6].parentElement.style.backgroundColor="#ffffff";
+                array[6].parentElement.style.borderTopColor="#838383";
+                array[6].parentElement.style.borderTopStyle="solid";
+                array[6].parentElement.style.borderTopWidth="2px";
+                array[6].parentElement.style.borderBottomColor="#838383";
+                array[6].parentElement.style.borderBottomStyle="solid";
+                array[6].parentElement.style.borderBottomWidth="2px";
+            }
+            /*移除时的响应*/
+            array[6].onmouseout = function (ev2) {
+                arrayMenu[6].style.display = "none";
+                array[6].parentElement.style.backgroundColor="";
+                array[6].parentElement.style.border="none";
+            }
+        }
+        
+    </script>
+
+</head>
+<body>
+<ul>
+    <div class="div1">
+    <div class="divInner" id="divInner">
+        <div class="topStyle" id="topStyle">所有分类</div>
+        <div style="width:400px;height:600px;">
+        <div class="ul1" id="ul1">
+            <li><a href="#">数码家电 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">家居日用 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">食品保健 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">运动户外 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">男女服装 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">鞋包配饰 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+            <li><a href="#">美容美妆 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></a></li>
+        </div>
+            <div id="threeMenuParent">
+                <div style="width:200px;height:150px;background-color: #cccccc;float: left;margin-top: 0px;display: none;" id="threeMenu">
+                    <p>移动/联通/电信话费充值</p>
+                    <p>手机号码/IP/网络电话</p>
+                    <p>网络游戏点卡</p>
+                    <p>网络游戏装备/游戏币/代练</p>
+                    <p>腾讯qq专区</p>
+                    <p>双色球/中国福利彩票</p>
+                    <p>超级大乐透/中国体育彩票</p>
+                </div>
+                <div style="width:200px;height:150px;background-color: #fff;float: left;margin-top: 40px;display: none;" id="threeMenu1"></div>
+                <div style="width:200px;height:150px;background-color: #fff;float: left;margin-top: 80px;display: none;" id="threeMenu2"></div>
+                <div style="width:200px;height:150px;background-color: #ffffff;float: left;margin-top: 120px;display: none;" id="threeMenu3"></div>
+                <div style="width:200px;height:150px;background-color: #ffffff;float: left;margin-top: 160px;display: none;" id="threeMenu4"></div>
+                <div style="width:200px;height:150px;background-color: #ffffff;float: left;margin-top: 200px;display: none;" id="threeMenu5"></div>
+                <div style="width:200px;height:150px;background-color: #ffffff;float: left;margin-top: 240px;display: none;" id="threeMenu6"></div>
+            </div>
+        </div>
+    </div>
+    <div class="divInner">女装</div>
+    <div class="divInner" >手机数码</div>
+    <div class="divInner">家具美食</div>
+    <div class="divInner">美容化妆</div>
+        <div style="height: 1px;background-color: #00b2eb; clear: both;"></div>
+    </div>
+</ul>
+<script>
+    one();
+    secondMenu();
+</script>
+</body>
+</html>

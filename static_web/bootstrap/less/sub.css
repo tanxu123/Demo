@@ -1,0 +1,173 @@
+html {
+  /*input[type="checkbox"]{ background:#2460aa; color:#fff; -webkit-text-shadow:none; border-color:#2157db; margin-right:0.08rem; border-radius:2px; -webkit-box-shadow:none;}*/
+  /*去除ios浏览器中input button的风格*/
+  /*移除html5 input="number"的小箭头*/
+}
+html body,
+html div,
+html dl,
+html dt,
+html dd,
+html ul,
+html ol,
+html li,
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6,
+html pre,
+html code,
+html form,
+html fieldset,
+html legend,
+html input,
+html textarea,
+html p,
+html blockquote,
+html th,
+html td,
+html hr,
+html button,
+html article,
+html aside,
+html details,
+html figcaption,
+html figure,
+html footer,
+html header,
+html hgroup,
+html menu,
+html nav,
+html section {
+  margin: 0;
+  padding: 0;
+}
+html body {
+  margin: 0 auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, "微软雅黑", sans-serif;
+  color: #222;
+  font-size: 12px;
+}
+html body,
+html button,
+html input,
+html select,
+html textarea {
+  outline: none;
+}
+html input,
+html select,
+html textarea {
+  font-size: 100%;
+}
+html textarea {
+  resize: none;
+}
+html table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+html th {
+  text-align: inherit;
+}
+html fieldset,
+html img {
+  border: 0;
+}
+html img {
+  vertical-align: middle;
+}
+html iframe {
+  display: block;
+}
+html abbr,
+html acronym {
+  border: 0;
+  font-variant: normal;
+}
+html del {
+  text-decoration: line-through;
+}
+html address,
+html caption,
+html cite,
+html code,
+html dfn,
+html em,
+html th,
+html var {
+  font-style: normal;
+  font-weight: 500;
+}
+html menu,
+html ol,
+html ul {
+  list-style: none;
+}
+html caption,
+html th {
+  text-align: left;
+}
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+html a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+html ins,
+html a,
+html a:visited {
+  text-decoration: none;
+  outline: none;
+}
+html i {
+  font-style: normal;
+}
+html button,
+html input,
+html select,
+html textarea {
+  margin: 0;
+  font-size: 100%;
+  vertical-align: middle;
+  font-family: "Helvetica Neue", Helvetica, Arial, "微软雅黑", sans-serif;
+}
+html button,
+html input[type="button"],
+html input[type="reset"],
+html input[type="submit"] {
+  -webkit-appearance: none;
+  outline: none;
+}
+html input::-webkit-outer-spin-button,
+html input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+html input[type="number"] {
+  -moz-appearance: textfield;
+}
+html a,
+html label {
+  blr: expression(this.onFocus=this.blur());
+}
+html a,
+html label {
+  outline: none;
+}
+html a {
+  color: #000;
+}
+html a:hover {
+  color: #000;
+}
+/*# sourceMappingURL=sub.css.map */

@@ -1,0 +1,67 @@
+/**
+推荐的css文件
+
+
+ */
+
+div.menuList {
+    overflow: hidden;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+div.menuList div.headMenu span.title {
+    font-size: 26px;
+}
+
+div.menuList div.headMenu {
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+div.menuList div div.divAllRight {
+    float: right;
+
+}
+
+div.menuList .menuListContainer img.menuImg {
+    width: 200px;
+    border-radius: 5px;
+}
+
+.connerMenuImg {
+    width: 200px;
+    border-radius: 120px;
+
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+div.menuList .menuListContainer div.columnSingleMenu p.title1 {
+    font-size: 14px;
+    font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+    font-weight: bold;
+}
+
+div.menuList .menuListContainer div.columnSingleMenu p.title2 {
+    font-size: 11px;
+    font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+    color: #9ea0a6;
+}
+
+div.menuList .menuListContainer div.columnSingleMenu p.title3 {
+    font-size: 12px;
+    font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+    color: #4c57b4;
+}
+
+div.menuList .menuListContainer div.columnSingleMenu {
+    display: inline-block;
+    overflow: hidden;
+    width: 240px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}

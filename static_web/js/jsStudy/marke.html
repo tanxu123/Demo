@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .tab{
+            margin: 0 auto;
+            text-align: center;
+            border:1px solid #ede6f1;
+        }
+        td{
+            font-size: 14px;
+            font-family: Aharoni;
+        }
+        th , td { border: 1px solid #eee; }
+        th { padding: 10px 0; font-size: 14px; color: #006699; background: #f6f6f6; }
+        td { padding: 5px; }
+        .money{
+            color: #ff9b0e;
+            font-weight: bold;
+            font-size: 22px;
+            font-family: Aharoni;
+        }
+    </style>
+
+    <script>
+
+        function changeSelect(){
+            var checkAll=document.getElementById("checkAll");
+           checkAll.onclick=function (ev) {
+               if(checkAll.checked==true){
+                   checkAll.checked="";
+               }else {
+                   checkAll.checked="true";
+               }
+               //checkAll.checked="";
+               var column=document.getElementsByTagName("tr");
+             for(var i=0;i<column.length;i++){
+                 var objec=column[i].getElementsByTagName("input");
+                 var allMoney=document.getElementById("allMoney");
+                 if(objec[0].checked==true){
+                     objec[0].checked="";
+                     allMoney.innerText="¥0.00元";
+                 }else {
+                     objec[0].checked="true";
+                 }
+                // objec[0].checked="";
+             }
+               if(objec[0].checked==true){
+                   //当选中时，调用函数，计算价格的总和
+                   var count=celculaterCount(objec);
+                   count="¥"+count+"元";
+                   allMoney.innerText=count;
+                   count=0;
+               }
+           }
+        }
+
+        function celculaterCount(object){
+            var count=0;
+      var money=document.getElementsByClassName("money");
+      for(var i=0;i<money.length;i++){
+          var num=new String(money[i].innerHTML).replace("¥","0");
+          num=parseInt(num);
+          count+=num;
+      }
+      return count;
+        }
+
+        /*
+        下面是对价格的排序
+         */
+        function price(){
+            var ele=document.getElementById("price");
+            ele.onclick=function (ev) {
+          var allMoney=document.getElementsByClassName("money");
+            myParseInt(allMoney);
+            }
+        }
+
+
+        /**
+         * 将数值进行解析为整形数据
+         * 然后通过数组进行返回
+         * @param object
+         * @returns {any[]}
+         */
+        function myParseInt(object){
+           // var array=new Array(object.length);
+            var max;
+            for(var i=0;i<object.length;i++){
+                var num=new String(object[i].innerHTML).replace("¥","0");
+                num=parseInt(num);
+                for(var j=i;j<object.length;j++){
+                   // alert(object.length);
+                    var num1=new String(object[j].innerHTML).replace("¥","0");
+                    num1=parseInt(num1);
+                    if(num<num1){
+                       // alert(num+":"+num1);
+                        max=object[j].parentElement.innerHTML;
+                        object[j].parentElement.innerHTML=object[i].parentElement.innerHTML;
+                        object[i].parentElement.innerHTML=max;
+                        num=num1;
+                    }
+                }
+            }
+        }
+
+        /**
+         * 下面是对地区排序的
+         */
+        function area(){
+            var ele=document.getElementById("area");
+            ele.onclick=function (ev) {
+                var allAddress=document.getElementsByClassName("address");
+                myParseString(allAddress);
+            }
+        }
+
+        function myParseString(object) {
+            var max;
+            for(var i=0;i<object.length;i++){
+              var number=statistic(object[i].innerText);
+              for(var j=0;j<object.length;j++){
+                  var number1=statistic(object[j].innerText);
+                  if(number1>number){
+                      max=object[j].parentElement.innerHTML;
+                      object[j].parentElement.innerHTML=object[i].parentElement.innerHTML;
+                      object[i].parentElement.innerHTML=max;
+                      number=number1;
+                  }
+              }
+            }
+        }
+
+        /**
+         * 统计Ascll码
+         */
+         function statistic(string){
+             var str="";
+             for(var i=0;i<string.length;i++){
+                str+=string.charCodeAt(i);
+             }
+             return parseInt(str);
+        }
+
+        /**
+         * 下面是执行删除的功能
+         */
+
+        function deleteSelect(){
+            var j=0;
+            var tdTag=document.getElementsByTagName("td");
+            for(var i=0;i<tdTag.length;i++){
+               // if(this.firstChild.nodeValue=="input") {
+               //     alert("gsdhs");
+               //     Node
+               // }
+                if(tdTag[i].firstChild.nodeName==="INPUT"){
+                    //if(tdTag[i].firstChild.nodeValue)
+                    if(tdTag[i].firstElementChild.type==="button"){
+                        tdTag[i].firstElementChild.onclick=function (ev) {
+                            j++;
+                            tdTag.index=j;
+                           alert(tdTag[tdTag.index].innerText);
+                           // alert(tdTag.index);
+                            tdTag[tdTag.index].parentElement.parentElement.removeChild(tdTag[tdTag.index].parentElement);
+                        }
+                    }
+                }
+            }
+
+            // if(tdTag[0].firstChild.nodeName==="INPUT"){
+            //             //if(tdTag[i].firstChild.nodeValue)
+            //             if(tdTag[0].firstElementChild.type==="button"){
+            //                 tdTag[0].firstElementChild.onclick=function (ev) {
+            //
+            //                 }
+            //             }
+            //         }
+        }
+
+
+    </script>
+
+</head>
+<body>
+<table class="tab" border="1" cellspacing="0" cellpadding="0" width="800">
+    <tr style="font-size: 14px; color: #006699; background: #f3f3f3;height: 50px;">
+        <td width="80px"><input type="checkbox" id="checkAll">全选</td>
+        <td width="300px;">商品名</td>
+        <td width="80px" id="price">价格</td>
+        <td width="80px" id="area">地区</td>
+        <td width="80px">功能</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+           <dt style="float: left;"><img src="../images/1.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">果绿后背钩花蝴蝶镂空长袖针织衫<br/>开衫小披肩韩国气质薄2010秋新</a></dd>
+            </dl>
+        </div>
+        </td>
+        <td class="money">&yen;59.00</td>
+        <td>北京</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+
+    <tr style="background: #f3f3f3;">
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+                <dt style="float: left;"><img src="../images/2.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">2010秋装新款韩版女装淑女花苞波<br/>西米亚条纹连衣裙Q0070</a></dd>
+            </dl>
+            </div>
+        </td>
+        <td class="money">&yen;97.00</td>
+        <td class="address">广州</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+                <dt style="float: left;"><img src="../images/3.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">随意美妙 O.SA欧莎热卖女装2010秋<br/>新韩版纯棉短袖T恤女ST00401</a></dd>
+            </dl>
+            </div>
+        </td>
+        <td class="money">&yen;33.00</td>
+        <td class="address">上海</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+
+    <tr style="background: #f3f3f3;">
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+                <dt style="float: left;"><img src="../images/4.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">2010秋装新款韩版女装淑女花苞波西<br/>米亚条纹连衣裙Q0070</a></dd>
+            </dl>
+            </div>
+        </td>
+        <td class="money">&yen;159.00</td>
+        <td class="address">深圳</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+                <dt style="float: left;"><img src="../images/1.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">果绿后背钩花蝴蝶镂空长袖针织衫<br/>开衫小披肩韩国气质薄2010秋新</a></dd>
+            </dl>
+            </div>
+        </td>
+        <td class="money">&yen;79.00</td>
+        <td class="address">广州</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+
+    <tr style="background: #f3f3f3;">
+        <td><input type="checkbox"></td>
+        <td>
+            <dl>
+                <dt style="float: left;"><img src="../images/4.jpg" width="80"></dt>
+                <dd style="float:left;font-size:14px; font-family: Aharoni;padding-top: 20px;"><a href="#" style="color:#1bd3da;text-decoration: none;">随意美妙 O.SA欧莎热卖女装2010秋<br/>新韩版纯棉短袖T恤女ST00401</a></dd>
+            </dl>
+            </div>
+        </td>
+        <td class="money">&yen;99.00</td>
+        <td class="address">北京</td>
+        <td><input type="button" value="删除"></td>
+    </tr>
+</table>
+<div style="text-align: center;margin-top: 10px;color:#124cdf;">
+    选中的商品总价是：<span class="money" id="allMoney">¥0.00元</span>
+</div>
+<script>
+    changeSelect();
+    price();
+    area();
+    deleteSelect();
+</script>
+</body>
+</html>

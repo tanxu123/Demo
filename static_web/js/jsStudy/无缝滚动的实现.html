@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var element;
+    function one(){
+        var box=document.getElementById("box11");
+      element=box.getElementsByTagName("div");
+        cycler();
+    }
+
+    /**
+     * 在程序执行时，在div盒子中插入一个div
+     */
+
+    // function insert(){
+    //     var ele=document.getElementById("box11");
+    //   ele.innerHTML="<div><img src=\"images/4.jpg\"></div>";
+    // }
+
+    function cycler(){
+      setInterval(move,1);
+    }
+
+    var speed=1;
+    function move(){
+        for(var i=0;i<element.length;i++){
+            var left=parseInt(element[i].style.left);
+            element[i].style.left=left+speed+"px";
+          //  alert(element[i].style.left);
+           if(left>=200){
+              // alert(element[i].style.left);
+               element[element.length-1].style.display="block";
+              // alert(element[i].parentElement.id);
+               var div4=document.getElementById("div4");
+               element[i].parentElement.insertBefore(div4, element[0]);
+           }
+        }
+    }
+</script>
+<style>
+    div img{
+        width:200px;
+        height: 200px;
+    }
+    div div{
+        float: left;
+        display: inline-block;
+        position: relative;
+    }
+     #box11{
+         width:600px;
+         overflow: hidden;
+     }
+</style>
+<body>
+<div>
+<div class="box11" id="box11">
+    <div style="left: 0px;"><img src="../images/1.jpg"></div>
+    <div style="left: 0px;"><img src="../images/2.jpg"></div>
+    <div style="left: 0px;"><img src="../images/3.jpg"></div>
+    <div style="left: 0px;display: none;" id="div4"><img src="../images/4.jpg"></div>
+</div>
+</div>
+
+<script>
+    one();
+    // insert();
+</script>
+</body>
+</html>

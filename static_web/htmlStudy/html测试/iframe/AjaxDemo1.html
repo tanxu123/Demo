@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+        function getChan(){
+            var ele=document.getElementById("box");
+
+            ele.onclick=function (ev) {
+              //  alert("吃法");
+                change();
+            }
+        }
+
+        function change(){
+            var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();
+            }
+            if(window.ActiveXObject){
+                xhr=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+            document.getElementById("box").innerText=xhr.responseText;
+            alert(xhr.responseText);
+                    }
+                }
+            }
+            xhr.open("get","http://localhost/demo2/Ajax?user=fang&password=123&date="+new Date().getTime(),true);
+            xhr.send();
+            /**
+             * 如果使用Post来发送数据，请使用setRequestHeader来添加HTTP头,然后在send中规定你希望发送的数据
+             */
+            // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            // xhr.send("user=fang&password=123&date="+new Date().getTime());
+            /**
+             * 使用get方法来发送数据，在open方法中的url参数中直接添加希望发送的数据
+             * 然后在send方法中填入null或不填写任何参数
+             */
+        }
+
+        /**
+         *
+         * 同步的Ajax的实现
+         */
+        function ajax(){
+            var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();
+            }
+            if(window.ActiveXObject){
+                xhr=new ActiveXObject("Microsoft-XMLHTTP");
+            }
+
+            xhr.open("get","http://localhost/demo2/Ajax?user=xiao",true);
+            xhr.setRequestHeader("person","xiaoxiao");
+            xhr.send();
+
+            if(xhr.readyState==4){
+                if(xhr.status==200){
+                    alert("得到的数据"+xhr.responseText);
+                }
+            }
+        }
+
+
+        function ajax1(){
+           var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();
+            }
+            if(window.ActiveXObject){
+                xhr=new ActiveXObject("microsoft-XMLHTTP");
+            }
+
+            xhr.onstatechange=function(){
+                if(xhr.readyState==200){
+                    if(xhr.status==4){
+                     document.getElementById("from").innerText=xhr.responseText;
+                    }
+                }
+            }
+
+            /*
+            如果通过fromData序列化数据的话，要使用的是post请求的方式
+             */
+            xhr.open("post","http://localhost/demo2/Ajax",true);
+              var data=new FormData();
+              data.append("user","fangzhiyue");
+              data.append("password","fzy123");
+              xhr.send(data);
+        }
+
+         function ajax2() {
+             //通过fromdata序列化表单数据
+             var xhr;
+             if (window.XMLHttpRequest) {
+                 xhr = new XMLHttpRequest();
+             }
+             if (window.ActiveXObject) {
+                 xhr = new ActiveXObject("microsoft-XMLHTTP");
+             }
+
+             xhr.onstatechange = function () {
+                 if (xhr.readyState == 200) {
+                     if (xhr.status == 4) {
+                         document.getElementById("from").innerText = xhr.responseText;
+                     }
+                 }
+             }
+
+             xhr.open("post", "http://localhost/demo2/Ajax", true);
+             var form = document.getElementById("from");
+             var data = new FormData(form);
+             xhr.send(data);
+         }
+
+          function ajax3(){
+
+            var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();
+            }
+
+            if(window.ActiveXObject){
+                xhr=new ActiveXObject("microsoft-xmlhttp");
+            }
+
+            xhr.onreadystatechange=function() {
+                if (xhr.readyState == 200) {
+                    if (xhr.status == 4) {
+                        alert(xhr.responseText);
+                    }
+                }
+            }
+            xhr.open("get","text.text",true);
+              xhr.timeout=2000;
+              xhr.ontimeout=function(){
+                  alert("响应超时");
+              }
+
+              xhr.overrideMimeType("text/xml");//设置响应的Mime类型
+              xhr.send();
+          }
+
+
+
+
+    </script>
+</head>
+<body>
+<div id="box" style="width:200px;height:200px;background-color: #FFCC00;"></div>
+<form action="http://localhost/demo2/Ajax" method="post" id="from">
+    <input type="text" name="用户" value="用户名">
+    <input type="password" name="密码" value="" >
+    <input type="submit" value="提交">
+</form>
+<button id="button">发送</button>
+<script>
+   cors();
+</script>
+</body>
+</html>

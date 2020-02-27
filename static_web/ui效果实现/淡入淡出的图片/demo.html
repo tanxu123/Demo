@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+        var demo=100;
+     function demo1(){
+         var ele=document.getElementById("img");
+         var defaultAlpha=30;  var timer;
+         var time2;
+         ele.onmouseover=function (ev) {
+             var this1=this;
+             clearInterval(time2);
+             clearInterval(timer);
+          timer= setInterval(function (){
+                 defaultAlpha+=10;
+                // alert(defaultAlpha);
+                     this1.style.filter="alpha(opacity:"+defaultAlpha+")";
+                     this1.style.opacity=defaultAlpha/100+"";
+                    // alert(defaultAlpha);
+                     if(defaultAlpha>=100){
+                         clearInterval(timer);
+                     }
+             },30);
+         };
+         ele.onmouseout=function (ev) {
+            var this1=this;
+            clearInterval(timer);
+             clearInterval(time2);
+             time2=setInterval(function(){
+                 // alert(defaultAlpha);
+                 demo-=10;
+                 this1.style.filter="alpha(opacity:"+demo+")";
+                 this1.style.opacity=demo/100+"";
+                 // alert(defaultAlpha);
+                 if(demo<=30){
+                     clearInterval(time2);
+                 }
+             },30);
+         };
+     }
+    </script>
+    <style>
+     img{
+         filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30); opacity: 0.3;}
+    </style>
+</head>
+<body>
+<img id="img" width="200px"  height="200px" src="1.jpg">
+<script>
+    demo1();
+</script>
+</body>
+</html>

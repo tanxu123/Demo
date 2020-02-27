@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      div div div{
+            width: 60px;
+            height:60px;
+          margin: 10px;
+            background: #111111;
+            float: left;
+          color: #fff;
+          text-align: center;
+        }
+        .lists{
+            width:240px;
+            height:80px;
+        }
+        body div{
+          width:240px;
+            height:320px;
+            background-color: #cccccc;
+            margin: 0 auto;
+        }
+        div h3{
+          margin: 0px;
+            border:none;
+            padding: 0px;
+        }
+    </style>
+    <script>
+        function change(){
+            var index=0;
+            var box=document.getElementsByClassName("box");
+            var row=box[0].getElementsByTagName("div");
+            for(var i=0;i<row.length;i++){
+                var column=row[i].getElementsByTagName("div");
+                for(var j=0;j<column.length;j++){
+                    column[j].onclick=function (ev) {
+                        //alert(index);
+                        column.index=index;
+                        //alert(column.index);
+                       column[column.index].style.backgroundColor="#fff";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="lists">
+        <div><h3>1</h3><p>JAN</p></div>
+        <div><h3>2</h3><p>FER</p></div>
+        <div><h3>3</h3><p>MAR</p></div>
+    </div>
+    <div class="lists">
+        <div><h3>4</h3><p>APR</p></div>
+        <div><h3>5</h3><p>MAY</p></div>
+        <div><h3>6</h3><p>JUN</p></div>
+    </div>
+    <div class="lists">
+        <div><h3>7</h3><p>JUL</p></div>
+        <div><h3>8</h3><p>AUG</p></div>
+        <div><h3>9</h3><p>SEP</p></div>
+    </div>
+    <div class="lists">
+        <div><h3>10</h3><p>OCT</p></div>
+        <div><h3>11</h3><p>NOV</p></div>
+        <div><h3>12</h3><p>DEC</p></div>
+    </div>
+</div>
+<script>
+    change();
+</script>
+</body>
+</html>

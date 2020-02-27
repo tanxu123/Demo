@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="div1"></div>
+
+<script>
+
+    /**
+     * @param url  请求服务器的url
+     * @param callback 返回数据的回调函数 data：响应的内容   status：请求的状态 “success” or “error”
+     */
+    $.get("http://localhost:8080/Ajax/AjaxTest", function (data, status) {
+        alert(data + "\n" + status)
+
+    })
+
+
+    html="<tr>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t企业所得税&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t应纳税所得额&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t2019&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t01&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t2018-01-01&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t2018-12-31&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t年&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t2019-05-31&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t2019-05-31&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t<td class=\"td_list_2\">\n" +
+        "\t\t\t\t\t\t查账征收&nbsp;\n" +
+        "\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\n" +
+        "\t\t\t\t</tr>"
+</script>
+</body>
+</html>

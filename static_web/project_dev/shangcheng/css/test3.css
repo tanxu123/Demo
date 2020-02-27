@@ -1,0 +1,45 @@
+
+.ts-nav .navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.ts-nav .ts-nav-menu {
+
+    float: left;
+    margin-left: 0.3rem;
+    /**  0.3rem */
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.ts-nav .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+.ts-nav .ts-nav-brand {
+    float: right;
+}
+
+
+.ts-input {
+    margin-top: 20px;
+}
+
+
+.ts-input .form-control {
+    border-radius: 0px;
+    border-color: #111111;
+    border-right-color: #CCCCCC;
+    height: 45px;
+
+}
+
+.ts-input .input-group-addon {
+    border-radius: 0px;
+    border-color: #111111;
+    color: #38f;
+    background-color: #ffffff;
+    font-weight: bold;
+
+}

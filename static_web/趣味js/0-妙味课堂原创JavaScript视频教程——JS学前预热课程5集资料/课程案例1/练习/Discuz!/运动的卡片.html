@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+
+    <script>
+        var content1;//div对象
+        var speed=10;//速度
+        var interval=null;//定时器引用
+        function change(){
+            var menu1=document.getElementById("menu1");
+            menu1.onmouseover=function (ev) {
+      content1=document.getElementById("content1");
+          content1.style.display="block";
+          //下面是调用周期函数，对div 的宽高进行设置，一直打到相应的大小
+                changeBig();
+            }
+
+            //鼠标的移除事件
+            menu1.onmouseleave=function (ev) {
+                //content1=document.getElementById("content1");
+                clearInterval(interval);
+                // changeBig();
+                content1.style.width="30px";
+                content1.style.height="200px";
+               content1.style.display="none";
+            }
+
+        }
+        //使div的大小变大
+        function changeBig(){
+       interval=setInterval(chan,1);
+        }
+
+        function chan(){
+        var width=parseInt(content1.style.width);
+        var height=parseInt(content1.style.height);
+        // alert(width);
+        // alert(height);
+        if(height<200) {
+        content1.style.height=height+speed+"px";
+        }
+        if(width<200){
+        content1.style.width=width+speed+"px";
+        }
+        if(content1.style.height>=200&&content1.style.width>=200){
+        clearInterval(interval);
+        }
+        }
+
+    </script>
+</head>
+<body>
+<div>
+    <div style="float:left;background-color: #33FF00;width:200px;height: 200px;">
+        <div style="width:30px;height:170px;background: darkorange;float: right;" id="menu1"></div>
+        <div  style="width:170px;height:30px;background: red;clear: both;" id="menu2"></div>
+    </div>
+    <!--测试的div-->
+    <div style="float:left;width:200px;height: 200px;">
+        <div style="background-color: #324321;width:30px;height:200px;margin: 0 auto;display: none;" id="content1"></div>
+    </div>
+    <!--测试的下面的div-->
+    <div style="clear:both;width:200px;height: 200px;">
+        <div style="background-color: #324321;width:200px;height:30px; display: none;" id="content2"></div>
+    </div>
+</div>
+<script>
+    change();
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+/**
+清除系统的默认属性设置
+ */
+
+* {
+    margin: 0px;
+    border: 0px;
+    list-style: none;
+    padding: 0px;
+}
+
+/**
+整个html的文本类型
+ */
+.fontset {
+    font: 16px/16px "华文宋体";
+}
+
+a:visited, a:link {
+    color: #000000;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+a:hover {
+    color: #000000;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.banner {
+
+    width: 100%;
+    height: 40%;
+
+}
+
+.banner ul li.current img {
+    width: 100%;
+    height: 400px;
+
+}
+
+/**
+控制显示用的第一个图片的显示效果
+ */
+.banner ul li.current {
+
+    height: 40%;
+    width: 100%;
+    float: left;
+    display: inline-block;
+}
+
+/**
+其他图片的显示效果
+ */
+.banner ul li.photo {
+
+    height: 40%;
+    width: 100%;
+    display: none;
+    float: left;
+}
+
+/*
+控制的是图标显示外部的长宽高
+ */
+.banner ul.icon_galley {
+    float: left;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.banner ul li.icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ff1e21;
+    position: relative;
+    top: -60px;
+}
+
+.banner ul li.current_icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid #ff1e21;
+    background: #ff2800;
+    position: relative;
+    top: -60px;
+}
+
+/**
+用来定义整个图标的显示框
+ */
+.iconRange {
+    margin: 20px 0px;
+    height: 200px;
+    width: 100%;
+    clear: both;
+}
+
+.iconRange dl.icon_set {
+    float: left;
+    width: 160px;
+    margin: 0px 100px;
+    height: 200px;
+}
+
+/**
+图标显示
+ */
+.iconRange dt.icon_dis {
+    float: left;
+    width: 160px;
+    height: 160px;
+    background: #ff2800;
+    border-radius: 150px;
+}
+
+/**
+文本的显示
+ */
+.iconRange dd.icon_text {
+    float: left;
+    margin: 10px 0px;
+    text-align: center;
+    width: 150px;
+    height: 40px;
+}
+
+div.split {
+    width: 100%;
+    margin-top: 20px;
+    height: 1px;
+    background-color: #989a9a;
+}
+
+/**
+下面是整个网页的主题部分的显示
+
+ */
+
+.content {
+
+    width: 100%;
+    height: 1000px;
+
+}
+
+.content p.title{
+    margin-top: 40px;
+    height: 60px;
+    line-height: 60px;
+    font: 40px "华文宋体";
+}
+
+
+.content div.music_range_div{
+    width:  100%;
+    height: 440px;
+}
+
+.content dl.musicTable{
+
+    width: 33%;
+    height: 320px;
+    float: left;
+}
+
+.content dt.musicImg{
+    width: 100%;
+    height: 100%;
+}
+
+.content dt.musicImg img{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.content dd.musicDes{
+    height: 7%;
+    clear: both;
+    width: 100%;
+}
+
+.content ul.musicFont{
+    height: 100%;
+    width: 300px;
+    margin: 0 auto;
+
+}

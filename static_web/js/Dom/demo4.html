@@ -1,0 +1,601 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>这是demo4</title>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8">
+    <script type="text/javascript">
+
+        function damain(){
+            alert("url"+document.URL);//http://localhost:63342/js/Dom/demo2.html?_ijt=u1q1qnqv3ee5maa9u3ma9kf36n
+            alert("domain"+document.domain);//localhost
+            alert("referrer"+document.referrer);//空
+        }
+
+       // damain();
+
+        function getElementByTagName(){
+           var collection= document.getElementsByTagName("h1");
+           for(var i=0;i<collection.length;i++){
+               //访问方式
+              //1..
+               collection[i];
+               //2.
+               collection.item(i);
+           }
+            //3..
+            collection.namedItem("title");//访问特定的元素
+            //4..
+            collection["title"];
+
+            //5.获得所有元素
+            var allElement=document.getElementsByTagName("*");
+
+        }
+
+        function getElementByName(){
+            var title=document.getElementsByName("title");//返回的是list的集合
+            //与nameItem 不同的是，在实现相同的功能是，nameItem返回的是一个首选项，而ByName返回的是一个集合；类型，也就是所有的元素对象
+
+        }
+
+        //document的特殊属性集合
+        function getElementBySpecify(){
+            document.anchors//带name 属性的<a>
+            document.forms;//表单集合
+            document.applets;//applets
+            document.images;//image集合
+            document.links;//带href的属性的<a>的元素
+        }
+
+        /**
+         *检测浏览器所支持的功能
+         * @param func 检测浏览器支持的功能
+         * @param version 检测浏览器支持功能的版本
+         * @returns {boolean} 支持返回true 不支持返回false
+         */
+        function domConsistencyTesting(func,version){
+            var isSupport=document.implementation.hasFeature(func,version);
+            return isSupport;
+        }
+        //alert(domConsistencyTesting.call(this,"Core","1.0"));
+
+        function documentTest(){
+            document.writeln("<h3>这是文档对象写进去的</h3>");
+        }
+
+        function elementAttributeTesting() {
+            var ele = document.getElementById("title");
+            alert(ele.id);
+            alert(ele.tagName);
+            alert(ele.nodeName);
+            alert(ele.title);
+            alert(ele.className);
+        }
+        //Attribute方法的使用
+
+        function attribute(){
+            var ele=document.getElementById("title");
+            var color=ele.getAttribute("background");
+            alert(color);//返回的结果为null
+
+            var user=ele.getAttribute("user");//返回自定义的内容的值
+            alert(user);
+
+            // user=ele.user;
+            // alert(user);错误，无法正常取到数据
+
+            var style=ele.getAttribute("style");
+            alert(style);
+
+            ele.onclick=function (ev) {  };
+            alert(ele.getAttribute("onclick"));
+
+
+        }
+
+        function attributesPrototype(){
+            var ele = document.getElementById("title");
+
+            if(ele.nodeType==1){//如果当前节点为元素节点
+              alert(ele.attributes.getNamedItem("id").nodeName);
+              alert(ele.attributes.getNamedItem("title"));//为null
+            }
+        }
+
+        //创建元素
+        function create(){
+            var div=document.createElement("div");
+            div.className="box";
+            document.body.appendChild(div);
+        }
+
+        //Text类型
+        function textType(){
+          var ele=document.getElementById("list");
+          ele.className="box";
+          //alert(ele.childNodes.length);//在火狐检测下，结果为7，也就是说，子节点包括空白的文本节点
+          // alert(ele.children.length);//这个返回的是elememt节点的个数
+            for(var i=0;i<ele.children.length;i++){
+               // alert(ele.children[i].firstChild.nodeType);结果都为3，因为都是文本节点
+                if(ele.children[i].firstChild.nodeType==3){
+                    ele.children[i].firstChild.appendData("抢购");
+                    ele.children[i].onmouseover=function (ev) {
+                      this.style.color="#ff020c";
+                      this.style.fontSize="180px";
+                      this.style.listStyleType="none";
+                    }
+                    ele.children[i].onmouseout=function (ev) {
+                        this.style.color="";
+                        this.style.fontSize="";
+                        this.style.listStyleType="";
+                        this.style.marginTop="20px";
+                    }
+                    }
+                }
+        }
+
+        function createText() {
+            var ele = document.getElementById("list");
+            ele.className = "box";
+            //alert(ele.childNodes.length);//在火狐检测下，结果为7，也就是说，子节点包括空白的文本节点
+            // alert(ele.children.length);//这个返回的是elememt节点的个数
+            for (var i = 0; i < ele.children.length; i++) {
+                // alert(ele.children[i].firstChild.nodeType);结果都为3，因为都是文本节点
+                if (ele.children[i].firstChild.nodeType == 3) {
+                    ele.children[i].firstChild.appendData("抢购");
+                }
+            }
+
+            var textNode = document.createTextNode("真的很便宜");
+            ele.children[0].appendChild(textNode);
+        }
+
+        //Comment类型
+        function comment(){
+
+            var ele=document.getElementById("divBox");
+            var comment=ele.firstChild;
+            if(comment.nodeType==8){
+               alert(comment.nodeValue);
+               //Commet类型与text类型继承自同意个基类，也就具有了相同的方法以及属性
+               alert(comment.data);//取到的是注释中的内容
+            }
+            }
+
+
+            //CDATASection
+           function CDATASection(){
+            var ele=document.getElementById("cdata");
+            var Cata=ele.firstChild;
+            alert(Cata.nodeValue);
+           }
+
+           //DocumentType
+        function documentType(){
+            alert(document.doctype.name);
+        }
+
+        //documentFragment
+        function documetnFragmentTesting(){
+            var fragment=document.createDocumentFragment();
+
+            var ul=document.createElement("ul");
+            for (var i=0;i<4;i++){
+               var li= document.createElement("li");
+               li.innerHTML="选项"+i;
+               ul.appendChild(li);
+            }
+
+            fragment.appendChild(ul);
+
+            document.body.appendChild(fragment);
+        }
+
+       // Dom操作技术
+
+        function ScriptTest(url){
+
+           var script= document.createElement("script");
+           script.type="text/javascript";
+           script.src=url;
+           document.head.appendChild(script);
+        }
+
+        ScriptTest("test.js");
+
+
+        // function DamicScript(){
+        //     var script=document.createElement("script");
+        //     script.type="text/javascript";
+        //     script.appendChild(document.createTextNode("function sayHi(){alert('你好!')}"));
+        // }
+
+        function damicScript(code){
+            var head=document.head;
+            var script=null;
+            for(var i=0;i<head.children.length;i++){//元素节点对象
+                if(head.children[i].nodeName.toLowerCase()=="script") {
+                    script=head.children[i];
+                }
+            }
+            try{
+                script.appendChild(document.createTextNode(code));
+            }catch (e){
+                script.text=code;
+            }
+            document.head.appendChild(script);
+        }
+
+
+        //动态样式
+        function damicStyle(){
+        var link=document.createElement("link");
+        link.rel="stylesheet";
+        link.type="text/css";
+        link.href="../css/demo1.css";
+        document.head.appendChild(link);
+        }
+
+        //在style中增加代码
+
+
+        function styleAddtion(css){
+            var styles=document.getElementsByTagName("style");
+             //alert(typeof styles[0]);
+            if(typeof styles[0]=="undefined"){
+                styles[0]=document.createElement("style");
+                document.head.appendChild(styles[0]);
+               // alert(typeof styles[0]);
+            }
+           var divNodeStyle= document.createTextNode(css);
+           try{
+               styles[0].appendChild(divNodeStyle);
+           }catch (e){
+               styles[0].styleSheet.cssText=css;
+           }finally {
+           }
+        }
+
+        //操作表格
+        function operatorTable(){
+
+            //创建下面的内容
+            var table=document.createElement("table");
+            // var tr1=documet.createElement("tr");
+            // var tr2=document.createElement("tr");
+            for(var i=0;i<3;i++){
+                var tr=document.createElement("tr");
+                for(var j=0;j<3;j++){
+                    var td=document.createElement("td");
+                    var text=document.createTextNode("选项"+j);
+                    td.appendChild(text);
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            table.width="600px";
+            table.height="300px";
+            table.style.border="1px solid #ccc";
+            table.cellPadding="1px";
+            table.cellSpacing="1px";
+            document.body.appendChild(table);
+        }
+
+        function operatorTable1(){
+            //增加插入按钮
+            var insert=document.createElement("input");
+            insert.value="插入";
+            insert.name="del";
+            insert.style.width="35px";
+            insert.style.height="20px";
+            insert.style.border="none";
+            insert.style.backgroundColor="#ccc";
+            document.body.appendChild(insert);
+            insert.onclick=function (ev) {
+                var tables=document.getElementsByTagName("table");
+                var row=tables[0].insertRow(3);
+              //  alert(row);
+                for(var j=0;j<3;j++){
+                    var td=document.createElement("td");
+                    var text=document.createTextNode("选项"+j);
+                    td.appendChild(text);
+                    row.appendChild(td);
+                }
+
+            }
+
+            //增加删除按钮
+            var ele=document.createElement("input");
+            ele.value="删除";
+            ele.name="del";
+            ele.style.width="35px";
+            ele.style.height="20px";
+            ele.style.border="none";
+            ele.style.backgroundColor="#ccc";
+            ele.onclick=function (ev) {
+
+                var tables=document.getElementsByTagName("table");
+                tables[0].deleteRow(2);
+            }
+            document.body.appendChild(ele);
+
+        }
+
+        function operatorTable2(ele) {
+
+            //var table=document.getElementById("table");
+            //alert(table.children.length);
+         ele.onmouseover=function (ev){
+             ele.style.backgroundColor="#30ff85";
+         }
+
+         ele.onmouseout=function (ev){
+             ele.style.backgroundColor = "#fff";
+         }
+            if(ele.previousSibling.style.backgroundColor=="#ccc"){
+                ele.style.backgroundColor = "#fff";
+            }else {
+                ele.style.backgroundColor = "#ccc";
+            }
+
+        }
+
+
+        //Dom扩展
+        function domExtend(){
+           var ele= document.querySelector("table tr");//获得table下第一行 HtmlRowElement
+            ele.style.backgroundColor="#838383";
+        }
+
+        function domExtend1(){
+            var ele=document.querySelectorAll("table tr");//table下面的tr ，总共找到了三个
+            alert(ele.length);//打印的数字为3
+        }
+
+        function domExtend2(){
+            var div=document.createElement("div");
+            div.className="user";
+
+            //alert(div.matches(".user"));
+           // alert(div.msMatchesSelector(".user"));
+           // alert(typeof div.msMatchesSelector=="undefined");
+            if(div.msMatchesSelector){
+                alert(div.msMatchesSelector(".user"));
+            }
+          //  alert(div.webkitMatchesSelector(".user"));
+        }
+
+        //domExtend2();
+
+        //元素的遍历
+        function domExtend3(){
+            var ele=document.body;
+            alert(ele.childElementCount);
+            alert(ele.firstElementChild);
+            alert(ele.lastElementChild);
+            alert(ele.previousElementSibling);
+            alert(ele.nextElementSibling);
+        }
+
+
+        //class属性的运用
+        function classList(){
+            var ele=document.body;
+            ele.className="content box";
+
+            alert(ele.classList.length);//返回的是className
+
+            for(var i=0;i<ele.classList.length;i++){
+               alert(ele.classList.item(i));
+
+                alert(ele.classList[i]);
+            }
+
+        }
+
+
+        //焦点管理
+         function getFocus(){
+           // var ele=document.getElementById("table");
+           // ele.focus();
+            // if(document.hasFocus()){
+            //     alert("table获得了焦点");
+            // }
+
+            var ele= document.querySelector("form input");
+           ele.focus();
+           ele.style.border="1px solid #ff020c";
+          // ele.style.width="200px";
+             ele.style.backgroundColor="#b9b8cb";
+         }
+
+         //HtmlDocument的变化
+        function htmlDocumentTesting(){
+
+           // alert(document.readyState);
+            //这个属性的返回值是loading与complete，
+            //这个实行的作用的运用时，在之前当文档加载完成时，可以通过onload调用事件
+            //而现在可以通过这个去实现
+
+            if(document.readyState=="complete"){
+                alert("文档加载完成");
+            }
+
+        }
+     // htmlDocumentTesting();
+     // window.onload=function (ev) {
+     //
+     //        alert("文档加载完成1");
+     // }
+
+     // if(document.readyState=="complete"){
+     //        alert("你好");
+     // }
+
+        //字符型的属性
+        function charSet(){
+            //alert(document.charset);
+            //document.charset="gbk";
+          // alert(document.charset);
+            //document.charset
+
+            // if(document.charset){
+            //  document.characterSet="gbk";
+            // }
+            // document.characterSet="gbk";
+            // document.charset="gbk";
+
+           // alert(document.charset);
+
+        }
+
+       // charSet();
+
+        //自定义数据类型
+        function userTypre(){
+            var ele=document.getElementById("divBox");
+            alert(ele.dataset.user);
+            alert(ele.dataset.id);
+        }
+
+        //插入标记
+        
+        function insertNode() {
+           var ele =document.getElementById("divBox");
+         //   ele.innerHTML="<a href='http://www.baidu.com'>百度一下</a>";
+
+            // alert(ele.innerHTML);//显示里面的所有的标记内容以及文本内容
+            //
+            // alert(ele.innerText);//显示里面的文本
+            //
+            // ele.innerText="搜索百度";
+            // alert(ele.innerHTML);//搜索百度
+            // alert(ele.innerText);//搜索百度
+            //
+            // var text="<a href='www.taobao.com' onclick='alert(\"淘宝欢迎你\")'></a>";
+            //
+            // var sanitized=window.toStaticHTML(text);//ie的api，在火狐不适用
+            //
+            // alert(sanitized);
+
+           // ele.outerText="世界你好";
+
+            //ele.outerHTML="<p>世界你好</p>";
+
+           // alert(ele.outerText);//undefined
+
+           //alert(ele.outerHTML);
+
+            //3,insertAdjacenHTML的使用
+
+           // ele.insertAdjacentHTML("beforebegin","<p>傻逼的思想</p>");
+
+        }
+
+
+           //滚动的使用
+        function scrolView(){
+            var ele=document.getElementById("scrollView");
+
+            ele.scrollIntoView(true);
+        }
+
+
+        function scrollDemo1(){
+
+        }
+
+
+
+
+
+   </script>
+    <style>
+
+        #title{
+            background-color: #33FF00;
+        }
+       .box{
+           width: 200px;
+           height:200px;
+           background-color: #1bd3da;
+        }
+
+        .boxScroll{
+            width:400px;
+            height:300px;
+            background-color: #33FF00;
+        }
+    </style>
+</head>
+<body>
+<!--<h1 name="title" id="title" user="xiaofangfang">这是demo4</h1>-->
+<!--<div name="divBox" id="divBox">&lt;!&ndash;这是一个div&ndash;&gt;</div>-->
+<!--<div name="cdata" id="cdata"><![CDATA[this is some content.]]></div>-->
+<!--<ul id="list">-->
+    <!--<li>电器</li>-->
+    <!--<li>美容</li>-->
+    <!--<li>家具</li>-->
+<!--</ul>-->
+
+<div id="divBox" data-user="fang" data-id="13245"></div>
+
+<table border="0px" width="600px;" cellspacing="1px;" cellpadding="1px;" id="table" style="border: 1px solid #ccc;">
+       <tr>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>籍贯</td>
+    </tr>
+    <tr >
+        <td>方志月</td>
+        <td>22</td>
+        <td>安徽六安</td>
+    <tr >
+        <td>方志生</td>
+        <td>年龄</td>
+        <td>安徽霍邱</td>
+    </tr>
+</table>
+
+<div style="height: 1000px;width:400px;"></div>
+
+<div class="boxScroll" id="scrollView"></div>
+
+
+<form action="">
+    姓名<input type="text" maxlength="20"/><br/>
+    年龄<input type="text" maxlength="20"/><br/>
+</form>
+
+
+<script type="text/javascript">
+   // documentTest();
+    //elementAttributeTesting();
+    //attribute();
+  // attributesPrototype();
+  //  create();
+   //textType();
+   // createText();
+   // comment();
+   //CDATASection();
+    //documentType();
+   // documetnFragmentTesting();
+    //damicScript("");
+  // damicStyle();
+   //styleAddtion("div{background-color:#ccc;width:300px;height:200px;}");
+  // operatorTable();
+  // operatorTable1();
+   //operatorTable2();
+   // domExtend();
+   //domExtend1();
+   //domExtend3();
+   //classList();
+    //getFocus();
+   // htmlDocumentTesting();
+   // userTypre();
+  // insertNode();
+   // scrolView();
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body div{
+            width: 300px;
+            height:299px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+        }
+
+    </style>
+
+    <script>
+        function positionCallback() {
+              alert("你的位置："+arguments[0].coords.latitude);
+        }
+
+        function errorCallback() {
+           alert("出现错误");
+           alert(arguments[0]);
+        }
+
+        function positionOptions() {
+
+        }
+       function chan(){
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(positionCallback,errorCallback,positionCallback);
+            }else{
+                alert("浏览器不支持");
+            }
+        //   alert(geolocation.coords.latitude);
+       }
+
+       
+        window.onload=function () {
+            
+        }
+
+
+
+    </script>
+</head>
+<body>
+<div></div>
+<script>
+    chan();
+</script>
+</body>
+</html>

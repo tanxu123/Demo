@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/woman.js"></script>
+    <!--less的css实现-->
+    <link rel="stylesheet" type="text/css" href="../css/learme.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" href="../css/contact.css">
+
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=LqKxEnYRw6i1yC4mh0AITbv1naAUoOvM"></script>
+
+</head>
+<body>
+
+
+<header class="sc-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="col-lg-2">
+                    <span class="tel glyphicon glyphicon-earphone"> 40012345678</span>
+                </div>
+                <div class="col-lg-3">
+                    <span>演示商城，不能购物</span>
+                </div>
+            </div>
+
+            <div class="col-lg-2 text-right">
+                <a><span>登录</span></a>
+                <a><span>注册</span></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="sc-search">
+    <div class="container">
+        <div class="col-lg-3 col-lg-offset-9">
+            <div class="input-group sc-com-input-box">
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon2">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="sc-menu">
+
+    <div class="container">
+        <div class="col-lg-1 "><a href="../index.html">首页</a></div>
+        <div class="col-lg-1"><a href="learnme.html">关于我们</a></div>
+        <div class="col-lg-1"><a href="womanPro.html">女装商品</a></div>
+        <div class="col-lg-1"><a href="manPro.html">男装商品</a></div>
+        <div class="col-lg-1"><a href="childPro.html">儿童商品</a></div>
+        <div class="col-lg-1"><a href="news.html">新闻质询</a></div>
+        <div class="col-lg-1"><a href="company.html">招商加盟</a></div>
+        <div class="col-lg-1"><a href="saleAfterServer.html">售后服务</a></div>
+        <div class="col-lg-1"><a href="contactMe.html">联系我们</a></div>
+    </div>
+</div>
+
+
+<div class="sc-banner">
+    <div class="container-fluid cancelPadding">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <div class="img-cover"></div>
+                </div>
+                <div class="item">
+                    <div class="img-cover"></div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="sc-contact-info">
+    <div class="container">
+        <div class="page-header">
+            <h3 class="glyphicon glyphicon-home"> 联系我们
+                <small>/CONTACT US</small>
+            </h3>
+        </div>
+
+        <div class="col-lg-6">
+            <p>使用表单之前需要配置表单的收件邮箱和网站的发件邮箱。详情请参考教程：</p>
+            <form>
+                <div class="form-group">
+                    <label for="username">姓名 *</label>
+                    <input type="email" class="form-control" id="username" placeholder="用户名">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">邮箱 *</label>
+                    <input type="email" class="form-control" id="email" placeholder="邮箱">
+                </div>
+
+                <div class="form-group">
+                    <label for="tel">联系电话 *</label>
+                    <input type="text" class="form-control" id="tel" placeholder="联系电话">
+                </div>
+
+                <textarea class="form-control" rows="3"></textarea>
+
+                <button class="btn btn-default">提交</button>
+
+            </form>
+
+        </div>
+        <div class="col-lg-6">
+            <div id="allmap"></div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="sc-flag">
+    <div class="container">
+        <div class="col-lg-3 text-center">
+            <h4><span class="flag1"></span>100%正品好货</h4>
+        </div>
+        <div class="col-lg-3 text-center">
+            <h4><span class="flag2"></span>客户认证好评</h4>
+        </div>
+        <div class="col-lg-3 text-center">
+            <h4><span class="flag3"></span>超低价格享受</h4>
+        </div>
+        <div class="col-lg-3 text-center">
+            <h4><span class="flag4"></span>七天退货保证</h4>
+        </div>
+        <div class="page-header">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-lg-2 text-center">新手帮助</div>
+        <div class="col-lg-2 text-center">常见问题</div>
+        <div class="col-lg-2 text-center">支付方式</div>
+        <div class="col-lg-2 text-center">配送服务</div>
+        <div class="col-lg-2 text-center">售后服务</div>
+        <div class="col-lg-2 text-center">服务热线</div>
+    </div>
+    <br>
+
+</div>
+
+
+<div class="sc-server">
+    <div class="container">
+        <div class="col-lg-2 text-center">如何注册</div>
+        <div class="col-lg-2 text-center">订单状态</div>
+        <div class="col-lg-2 text-center">在线支付</div>
+        <div class="col-lg-2 text-center">范围及运费</div>
+        <div class="col-lg-2 text-center">退换货方式</div>
+        <div class="col-lg-2 text-center addWidth">北京市海淀区人民路15号</div>
+    </div>
+</div>
+
+<div class="sc-server2">
+    <div class="container">
+        <div class="col-lg-2 text-center">门店认证</div>
+        <div class="col-lg-2 text-center">发票说明</div>
+        <div class="col-lg-2 text-center">银行转账</div>
+        <div class="col-lg-offset-2 col-lg-2 text-center">退换货流程</div>
+        <div class="col-lg-2 text-center">电话：400-202-586</div>
+    </div>
+
+</div>
+
+
+<footer class="sc-footer text-center">
+    版权所有 (c) 2045 Levi's服装商务有限公司. 苏ICP备**********号-1
+</footer>
+
+
+<script>
+
+    var maxPrice = 2000;
+
+
+    seekbar(function (progress) {
+        //这里面获得的是seekbar获得的进度
+        $("#selectPrice").html(maxPrice * progress / 100);
+
+    })
+
+
+</script>
+
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+    //添加地图类型控件
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes: [
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]
+    }));
+    map.setCurrentCity("南昌");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+        .one {
+
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url("17.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            z-index: -2;
+        }
+
+
+        .top {
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .menuBar {
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menuBar div {
+            width: 33.333%;
+        }
+
+
+        .menuBar div:first-child {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .menuBar div:last-child {
+            display: flex;
+            padding-right: 5%;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+
+        .content {
+            top: 109px;
+            background-color: #0C77CF;
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div class="one" id="top"></div>
+
+<div class="top">
+    <span style="font-size: 32px;color: #ffffff;">南昌市红十字会</span>
+</div>
+
+<div class="menuBar" id="menuBar">
+    <div>
+        <img src="Nipic_18670821_20140510165048475000.png" alt="" width="60px">
+        <span>操作5</span>
+        <span>操作6</span>
+    </div>
+    <div></div>
+    <div>
+        <span>操作1</span>
+        <span>操作2</span>
+        <span>操作3</span>
+    </div>
+</div>
+
+
+<div class="content" id="content">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+
+
+<script>
+
+</script>
+
+</body>
+</html>

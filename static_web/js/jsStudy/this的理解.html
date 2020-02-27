@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function Aaa() {
+            var _this = this;
+            this.a = 12;
+
+
+            setTimeout(function () {//这里使用了闭包,内部函数使用了内部函数的变量
+                 //this.show();//undefined
+               _this.show()
+
+                return function () {
+
+                    return function () {
+
+                      console.log(a)
+                    }
+                }()();
+
+            }, 1000);
+        }
+
+
+        Aaa.prototype.show = function () {
+           // alert(this.a);
+        };
+        var obj = new Aaa();
+        obj.show();   //会一直弹出12
+
+
+        Aaa();
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

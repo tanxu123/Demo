@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/indexTitle.css" type="text/css" rel="stylesheet">
+    <script>
+
+        /**
+         * 存放的是当前的用户的信息
+         */
+        var userInfo;
+
+
+        function ParseResponse() {
+            /*
+          下面的代码是用来检测用户是否已经登录
+          */
+
+            /**
+             * 用户状态的查询
+             * @param ev
+             */
+            this.userLoginInfo = function (jsonResponse) {
+                //alert(jsonResponse)
+                var userStatus = JSON.parse(jsonResponse);
+                var responseResult = userStatus.responseResult;
+                if (responseResult.errorCode == 1) {
+                    userInfo = userStatus.user;
+                    var urlAddress = "http://localhost:8080/Blog/UserServlet?cancellation=true";
+                    //代表已经登录了
+                    var innerhtml = "            <a href=\"#\"><img data-v-07578fd8=\"\" height=\"30\" src=\"" + userInfo.picture + "\" class=\"img-item-user\"/></a>\n" +
+                        "            <a href=\"\" class=\"cancellationButton\"><span data-v-07578fd8=\"\" class=\"item-text\">注销</span></a>"
+                    var loginBox = document.getElementById("login-box");
+                    loginBox.innerHTML = innerhtml;
+
+                    var cancellationButton = document.getElementsByClassName("cancellationButton")[0];
+                    cancellationButton.onclick = function (ev) {
+                        var request = new Request();
+                        var parseData = new ParseResponse();
+                        //请求下线地址返回数据
+                        request.requestGet(urlAddress, parseData.parseCanellationData);
+                    }
+
+                    var parse = new ParseResponse();
+                    parse.progressUserInfo(userInfo);
+
+                }
+            }
+
+            /**
+             * name
+             qqNumber
+             occupation
+             hobby
+             likeSinger
+             likeMusic
+             motto
+             userid
+             picture
+             password
+             nikeName
+
+             * @param user
+             */
+            this.progressUserInfo = function (user) {
+                var name = user.name;
+                var qqNumber = user.qqNumber;
+                var occupation = user.occupation;
+                var hobby = user.hobby;
+                var likeSinger = user.likeSinger;
+                var likeMusic = user.likeMusic;
+                var motto = user.motto;
+                var picture = user.picture;
+                var info = [name, qqNumber, occupation, hobby, likeSinger, likeMusic, motto, picture];
+                var indoBox = document.getElementById("userInfo");
+                var liSet = document.getElementsByTagName("li");
+                for (var i = 0; i < liSet.length - 1; i++) {
+                    liSet[i].innerText += info[i];
+                }
+
+            }
+
+
+            this.parseCanellationData = function (jsonResponse) {
+                //alert(jsonResponse);
+            }
+
+
+            this.updateUserInfoResult = function (jsonResponse) {
+                alert(jsonResponse);
+            }
+        }
+    </script>
+    <script>
+        function Request() {
+            /**
+             * 创建一个ajax对象
+             */
+            this.createAJAX = function () {
+                var xhr;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xhr = new XMLHttpRequest();
+                }
+                else {// code for IE6, IE5
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                return xhr;
+            }
+
+            /**
+             * @param url 请求的资源的地址
+             * @param parseJsonData ajax响应数据产生的回调函数
+             */
+            this.requestGet = function (url, parseJsonData) {
+                var xhr = this.createAJAX();
+                //alert(xhr)
+                xhr.open("GET", url, true);
+                xhr.send();
+                xhr.onreadystatechange = function (ev) {
+                    // alert(xhr.status)
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var response = xhr.responseText;
+                            parseJsonData(response);
+                        }
+                    }
+                }
+            }
+
+            /**
+             * @param url 请求的url
+             * @param parseJsonData 响应的回调函数
+             * @param requestparam 请求的参数
+             */
+            this.requestPost = function (url, parseJsonData, requestparam) {
+                var xhr = this.createAJAX();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send(requestparam);
+                //alert(requestparam)
+                xhr.onreadystatechange = function (ev) {
+                    // alert(xhr.status)
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var response = xhr.responseText;
+                            parseJsonData(response);
+                        }
+                    }
+                }
+            }
+
+        }
+    </script>
+    <script type="text/javascript">
+        window.onload = function (ev) {
+
+            /**
+             检验用户是否已经登录
+             */
+            (function () {
+                var requestUserStatus = "http://localhost:8080/Blog/UserServlet?status=1";
+                var req = new Request();
+                var parseRequest = new ParseResponse();
+                req.requestGet(requestUserStatus, parseRequest.userLoginInfo);
+            })();
+
+            /**
+             * 点击修改用户的信息
+             */
+            (function () {
+                var link = document.getElementById("changeUserInfoLink");
+                link.onclick = function (ev) {
+                    var frame = document.getElementsByClassName("updateUserInfoDialog")[0];
+                    frame.style.display = "block";
+                }
+
+                var cancelUpdate = document.getElementsByClassName("cancelUpdate")[0];
+                cancelUpdate.onclick = function (ev) {
+                    var frame = document.getElementsByClassName("updateUserInfoDialog")[0];
+                    frame.style.display = "none";
+                }
+
+                var submitUserInfo = document.getElementById("submitUserInfoLink");
+                submitUserInfo.onclick = function (ev) {
+                    //在这里需要检测用户输入
+                    var name = document.getElementsByName("name")[0];
+                    var qq = document.getElementsByName("QQ")[0];
+                    var occupation = document.getElementsByName("occupation")[0];
+                    var hobby = document.getElementsByName("hobby")[0];
+                    var likeSinger = document.getElementsByName("likeSinger")[0];
+                    var likeMusic = document.getElementsByName("likeMusic")[0];
+                    var motto = document.getElementsByName("motto")[0];
+                    var url = "http://localhost:8080/Blog/UserServlet";
+                    var req = new Request();
+                    var param = "name=" + name.value
+                        + "&qq=" + qq.value
+                        + "&occupation="
+                        + occupation.value
+                        + "&hobby=" + hobby.value
+                        + "&likeSinger="
+                        + likeSinger.value
+                        + "&likeMusic=" + likeMusic.value
+                        + "&motto=" + motto.value;
+
+                    var parseRequest = new ParseResponse();
+                    req.requestPost(url, parseRequest.updateUserInfoResult, param);
+
+                }
+
+            })();
+        }
+
+
+    </script>
+    <style>
+        img.img-item-user {
+            position: relative;
+            top: 10px;
+            margin-right: 10px;
+            border-radius: 15px;
+        }
+
+        /*当前页面的版权信息*/
+        div.copyRightBottomBox {
+            background-color: #fff;
+            height: 50px;
+            font-size: 12px;
+            color: #504d50;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        /*
+        网页的主体部分的代码
+        */
+        div.wrapper {
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #ecedeb;
+        }
+
+        div.wrapper div.container {
+            width: 1200px;
+            margin: 20px auto 0px;
+        }
+
+        /**
+     处理指示器部分
+     */
+        div.wrapper div.container div.indictor {
+            overflow: hidden;
+            line-height: 25px;
+            margin: 20px 0px;
+        }
+
+        div.wrapper div.container div.indictor img.indictorImg {
+            position: relative;
+            top: 3px;
+        }
+
+        div.wrapper div.container div.containerCenter {
+            padding: 40px;
+            background-color: #FFFFFF;
+            margin: 20px 0px;
+            height: 460px;
+        }
+
+        ul.userInfo li {
+            line-height: 40px;
+        }
+
+        div.userImg {
+            float: left;
+            margin-top: 40px;
+            width: 50px;
+            height: 50px;
+
+        }
+
+        ul.userInfo {
+            margin-top: 40px;
+            margin-left: 40px;
+            float: left;
+            width: 200px;
+        }
+
+        .currentSelect {
+            color: #ff1e21;
+        }
+
+        /**
+        当前弹出的用户更新自己信息的弹窗
+         */
+
+        div.updateUserInfoDialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .6);
+            z-index: 999;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame {
+            width: 502px;
+            height: 430px;
+            margin: 100px auto;
+            background: #fff;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.userinfoFrameHead {
+            overflow: hidden;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.userinfoFrameHead span {
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.userinfoFrameHead img.cancelUpdate {
+            position: relative;
+            top: 2.5px;
+            float: right;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.rowInputBox {
+            padding: 5px;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.rowInputBox input.inputUserInfo {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            height: 28px;
+            padding: 0px 10px;
+        }
+
+        div.updateUserInfoDialog div.userinfoFrame div.rowInputBox span.nameLable {
+            color: #4d4d4d;
+            display: inline-block;
+            width: 100px;
+        }
+
+        div.submitUserInfo {
+            float: right;
+            margin-top: 30px;
+            height: 30px;
+            text-align: center;
+            color: #FFFFFF;
+            line-height: 30px;
+            width: 80px;
+            background-color: #ff3718;
+            border-radius: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div data-v-07578fd8="" class="header-wrap clearfix">
+    <img data-v-07578fd8="" src="../img/logo.9bde9cc.png" alt="段亮个人博客" class="logo fl">
+    <div data-v-07578fd8="" class="nav-wrap">
+        <ul data-v-07578fd8="" class="nav-list">
+            <li data-v-07578fd8="" class="nav-item "><a href="index.html">首页</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="videoPage.html" class="linkPage">免费视频教程</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="webMode.html" class="linkPage active">网站模板</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="studyPage.html" class="linkPage">学无止境</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="personalNotePage.html" class="linkPage">个人日记</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="learnMe.html" class="linkPage">关于方志月</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="leaveMessage.html" class="linkPage">留言板</a></li>
+        </ul>
+        <div data-v-07578fd8="" class="login-box" id="login-box">
+            <a href="login.html"><span data-v-07578fd8="" class="item-text">登录</span></a>/
+            <a href="login.html"><span data-v-07578fd8="" class="item-text">注册</span></a>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <!-- 网页的指示器 -->
+        <div class="indictor">
+            <img alt="指数器" class="indictorImg" src="http://localhost:8080/Blog/html/img/position.svg">
+            <span>首页</span>&gt;
+            <span>个人中心</span>
+        </div>
+        <!--网页的内容显示部分-->
+        <div class="containerCenter">
+            <h2>基本资料</h2>
+            <div class="userImg">
+                <img src="../images/usepricture.jpeg" height="50" width="50"/>
+            </div>
+            <ul class="userInfo" id="userInfo">
+                <li>名称:&nbsp;</li>
+                <li>QQ:&nbsp;</li>
+                <li>职业:&nbsp;</li>
+                <li>爱好:&nbsp;</li>
+                <li>喜欢的歌手:&nbsp;</li>
+                <li>座右铭:&nbsp;</li>
+                <li><a href="#" id="changeUserInfoLink"><span class="currentSelect">修改用户信息</span></a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="updateUserInfoDialog" style="display: none">
+    <div class="userinfoFrame">
+        <!--头部的文本和取消按钮-->
+        <div class="userinfoFrameHead">
+            <span>修改资料</span>
+            <img class="cancelUpdate" src="../images/cancelUpdate.svg"/>
+        </div>
+        <!--具体的细节-->
+        <div class="rowInputBox">
+            <span class="nameLable">名称:</span>
+            <input type="text" name="name" maxlength="5" minlength="2" value="" placeholder="请输入名称"
+                   class="inputUserInfo"/>
+        </div>
+        <!--qq号-->
+        <div class="rowInputBox">
+            <span class="nameLable">QQ:</span>
+            <input type="text" name="QQ" maxlength="12" minlength="5" value="" placeholder="请输入qq号码"
+                   class="inputUserInfo"/>
+        </div>
+        <!--职业-->
+        <div class="rowInputBox">
+            <span class="nameLable">职业:</span>
+            <input type="text" name="occupation" maxlength="10" minlength="2" placeholder="请输入职业" value=""
+                   class="inputUserInfo"/>
+        </div>
+        <!--爱好-->
+        <div class="rowInputBox">
+            <span class="nameLable">爱好:</span>
+            <input type="text" name="hobby" maxlength="50" minlength="2" placeholder="请输入爱好" value=""
+                   class="inputUserInfo"/>
+        </div>
+        <!--喜欢的歌手-->
+        <div class="rowInputBox">
+            <span class="nameLable">喜欢的歌手:</span>
+            <input type="text" name="likeSinger" maxlength="6" minlength="3" placeholder="请输入歌手" value=""
+                   class="inputUserInfo"/>
+        </div>
+        <!--喜欢的歌手-->
+        <div class="rowInputBox">
+            <span class="nameLable">喜欢的音乐:</span>
+            <input type="text" name="likeMusic" maxlength="6" minlength="1" placeholder="请输入音乐" value=""
+                   class="inputUserInfo"/>
+        </div>
+        <!--左右铭-->
+        <div class="rowInputBox">
+            <span class="nameLable">座右铭:</span>
+            <input type="text" name="motto" maxlength="255" minlength="10" placeholder="请输入座右铭" value=""
+                   class="inputUserInfo"/>
+        </div>
+
+        <!--确定-->
+        <a href="#" id="submitUserInfoLink">
+            <div class="submitUserInfo" id="">
+                确定
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+<!-- 网页的底部数据 -->
+<div class="copyRightBottomBox">
+    <p>Design by：段亮 备案号：湘ICP备14011335号-2</p>
+</div>
+
+
+</body>
+</html>

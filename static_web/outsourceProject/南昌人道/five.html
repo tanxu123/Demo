@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        *{
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        .out {
+            position: absolute;
+            width: 200px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .inner {
+            overflow-y: auto;
+            width: 230px;
+            height: 100%;
+        }
+
+
+        .content {
+            height: 800px;
+            background-color: orangered;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<!--<div style="width: 500px;height: 250px;overflow:hidden">-->
+
+<!--    <div style="width: 530px;height: 250px;overflow-y: auto;background-color: red">-->
+
+
+<!--        <p style="height: 900px;">我是内容</p>-->
+<!--        <p style="height: 900px;">我是内容</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div class="out">
+    <div class="inner">
+        <p class="content">我的内容</p>
+        <p class="content">我的内容</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        //设置一个全局的变量，便于保存验证码
+        var code;
+
+        var ParseRequest;
+
+
+        //定义ajax加载函数
+        function Request() {
+            /**
+             * 创建一个ajax对象
+             */
+            this.createAJAX = function () {
+                var xhr;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xhr = new XMLHttpRequest();
+                }
+                else {// code for IE6, IE5
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                return xhr;
+            }
+
+            /**
+             * @param url 请求的资源的地址
+             * @param parseJsonData ajax响应数据产生的回调函数
+             */
+            this.requestGet = function (url, parseJsonData) {
+                var xhr = this.createAJAX();
+                //alert(xhr)
+                xhr.open("GET", url, true);
+                xhr.send();
+                xhr.onreadystatechange = function (ev) {
+                    // alert(xhr.status)
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var response = xhr.responseText;
+                            parseJsonData(response);
+                        }
+                    }
+                }
+            }
+
+            /**
+             * @param url 请求的url
+             * @param parseJsonData 响应的回调函数
+             * @param requestparam 请求的参数
+             */
+            this.requestPost = function (url, parseJsonData, requestparam) {
+                var xhr = this.createAJAX();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send(requestparam);
+                xhr.onreadystatechange = function (ev) {
+                    // alert(xhr.status)
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var response = xhr.responseText;
+                            parseJsonData(response);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        function createCode(index) {
+            //首先默认code为空字符串
+            code = '';
+            //设置长度，这里看需求，我这里设置了4
+            var codeLength = 4;
+            var codeV = document.getElementsByClassName('code')[index];
+            //设置随机字符
+            var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+            //循环codeLength 我设置的4就是循环4次
+            for (var i = 0; i < codeLength; i++) {
+                //设置随机数范围,这设置为0 ~ 36
+                var index = Math.floor(Math.random() * 36);
+                //字符串拼接 将每次随机的字符 进行拼接
+                code += random[index];
+            }
+            //将拼接好的字符串赋值给展示的Value
+            codeV.value = code;
+        }
+
+        //下面就是判断是否== 的代码，无需解释
+        function validate(index) {
+            //下面的作用是去验证登录名和密码
+            if (index == 1) {//注册
+                var nikeName = document.getElementById("nikeName");
+                var repassword = document.getElementById("repassword");
+                var userid = document.getElementById("registerUserid");
+                var password = document.getElementById("setPassword");
+                var oValue = document.getElementById("registerCodeInput").value.toUpperCase()
+                // alert(oValue + ":" + code)
+                //alert(userid.value + ";" + repassword.value + ":" + password.value)
+                if (userid.value.trim() == "") {
+                    alert("请填写用户名")
+                    return;
+                }
+                if (password.value.trim() == "") {
+                    alert("请填写密码")
+                    return;
+                }
+                if (oValue == 0) {
+                    alert('请输入验证码');
+                    return;
+                } else if (oValue != code) {
+                    alert('验证码不正确，请重新输入');
+                    oValue = ' ';
+                    document.getElementsByClassName('code')[index].value = oValue
+                    createCode(index);
+                    return;
+                }
+
+                if (password.value != repassword.value) {
+                    alert("两次密码不一致")
+                    return;
+                }
+
+                var req = new Request();
+                var parseRequest = new ParseRequest();
+                var requestUrl = "http://localhost:8080/Blog/UserServlet";
+                //代表的是执行登录
+                var param = "userid=" + userid.value.trim()
+                    + "&password=" + password.value.trim()
+                    + "&nikeName=" + nikeName.value.trim();
+                //alert(param)
+                req.requestPost(requestUrl, parseRequest.parseUserRegister, param);
+                return;
+
+            } else if (index == 0) {//登录
+                var userid = document.getElementsByName("userid")[0];
+                var password = document.getElementsByName("password")[0];
+                var oValue = document.getElementsByClassName('codeInput')[index].value.toUpperCase();
+                var rememberPw = document.getElementsByName("rememberPassword")[0];
+                //alert(oValue + ":" + code)
+                if (userid.value.trim() == "") {
+                    alert("请填写用户名")
+                    return;
+                }
+                if (password.value.trim() == "") {
+                    alert("请填写密码")
+                    return;
+                }
+                if (oValue == 0) {
+                    alert('请输入验证码');
+                    return;
+                } else if (oValue != code) {
+                    alert('验证码不正确，请重新输入');
+                    oValue = ' ';
+                    document.getElementsByClassName('code')[index].value = oValue
+                    createCode(index);
+                    return;
+                }
+                var req = new Request();
+                var parseRequest = new ParseRequest();
+                var requestUrl = "http://localhost:8080/Blog/UserServlet";
+                //代表的是执行登录
+                var param = "userid=" + userid.value.trim()
+                    + "&password=" + password.value.trim()
+                    + "&remember=" + rememberPw.checked
+                //alert(param)
+                req.requestPost(requestUrl, parseRequest.parseUserLogin, param);
+                return;
+            }
+
+        }
+
+        window.onload = function (ev) {
+
+
+            //每次页面进行加载就去创建
+            var container = document.getElementsByClassName("container")[0];
+            var containerRegister = document.getElementsByClassName("containerRegister")[0];
+            if (container.style.display == "block") {
+                //代表进入的是注册界面
+                createCode(0);
+            }
+            if (containerRegister.style.display == "block") {
+                createCode(1);
+            }
+
+            //发送请求
+            ParseRequest = function () {
+                /**
+                 * 解析必应的每天的壁纸
+                 * @param jsonResponse
+                 */
+                this.parseBeyingBg = function (jsonResponse) {
+                    // alert(jsonResponse)
+                    var jsonObj = JSON.parse(jsonResponse);
+                    // alert(jsonObj.url);
+                    document.getElementById("loginBg").src = jsonObj.url;
+                }
+                /**
+                 * 解析用户登录的请求
+                 * @param jsonResponse
+                 */
+                this.parseUserLogin = function (jsonResponse) {
+                    var jsonObj = JSON.parse(jsonResponse);
+                    switch (jsonObj.errorCode) {
+                        case 1:
+                            break;
+                        case 2:
+                            alert(jsonObj.errorCause)
+                            break;
+                        case 3:
+                            alert(jsonObj.errorCause)
+                            break;
+                    }
+                    if (jsonObj.errorCode == 1) {
+                        location.href = "../../../htmlStudy/html/index.html"
+                        return;
+                    }
+
+                }
+
+                this.parseUserRegister = function (jsonResponse) {
+                    alert(jsonResponse.errorCause)
+                    var registerObj = JSON.parse(jsonResponse);
+                    if (registerObj.errorCode == 5) {
+                        //代表的是注册成功，跳转到登录界面
+                        backLogin();
+                    }
+                }
+
+            }
+
+            //定义并且直接调用
+            function sendAjax() {
+                var requestImgBg = "http://localhost:8080/Blog/ImgServlet?currentBg=1";
+                var req = new Request();
+                var parseRequest = new ParseRequest();
+                req.requestGet(requestImgBg, parseRequest.parseBeyingBg);
+            };
+            sendAjax();
+
+        }
+
+        /**
+         * 返回登录界面
+         */
+        function backLogin() {
+            // alert("登录界面");
+            var container = document.getElementsByClassName("container")[0];
+            var containerRegister = document.getElementsByClassName("containerRegister")[0];
+            container.style.display = "block";
+            containerRegister.style.display = "none";
+            createCode(0)
+        }
+
+        function registeNewUser() {
+            var container = document.getElementsByClassName("container")[0];
+            var containerRegister = document.getElementsByClassName("containerRegister")[0];
+            container.style.display = "none";
+            containerRegister.style.display = "block";
+            createCode(1)
+        }
+
+    </script>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        div#bgBox {
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
+        div#bgBox img#loginBg {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.titleBg {
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+
+        div.container {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            height: 360px;
+            background-color: transparent;
+            width: 360px;
+        }
+
+        div.container div.loginFrame {
+            height: 335px;
+            background-color: #b6b2b5;
+            overflow: hidden;
+            opacity: 0.6;
+        }
+
+        div.container a span.backIndex, div.container a.backIndexLink {
+            background-color: transparent;
+            color: #000000;
+        }
+
+        input.code {
+            font-family: Arial;
+            font-style: italic;
+            font-weight: bold;
+            border: 0;
+            letter-spacing: 2px;
+            color: blue;
+        }
+
+        p.userLoginTag {
+            margin: 20px 0px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        div.lineInputBox {
+            text-align: center;
+            background-color: #FFFFFF;
+            margin: 5px 40px 0px 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .inputStyle {
+            padding-left: 10px;
+            text-align: center;
+        }
+
+        div.lineInputBox input.codeInput {
+            text-align: center;
+        }
+
+        div.lineInputBox img.loginImg {
+            position: relative;
+            top: 8px;
+        }
+
+        div.lineInputBox input.loginButton {
+            background: transparent;
+            width: 260px;
+            margin: 0 auto;
+            height: 40px;
+        }
+
+        div.checkBoxBox {
+            margin: 5px 40px;
+            height: 40px;
+            line-height: 40px;
+            color: #005fcc;
+        }
+
+        span.rememberPasswordText {
+            font-size: 14px;
+            position: relative;
+            top: -3px;
+            color: #005fcc;
+            height: 30px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        /**
+        下面是注册的界面显示
+         */
+        div.containerRegister {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            z-index: 1;
+            display: none;
+            height: 400px;
+            background-color: transparent;
+            width: 360px;
+        }
+
+        div.containerRegister div.registerFrame {
+            height: 335px;
+            background-color: #b6b2b5;
+            overflow: hidden;
+            opacity: 0.6;
+        }
+
+        input#registerCodeInput {
+            width: 180px;
+        }
+
+        input#registerCode {
+            width: 60px;
+        }
+
+        input#loginCode {
+            width: 60px;
+        }
+
+        input#input {
+            width: 180px;
+        }
+
+
+    </style>
+    <link href="../css/indexTitle.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!--实现的背景部分-->
+<div id="bgBox">
+    <img id="loginBg" src="../images/four.jpeg"/>
+</div>
+
+<div class="titleBg">
+    <div data-v-07578fd8="" class="header-wrap clearfix">
+        <img data-v-07578fd8="" src="../images/logo.9bde9cc.png" alt="段亮个人博客" class="logo fl">
+        <div data-v-07578fd8="" class="nav-wrap">
+            <ul data-v-07578fd8="" class="nav-list">
+                <li data-v-07578fd8="" class="nav-item "><a href="index.html">首页</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="videoPage.html" class="linkPage">免费视频教程</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="webMode.html" class="linkPage">网站模板</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="studyPage.html" class="linkPage">学无止境</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="personalNotePage.html" class="linkPage">个人日记</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="learnMe.html" class="linkPage">关于方志月</a></li>
+                <li data-v-07578fd8="" class="nav-item"><a href="leaveMessage.html" class="linkPage">留言板</a></li>
+            </ul>
+            <div data-v-07578fd8="" class="login-box">
+                <span data-v-07578fd8="" class="item-text">登录</span>/
+                <span data-v-07578fd8="" class="item-text">注册</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="display: block">
+    <a href="#" class="backIndexLink"><span class="backIndex">&lt;返回首页</span></a>
+    <div class="loginFrame">
+        <p class="userLoginTag">用户登录</p>
+        <div class="lineInputBox">
+            <img src="../images/用户.svg" class="loginImg">
+            <input type="text" class="inputStyle" name="userid" placeholder="用户id"/>
+        </div>
+        <div class="lineInputBox">
+            <img src="../images/密码.svg" class="loginImg">
+            <input type="password" class="inputStyle" placeholder="密码" name="password"/>
+        </div>
+        <div class="lineInputBox">
+            <input type="text" id="input" class="codeInput" placeholder="验证码" value="验证码"/>
+            <input type="button" id="loginCode" class="code" onclick="createCode(0)"/>
+        </div>
+
+        <div class="checkBoxBox">
+            <input type="checkbox" checked name="rememberPassword" class="codeInput" value="验证码"/><span
+                class="rememberPasswordText">记住密码</span>
+        </div>
+
+        <div class="lineInputBox">
+            <input type="button" class="loginButton" value="登录" onclick="validate(0)"/>
+        </div>
+
+        <div class="checkBoxBox">
+            <a href="#" onclick="registeNewUser()"><span class="rememberPasswordText">注册成为新用户&gt;</span></a>
+        </div>
+    </div>
+</div>
+
+
+<!--下面是注册的界面显示-->
+<div class="containerRegister" style="display: none">
+    <a href="#" class="backIndexLink" onclick="backLogin()"><span class="backIndex">&lt;返回登录</span></a>
+    <div class="registerFrame">
+        <p class="userLoginTag">用户注册</p>
+        <div class="lineInputBox">
+            <img src="../images/用户.svg" class="loginImg">
+            <input type="text" class="inputStyle" name="nikeName" id="nikeName" placeholder="用户昵称" title="用户的昵称"/>
+        </div>
+        <div class="lineInputBox">
+            <img src="../images/用户.svg" class="loginImg">
+            <input type="text" class="inputStyle" name="userid" id="registerUserid" placeholder="用户id(数字)"
+                   title="用于登录的id"/>
+        </div>
+        <div class="lineInputBox">
+            <img src="../images/密码.svg" class="loginImg">
+            <input type="password" class="inputStyle" id="setPassword" placeholder="设置密码" name="password" title="设置密码"/>
+        </div>
+        <div class="lineInputBox">
+            <img src="../images/密码.svg" class="loginImg">
+            <input type="password" class="inputStyle" id="repassword" placeholder="确认密码" name="repassword"/>
+        </div>
+        <div class="lineInputBox">
+            <input type="text" id="registerCodeInput" value="验证码" class="codeInput" placeholder="验证码"/>
+            <input type="button" id="registerCode" class="code" onclick="createCode(1)"/>
+        </div>
+
+        <div class="lineInputBox">
+            <input type="button" class="loginButton" value="注册" onclick="validate(1)"/>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

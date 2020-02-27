@@ -1,0 +1,701 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style></style>
+    <link rel="stylesheet" type="text/css" href="../../css/demo1.css">
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8">
+    <script>
+    function styleDome(){
+     var ele =document.getElementById("boxId");
+     alert(ele.style.cssText);
+     alert(ele.style.length);
+     //alert(ele.style.parentRule);null
+        //迭代
+        var str="";
+        for(var i=0;i<ele.style.length;i++){
+          var css=ele.style.item(i);
+           var value=ele.style.getPropertyValue(css);
+           document.writeln(css+":"+value+"<br/>");
+        }
+    }
+
+    function styleDemo2(){
+        var ele=document.getElementById("boxId");
+        // var style=document.defaultView.getComputedStyle(ele,null);
+        // alert(style.width);
+
+        var support=document.implementation.hasFeature("StyleSheets","2.0");//火狐支持
+        //alert(support);
+        var cssStyle=document.styleSheets;
+        for(var i=0;i<cssStyle.length;i++){
+            var sheet=cssStyle.item(i);
+            alert(sheet.href);
+        }
+    }
+    //获得cssStyleSheet对象
+    /**
+     *     //获得cssStyleSheet对象
+     * @returns {StyleSheet | ActiveX.IXMLDOMNode}
+     */
+        function getStyleSheet(){
+        var style=document.head.getElementsByTagName("style")[0];
+        return style.sheet||style.stylesheet;
+        }
+
+        function getStyle(){
+            var sheet=document.styleSheets[0];
+            var rules=sheet.cssRules||sheet.rules;//得到样式规则对象
+           // alert(typeof rules);
+            var rule=rules[0];
+            alert(rule.style.cssText);
+        }
+
+    /**
+     * 向样式表中插入规则
+     * @param sheet 样式表对象
+     * @param selectorText 选择器
+     * @param cssText css规则
+     * @param position 位置
+     */
+        function insertRule(sheet,selectorText,cssText,position){
+            if(sheet.insertRule){
+                sheet.insertRule(selectorText+"{"+cssText+"}",position);
+            }else if(sheet.addRule){
+                sheet.addRule(selectorText,cssText,position);
+            }
+        }
+
+        //删除规则
+    /**
+     * 从样式表中删除规则
+     * @param sheet 样式表对象
+     * @param index 要删除的索引
+     */
+        function deleteRule(sheet,index){
+            if(sheet.deleteRule){
+                sheet.deleteRule(index);
+            }else if(sheet.removeRule){
+                sheet.removeRule(index);
+            }
+        }
+
+        //偏移量
+        function offsetObj(){
+            var ele=document.querySelector("#boxId");
+            alert(ele.offsetWidth);//宽度的偏移量，也就代表的是物体的实际大小
+            alert(ele.offsetHeight);//物体的实际高
+            alert(ele.offsetLeft);
+            alert(ele.offsetTop);
+        }
+
+        //获得元素在页面的偏移量
+    /**
+     * 获得元素在页面的左边偏移量
+     * @param ele 需要检验的节点
+     * @returns {number} 返回最终检验的值
+     */
+        function getElementLeft(ele){
+            var left=ele.offsetLeft;
+            var parent=ele.offsetParent;
+
+            while(parent!=null){
+                left+=parent.offsetLeft;
+                parent=parent.offsetParent;
+            }
+            return left;
+        }
+
+    /**
+     * 获得元素在页面的上边偏移量
+     * @param ele 需要检验的节点
+     * @returns {number} 返回最终检验的值
+     */
+    function getElementTop(ele){
+          var top=ele.offsetTop;
+          var parent=ele.offsetParent;
+          while(parent!=null){
+              top+=parent.offsetTop;
+              parent=parent.offsetParent;
+          }
+          return top;
+        }
+
+       //2客户端的大小
+        function getClientimension(){
+           // var ele=document.querySelector("#boxId");
+            var ele=null;
+            ele=document.documentElement||document.body;
+            alert(ele.clientHeight);
+            alert(ele.clientWidth);
+            alert(ele.scrollHeight);
+            alert(ele.scrollWidth);
+        }
+
+        //确定文档的总高度
+    /**
+     * 确定文档的总高度
+     * @returns {any[]} 返回的是数组类型，返回的数据存放在数组的0,1项中，0是宽1是高
+     */
+        function getDocumentDimention(){
+        var arr=new Array();
+        var ele=null;
+        if(document.compatMode=="BackCompat"){
+            ele=document.body;
+        }else{
+            ele=document.documentElement;
+        }
+        var width=Math.max(ele.scrollWidth,document.ele.clientWidth);
+        var height=Math.max(ele.scrollHeight,ele.clientHeight);
+        arr[0]=width;
+        arr[1]=height;
+        return arr;
+        }
+
+        //获得浏览器的视口大小
+    /**
+     * 获得浏览器的视口大小 返回匿名对象，该对象有宽高两个属性
+     * @returns {{width: number, height: number}}
+     */
+    function getViewPort(){
+            if(document.compatMode=="BackCompat"){//混杂模式
+                return {
+                  width:document.body.clientWidth,
+                  height:document.body.clientHeight
+                };
+            }else{
+                return {
+                    width:document.documentElement.clientWidth,
+                    height:document.documentElement.clientHeight
+                }
+            }
+        }
+
+        function scroll(){
+         //var ele=document.getElementById("box1");
+            //var ele=document.documentElement||document.body;
+
+         alert(ele.scrollTop);
+        }
+
+
+    //事件处理程序
+    //1html事件处理程序
+
+
+        //2,dom0级事件处理程序
+        function getOnlick(){
+        var ele=document.getElementById("div2");
+        ele.onclick=function (ev) {
+            alert(this==ele);//true
+        }
+        }
+        //3.dom2级事件处理程序
+        function getOnClick(){
+        var ele=document.getElementById("div2");
+        ele.addEventListener("click",function () {
+         window.alert("dom2级事件处理程序");
+        },false);
+        }
+        //ie事件处理程序
+        function ieEventProc(){
+            var ele=document.getElementById("div2");
+            ele.attachEvent("onclick",function(){
+               alert("Clicked");
+            });
+        }
+
+        //跨浏览器的事件处理程序
+    function eventUtil(){
+        var EventUtil={
+            addHandler:function (event,type,handler){
+                if(event.addEventListener){
+                    event.addEventListener(type,handler,false);
+                }else if(event.attachEvent){
+                    event.attachEvent("on"+type,handler);
+                }else {
+                    event["on"+type]=null;
+                }
+            },
+            removeHandler:function(event,type,handler){
+                if(event.removeEventListener){
+                    event.removeEventListener(type,handler,false);
+                }else if(event.detachEvent){
+                    event.detachEvent("on"+type,handler);
+                }else{
+                    event["on"+type]=null;
+                }
+            }
+        };
+       return EventUtil;
+    }
+
+    function test(){
+        var event=eventUtil();
+        var bun=document.getElementById("box");
+        var handler=function (){
+            alert("Click ");
+        }
+
+        event.addHandler(bun,"click",handler);
+    }
+
+    //事件对象
+
+        function demo17(){
+        var ele=document.getElementById("box");
+        ele.onclick=function (ev){
+           // ele this ev.currentTarget ev.target;
+            alert(this==ev.currentTarget);//true
+            alert(this==ev.target);//true
+            alert(this==ele);//true
+        }
+        }
+
+        function demo18(){
+        var ele=document.getElementById("box");
+        document.body.onclick=function (ev) {
+            alert(this);
+            alert(ev.currentTarget);
+            alert(ev.target);
+            //当我们点击上面的div时，由于我们的事件处理程序
+            //是在div的父节点上，那么ev.target就等于HTMLDivEvent
+            //也就是div这个对象，而不是body
+            //也就是说事件处理程序注册到哪个元素，this和currentTarget就等于谁，
+            //而target则表示的是实际的点击对象，也就是事件的真正目标
+        }
+        }
+
+
+        //阻止事件的默认行为
+        function preventDefault(){
+        var ele=document.getElementById("links");
+        ele.onclick=function (ev) {
+            alert("你想去百度对不");
+            ev.preventDefault();//会阻止对象的默认行为，当前的链接会被取消
+        };
+        }
+
+        //停止事件在dom层次中的传播
+        function demo19(){
+            var ele=document.getElementById("box");
+            ele.onclick=function (ev) {
+                alert("im box");
+                ev.stopPropagation();//取消事件的冒泡
+            };
+
+            document.body.onclick=function (ev) {
+                alert("event transition body");
+            }
+            //如果不阻止dom的传播，那么点击ele时，也会触发body的点击事件
+        }
+
+        //IE中的事件对象
+        function IeTesting(){
+        var ele=document.getElementById("box");
+        ele.onclick=function (ev) {
+            var event=window.event||ev;
+            alert(event.type);
+        }
+        }
+
+
+        function EventUtil(){
+
+        this.addHandler=function () {
+            
+        };
+        this.removeHandler=function () {
+
+        };
+        }
+
+        function demo20(){
+        var eventUtil=new EventUtil();
+        eventUtil.addHandler();
+        }
+
+
+
+
+
+    //     //创建对象
+    //     function Object1(name,sex){
+    //     this.name=name;
+    //     this.sex=sex;
+    //     }
+    //
+    //     var obj=new Object1("fang","男");
+    //
+    // var obj={
+    //     name:"fang",
+    //     sex:"男",
+    //     age:22,
+    //     getName:function(){
+    //         return this.name;
+    //     },
+    //     setName:function(name){
+    //         this.name=name;
+    //         return this;
+    //     }
+    // }
+
+        //事件类型
+
+       //  function demo21(){
+       // window.onload=function (ev) {
+       //     alert("文档加载完成");
+       // }
+       //  }
+
+        // function demo23(event){
+        // alert(event.type);
+        // }
+
+         function demo24(){
+        var script=document.createElement("script");
+        script.type="text/javascript";
+        script.src="../js/test.js";
+        script.onload=function (ev) {
+            alert("脚本动态添加");
+        }
+        document.documentElement.appendChild(script);
+         }
+
+           function demo25(){
+        window.onunload=function (ev) {
+            alert("页面卸载完成");
+        }
+           }
+
+           function demo26(){
+        var ele=document.getElementById("box");
+        ele.focus();
+        ele.focusin=function () {
+            alert("获得焦点");
+        }
+           }
+
+           /*
+           鼠标与滚轮事件
+            */
+        function demo27(){
+        document.body.onclick=function (ev) {
+            alert("点击了对象");//
+            alert(ev.clientX);//视口中的位置
+            alert(ev.clientY);//视口中的位置，这个现实的是视口的位置，其长度不回大过浏览器的是显示窗口大小
+            alert(ev.pageX);//页面坐标位置
+            alert(ev.pageY);//页面坐标位置,显示的是页面的坐标位置。当页面的内容过多时，显示不过来就会page
+            //坐标就会显示出来
+        }
+        }
+
+        //屏幕坐标位置
+        function demo28(){
+            document.body.onclick=function (ev) {
+                alert(ev.clientX);
+                alert(ev.clientY);
+                alert(ev.screenX);
+                alert(ev.screenY);
+            }
+        }
+
+        function demo29(){
+            document.body.onclick=function (ev) {
+
+                var arra=new Array();
+                if(ev.shiftKey){
+                    arra.push("shift");
+                }
+                if(ev.altKey){
+                    arra.push("alt");
+                }
+                if(ev.ctrlKey){
+                    arra.push("ctrl");
+                }
+                if(ev.metaKey){
+                    arra.push("meta");
+                }
+
+                alert(arra.join("-"));
+            }
+        }
+
+         //鼠标按钮
+          function demo30(){
+            // document.body.onmouseover=function (ev) {
+            //     alert(ev.button);
+            // }
+              var ele=document.getElementById("mouseTest");
+              ele.onmousedown=function (ev) {
+                  alert("按下"+ev.button);
+              }
+              ele.onmouseup=function (ev) {
+                  alert("弹起"+ev.button);
+              }
+          }
+
+          function demo31(){
+              var ele=document.getElementById("mouseTest");
+              ele.onclick=function (ev) {
+                  alert(ev.detail);
+              }
+          }
+
+          //鼠标的滚轮事件
+          function demo32(){
+            var ele=document.getElementById("mouseTest");
+            ele.onmousewheel=function (ev) {
+                alert(ev.wheelDelta);
+            };
+          }
+
+          function demo33(){
+            var ele=document.getElementById("inputText");
+           // ele.hasFocus();
+              ele.focus();
+            ele.onkeydown=function (ev) {
+              alert(ev.charCode);
+            };
+            // ele.onkeypress=function (ev) {
+            //   alert(ev.keyCode);
+            // };
+            // ele.onkeyup=function (ev) {
+            //     alert(ev.keyCode);
+            // };
+          }
+
+          //检测是否支持复合事件
+          function demo34(){
+            var isSupport=document.implementation.hasFeature("CompositionEvent","3.0");
+            alert(isSupport);
+          }
+
+          function demo35(){
+            var ele=document.getElementById("smallBox");
+            ele.onclick=function (ev) {
+                switch(ev.target.id){
+                    case "box":
+                  alert("这是第一个div盒子");
+                  break;
+                    case "linkA":
+                        alert("你点击的是个链接");
+                        ev.preventDefault();//阻止它的默认行为
+                        break;
+                    case "box2":
+                        alert("你点击了第二个盒子");
+                        break;
+                    case "mouseTest":
+                        alert("你点击了最后一个盒子");
+                        break;
+                }
+            }
+          }
+
+          //模拟事件
+        function demo36(){
+            var event=document.createEvent(UIEvent);
+            event.initUIEvent()
+        }
+        
+        //表单脚本HTMLFormElement属性
+        function demo37() {
+        var form=document.forms[0];
+        alert(form.acceptCharset);
+        alert(form.action);
+        alert(form.target);
+        }
+
+        //提交表单
+        function demo37(){
+            var form=document.forms[0];
+            var input=form[1];//获得提交按钮
+
+            var reg=/[abc]at/gi;
+            input.onclick=function (ev){
+               if(form[0].value==""){
+                   alert("你所提交的信息不完整");
+                   ev.preventDefault();//如果信息不完整，就阻止默认行为
+               }else if(!reg.test(form[0].value)){
+                   alert(form[0].value+"信息不符合规范");
+                   ev.preventDefault();
+               }
+               //alert(reg.ui效果实现(form[0].value));
+            };
+        }
+
+        //共有的表单字段属性
+        function demo38() {
+            var form=document.forms[0];
+            var input=form[1];//获得提交按钮
+           alert(input.name);
+           alert(input.disabled);
+           alert(input.type);
+        }
+
+        //共有的表单字段方法
+        //focus blur
+        
+        //共有的表单字段事件
+        function demo39(){
+            var form=document.forms[0];
+            var input=form[1];
+            form[0].onblur=function (ev) {
+                alert("当前失去焦点");
+            }
+
+            form[0].onfocus=function (ev) {
+                alert(this.type+"获得焦点");
+            }
+        }
+
+        //文本框脚本
+        function demo40(){
+            var form=document.forms[0];
+            form[0].onfocus=function (ev) {
+                this.value="这是一些文本";
+                ev.target.select();
+            }
+        }
+
+        function demo41(){
+            var form=document.forms[0];
+            form[0].value="这里是一些文本字段，显示的是最基本的信息，这是什么重要的信息，测试选择文本的功能";
+            form[0].onselect=function (ev) {
+                alert("你选择的文本字段为："+this.value.substring(form[0].selectionStart,form[0].selectionEnd));
+            };
+        }
+
+        //选择部分文本
+        function demo42(){
+            var form=document.forms[0];
+            form[0].value="这里是一些文本字段，显示的是最基本的信息，这是什么重要的信息，测试选择文本的功能";
+            form[0].setSelectionRange(0,12);
+        }
+
+    /**
+     * 选择文本框中的文本
+     * @param textBox 文本框
+     * @param startIndex 选择的开始位置
+     * @param endIndex 选择的结束位置
+     */
+        function selectText(textBox,startIndex,endIndex){
+            if(textBox.setSelectionRange){
+                textBox.setSelectionRange(startIndex,endIndex);
+            }else if(textBox.createTextRange){
+                var range=textBox.createTextRange();
+                range.collapse(true);
+                range.moveStart("character",0);
+                range.moveEnd("character",textBox.value.length);
+                range.select();
+            }
+            textBox.focus();
+        }
+
+        //过滤输入
+        function demo42(){
+
+        }
+
+        //操作剪切板
+        function demo43(){
+            var form=document.forms[0];
+            // form[0].onbeforecopy=function (ev) {
+            //   alert("你复制了里面的内容");
+            // };
+            form[0].oncopy=function (ev) {
+              alert("你复制了");
+              alert(typeof ev.clipboardData);
+              var clipboard=ev.clipboardData||window.clipboardData;
+              // alert(clipboard.getData("text/plain"));
+            };
+        }
+
+        function demo44(){
+            var form=document.forms[0];
+            form[0].value="xia";
+            var isSupport="pattern" in document.createElement("input");
+            if(isSupport==false){
+                return ;
+            }
+           // form[0].pattern;
+            if(form[0].checkValidity()){//使用这种验证方法在输入的值是错的情况下，会将文本框的边框变为红色
+                alert("你输入的值是正确的");
+            }else{
+                alert("你所输入的值是错误的");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+<form action="http://www.baidu.com">
+    <input type="text" maxlength="200" size="50" id="inputText" pattern="\d+">
+    <input type="submit" name="sub"><!--autofocus自动取得焦点-->
+</form>
+
+<div id="smallBox" style="background-color: #1bd3da;">
+<div id="box" style="width:200px;height:300px;background-color: #1bd3da;"></div>
+<a href="http://www.baidu.com" id="links" id="linkA">百度一下</a>
+<div style="width:200px;height:400px;" id="box2"></div>
+<div id="mouseTest" class="mouseTest" style="width: 400px;height:400px;background-color: #124cdf;"></div>
+    <button type="submit">提交</button>
+</div>
+
+<!--<div class="box" id="boxId" style="width:300px; height: 1000px; background-color: #1bd3da;"></div>-->
+<!--<div class="box1" id="box1" style="width:300px; height: 300px; background-color: #838383;margin-top: 100px;"></div>-->
+<!--<div class="div2" id="div2" style="width:40px;height:40px;background-color: #00b2eb;"></div>&lt;!&ndash;html事件处理程序&ndash;&gt;-->
+
+<script>
+    //styleDome();
+    //styleDemo2();
+    //getStyle();
+    //offsetObj();
+    //getClientimension();
+    //scroll();
+ //   window.getOnlick();
+   // getOnClick();
+   // ieEventProc();
+   // ui效果实现();
+    //demo17();
+    //demo18();
+   // preventDefault();
+    //demo19();
+    //IeTesting();
+    //demo21();
+    //demo24();
+    // demo25();
+    // demo26();
+    //demo27();
+    //demo28();
+   // demo29();
+   // demo30();
+    //demo31();
+   // demo32();
+   // demo33();
+    //demo34();
+    //demo35();//事件委托
+    //demo37();
+      //demo38();
+    //demo39();
+    //demo40();
+    //demo41();
+   // demo42();
+    //demo43();
+    demo44();
+</script>
+</body>
+</html>

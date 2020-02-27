@@ -1,0 +1,247 @@
+
+a, a:hover {
+    color: #fff;
+}
+
+
+.cancelPadding {
+    padding: 0px;
+}
+
+.m-t20 {
+    margin-top: 20px;
+}
+
+.m-r10 {
+    margin-right: 10px;
+}
+
+.p-r10 {
+    padding-right: 10px;
+}
+
+
+.sc-head {
+    height: 40px;
+    background: #333951;
+    line-height: 40px;
+    color: #ffffff;
+}
+
+.sc-head div a:first-child span::before {
+
+    content: '';
+    background-image: url("../images/yonghu.svg");
+    background-size: 16px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+
+}
+
+.sc-head div a:last-child span::before {
+
+    content: '';
+    background-image: url("../images/zhuce.svg");
+    background-size: 16px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+
+}
+
+
+.sc-search {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sc-search .sc-com-input-box {
+    border: 1px solid #c92323;
+}
+
+.sc-search .sc-com-input-box .form-control {
+    border-radius: 0px;
+    border: none;
+}
+
+.sc-search .sc-com-input-box .input-group-addon {
+
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background: #c92323;
+    border: none;
+}
+
+.sc-menu {
+    height: 50px;
+    background: #c92323;
+    line-height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+    font-family: "Micro Yahei", "Arial", "Lucida Sans Unicode", Helvetica, Verdana, sans-serif;
+}
+
+.sc-menu .col-lg-1 {
+    padding: 0px;
+    text-align: center;
+    margin-right: 25px;
+}
+
+.sc-product-class {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+
+.sc-pro-list {
+
+}
+
+.sc-pro-list .page-header {
+    border: 0px;
+}
+
+.sc-pro-list .page-header h3::before {
+    content: "";
+    background-image: url("../images/xing.svg");
+    background-size: 20px;
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    display: inline-block;
+}
+
+.sc-pro-list .container .col-lg-3 {
+    padding: 0px;
+    padding-right: 10px;
+}
+
+.sc-pro-list .container .col-lg-3:nth-of-type(4) {
+    padding-right: 0px;
+    margin-bottom: 20px;
+}
+
+.sc-lookPoint {
+    margin-top: 80px;
+}
+
+.sc-lookPoint .jumbotron {
+    padding-top: 200px;
+    padding-bottom: 200px;
+    background: #666666;
+}
+
+.sc-lookPoint .jubm-text {
+    color: #ffffff;
+}
+
+.sc-lookPoint div.text-center {
+    margin-top: 40px;
+}
+
+.sc-lookPoint .jubmotron-btn {
+
+    font-size: 18px;
+    border: 3px solid #ffffff;
+    padding: 8px 15px;
+    color: #ffffff;
+}
+
+
+
+.sc-flag{
+    background: #f4f4f4;
+    padding-top: 40px;
+}
+
+
+
+.sc-flag h4 span::before {
+    background-size: 20px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+.sc-flag span.flag1::before {
+    content: '';
+    background-image: url("../images/zheng.png");
+}
+
+.sc-flag span.flag2::before {
+    content: '';
+    background-image: url("../images/admire.png");
+}
+
+.sc-flag span.flag3::before {
+    content: '';
+    background-image: url("../images/lowPrice.png");
+}
+
+.sc-flag span.flag4::before {
+    content: '';
+    background-image: url("../images/pingzhi.png");
+}
+
+
+.sc-flag .col-lg-2.text-center {
+    font-size: 21px;
+    padding: 0px;
+}
+
+.sc-server{
+    background: #f4f4f4;
+}
+
+
+.sc-server .col-lg-2.text-center {
+    font-size: 15px;
+    padding: 0px;
+}
+
+
+.sc-server .container {
+    padding: 0px;
+}
+
+
+.sc-server2{
+    background: #f4f4f4;
+}
+
+.sc-server2 {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.sc-server2 .container {
+    padding: 0px;
+}
+
+.sc-footer {
+    line-height: 40px;
+    font-size: 15px;
+    color: #ffffff;
+    height: 40px;
+    background: #c92323;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

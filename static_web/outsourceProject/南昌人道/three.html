@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            box-sizing: border-box;
+            font-size: 0.16rem;
+        }
+
+
+        .bg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url("./17.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        .tncrd-top {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+        }
+
+        .menuBar {
+            padding-top: 0.26rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menuBar div {
+            width: 33.333%;
+        }
+
+
+        .menuBar div:first-child {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .menuBar div:first-child img {
+            width: 0.54rem;
+        }
+
+        .menuBar div:last-child {
+            display: flex;
+            padding-right: 5%;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .ncrd-content {
+            top: 0.8rem;
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        .leftsidebar {
+            display: inline-block;
+            width: 2rem;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .inner-left {
+            overflow-y: scroll;
+            width: 2.17rem;
+            height: 100%;
+        }
+
+
+        .main {
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div style="overflow: hidden">
+
+    <div class="tncrd-top">
+        <span style="font-size: 0.3rem;color: #ffffff;">南昌市红十字会</span>
+    </div>
+    <div class="menuBar">
+
+        <div>
+            <img src="Nipic_18670821_20140510165048475000.png" alt="">
+            <span>操作5</span>
+            <span>操作6</span>
+        </div>
+        <div></div>
+        <div>
+            <span>操作1</span>
+            <span>操作2</span>
+            <span>操作3</span>
+        </div>
+
+    </div>
+
+</div>
+<div class="ncrd-content">
+    <div class="leftsidebar">
+        <div class="inner-left">
+            <div style="height: 1000px;background-color: red">asfwqf</div>
+            <div style="height: 1000px;background-color: red">qerqw</div>
+            <div style="height: 1000px;background-color: red">fqwfqe</div>
+        </div>
+    </div>
+    <div class="main">
+
+    </div>
+</div>
+
+<script>
+
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                if (clientWidth <= 1024) {
+                    docEl.style.fontSize = '100px';
+                } else {
+                    docEl.style.fontSize = 100 + 20 * (clientWidth / 1024) + 'px';
+                }
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+
+    window.onload = function () {
+
+        console.log(document.getElementById(""))
+
+    }
+
+
+</script>
+
+</body>
+</html>

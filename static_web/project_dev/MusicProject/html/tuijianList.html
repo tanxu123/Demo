@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+
+        /**
+         * 歌手对象
+         * @param id
+         * @param name
+         * @param destribute
+         * @constructor
+         */
+        function Singer(id, name, describute, image) {
+
+            this.id = id;
+            this.name = name;
+            this.image = image;
+            this.describute = describute;
+        }
+
+
+        function Music(id, name, albumId, clasfyId, image, singerId, playTime, playCount) {
+            this.id = id;
+            this.albumId = albumId;
+            this.classfyId = clasfyId;
+            this.image = image;
+            this.singerId = singerId;
+            this.playTime = playTime;
+            this.playConut = playCount;
+        }
+
+
+        function Classfy(id, classfyName, image) {
+            this.id = id;
+            this.className = classfyName;
+            this.image = image;
+        }
+
+
+        /**
+         * @param title
+         * @param linkName
+         * @param linkAddress
+         * @param isConner
+         * @param list 这个是一个集合存放的是singer或者是MusicMenu对象
+         * @constructor
+         */
+        function ModelWrapper(title, linkName, linkAddress, isConner, list) {
+
+            this.title = title;
+            this.linkName = linkName;
+            this.linkAddress = linkAddress;
+            this.isConner = isConner;
+            this.list = list;
+        }
+
+        /**
+         *@param music 歌曲的封装对象
+         *@param image  歌单的图片
+         *@param link  点击的链接
+         *@param title1 标题1
+         *@param title2  标题2
+         *@param title3  标题3
+         */
+        function MusicMenu(music, image, link, title1, title2, title3) {
+            this.music = music;
+            this.image = image;
+            this.link = link;
+            this.title1 = title1;
+            this.title2 = title2;
+            this.title3 = title3;
+        }
+
+
+        /**
+         *
+         * @param modelWrapper ModelWrapper 模型的包装类
+         */
+        function CreateDisplayTemplate(modelWrapper) {
+
+
+            this.modelWrapper = modelWrapper;
+
+
+            var isConner = this.modelWrapper.isConner;
+
+
+            var imgClass = isConner == true ? "connerMenuImg" : "menuImg";
+
+            var textAlignCenter = isConner == true ? "textAlignCenter" : "";
+
+            /**
+             *
+             * 创建音乐菜单列表
+             * 这个方法就是用来创建实际的html代码的
+             */
+            this.createMusicMenuList = function () {
+
+                var container = "<div class=\"menuList\">"
+                container += this.createHead();
+                container += this.createContent();
+
+                return container + "</div>"
+            }
+
+
+            this.createHead = function () {
+
+                var head = " <div class=\"headMenu\">\n" +
+                    "        <span class=\"title\">" + this.modelWrapper.title + "</span>\n" +
+                    "        <div class=\"divAllRight\"><a href='" + this.modelWrapper.linkAddress + "'>" + this.modelWrapper.linkName + " &gt;</a></div>\n" +
+                    "    </div>";
+                return head;
+            }
+
+            this.createContent = function () {
+
+                var content = " <div class=\"menuListContainer\">\n";
+
+                if (this.modelWrapper.list[0] instanceof MusicMenu) {
+
+
+                    for (var i = 0; i < this.modelWrapper.list.length; i++) {
+                        var single;
+                        var obj = this.modelWrapper.list[i];
+
+                        single = " <div class=\"columnSingleMenu\">\n" +
+                            "            <img src=\"" + obj.image + "\" class=\"" + imgClass + "\"/>\n" +
+                            "            <p class=\"" + textAlignCenter + " title1\">" + obj.title1 + "</p>\n" +
+                            "            <p class=\"" + textAlignCenter + " title2\" > " + obj.title2 + "</p>\n" +
+                            "            <p class=\"" + textAlignCenter + " title3\">" + obj.title3 + "</p>\n" +
+                            "        </div>"
+                        content += single;
+                    }
+                } else if (this.modelWrapper.list[0] instanceof Singer) {
+
+                    for (var i = 0; i < this.modelWrapper.list.length; i++) {
+                        var single;
+                        var obj = this.modelWrapper.list[i];
+                        single = " <div class=\"columnSingleMenu\">\n" +
+                            "            <img src=\"" + obj.image + "\" class=\"" + imgClass + "\"/>\n" +
+                            "            <p class='title1 " + textAlignCenter + "'>" + obj.name + "</p>\n" +
+                            "            <p class='title3 " + textAlignCenter + "' style='color:#f47615'>" + obj.describute + "</p>\n" +
+                            "        </div>"
+                        content += single;
+                    }
+                }
+
+                return content + " </div>";
+            }
+
+
+        }
+
+
+        window.onload = function () {
+
+            var modelWrapper = new ModelWrapper("热门歌曲", "全部", "allMusicMenu.html", false, [
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+                new MusicMenu(new Music(), "../images/menu.jpg", "mesicMenuDetail.html", "【女声】一听钟情 情之所起", "大卫Marshall", "女生.流行，欧美"),
+            ]);
+
+
+            modelWrapper = new ModelWrapper("热门艺人", "全部", "allSinger.html", true, [
+                new Singer(1, "五月天", "流行摇滚国语", "../images/singer.jpg"),
+                new Singer(1, "五月天", "流行摇滚国语", "../images/singer.jpg"),
+                new Singer(1, "五月天", "流行摇滚国语", "../images/singer.jpg"),
+                new Singer(1, "五月天", "流行摇滚国语", "../images/singer.jpg"),
+                new Singer(1, "五月天", "流行摇滚国语", "../images/singer.jpg"),
+
+            ]);
+
+
+            var htmlobj = new CreateDisplayTemplate(modelWrapper)
+            document.body.innerHTML = htmlobj.createMusicMenuList();
+        }
+
+    </script>
+
+
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+        div.menuList {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        div.menuList div.headMenu span.title {
+            font-size: 26px;
+        }
+
+        div.menuList div.headMenu {
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        div.menuList div div.divAllRight {
+            float: right;
+
+        }
+
+        div.menuList .menuListContainer img.menuImg {
+            width: 240px;
+            border-radius: 5px;
+        }
+
+        .connerMenuImg {
+            width: 240px;
+            border-radius: 120px;
+
+        }
+
+        .textAlignCenter {
+            text-align: center;
+        }
+
+        div.menuList .menuListContainer div.columnSingleMenu p.title1 {
+            font-size: 14px;
+            font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+            font-weight: bold;
+        }
+
+        div.menuList .menuListContainer div.columnSingleMenu p.title2 {
+            font-size: 11px;
+            font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+            color: #9ea0a6;
+        }
+
+        div.menuList .menuListContainer div.columnSingleMenu p.title3 {
+            font-size: 12px;
+            font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+            color: #4c57b4;
+        }
+
+        div.menuList .menuListContainer div.columnSingleMenu {
+            display: inline-block;
+            overflow: hidden;
+            width: 240px;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<!--推荐列表相关的配置-->
+
+</body>
+</html>

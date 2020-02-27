@@ -17,6 +17,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Webstorm" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -25,7 +28,13 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Demo" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1TbHzSwEjvy1znygICjBRead6dq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -33,6 +42,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Demo/轮播图/js" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -69,7 +79,18 @@
       <workItem from="1573892944390" duration="12000" />
       <workItem from="1574068214795" duration="7351000" />
       <workItem from="1574096329242" duration="3000" />
-      <workItem from="1574150030397" duration="1936000" />
+      <workItem from="1574150030397" duration="2660000" />
+      <workItem from="1581319827053" duration="1670000" />
+      <workItem from="1581927508396" duration="11000" />
+      <workItem from="1581927564972" duration="211000" />
+      <workItem from="1581929366636" duration="94000" />
+      <workItem from="1581929546494" duration="118000" />
+      <workItem from="1581931403506" duration="25000" />
+      <workItem from="1582214496669" duration="3000" />
+      <workItem from="1582305053067" duration="2000" />
+      <workItem from="1582374617685" duration="3663000" />
+      <workItem from="1582776182244" duration="19000" />
+      <workItem from="1582795534118" duration="961000" />
     </task>
     <servers />
   </component>

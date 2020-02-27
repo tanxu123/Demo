@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/test.css">
+
+    <style>
+
+
+        .scroll {
+            width: 400px;
+            height: 8px;
+            background-color: #ccc;
+            margin: 100px;
+            position: relative;
+        }
+
+        .bar {
+            width: 10px;
+            height: 22px;
+            background-color: #ff0d2f;
+            position: absolute;
+            top: -7px;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .mask {
+            width: 0;
+            height: 100%;
+            background-color: #336699;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--<nav class="navbar navbar-default">-->
+<!--<div class="container-fluid">-->
+<!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+<!--<div class="navbar-header">-->
+<!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">-->
+<!--<span class="sr-only">Toggle navigation</span>-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--</button>-->
+<!--<a class="navbar-brand" href="#">Brand</a>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+<!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+<!--<ul class="nav navbar-nav">-->
+<!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+<!--<li><a href="#">Link</a></li>-->
+<!--<li class="dropdown">-->
+<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+<!--<ul class="dropdown-menu">-->
+<!--<li><a href="#">Action</a></li>-->
+<!--<li><a href="#">Another action</a></li>-->
+<!--<li><a href="#">Something else here</a></li>-->
+<!--<li role="separator" class="divider"></li>-->
+<!--<li><a href="#">Separated link</a></li>-->
+<!--<li role="separator" class="divider"></li>-->
+<!--<li><a href="#">One more separated link</a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+
+<!--<ul class="nav navbar-nav navbar-right">-->
+<!--<li><a href="#">Link</a></li>-->
+<!--</ul>-->
+<!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
+
+<!--<div class="ts">-->
+
+<!--<div class="panel-group" id="accordion">-->
+<!--<div class="panel panel-default">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">-->
+<!--<div class="checkbox-inline">-->
+<!--<label>-->
+<!--<input type="checkbox">女装上装-->
+<!--</label>-->
+<!--</div>-->
+<!--<a data-toggle="collapse" data-parent="#accordion"-->
+<!--class="glyphicon glyphicon-plus f-r"-->
+<!--href="#collapseOne">-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div id="collapseOne" class="panel-collapse collapse ">-->
+<!--<div class="panel-body">-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">T恤-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">卫衣-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">衬衫-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="panel panel-default">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">-->
+<!--<div class="checkbox-inline">-->
+<!--<label>-->
+<!--<input type="checkbox">女装上装-->
+<!--</label>-->
+<!--</div>-->
+<!--<a data-toggle="collapse" data-parent="#accordion"-->
+<!--class="glyphicon glyphicon-plus f-r"-->
+<!--href="#collapseTwo">-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div id="collapseTwo" class="panel-collapse collapse">-->
+<!--<div class="panel-body">-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">打底裤-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">牛仔裤-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">阔腿裤-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="panel panel-default">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">-->
+<!--<div class="checkbox-inline">-->
+<!--<label>-->
+<!--<input type="checkbox">女装上装-->
+<!--</label>-->
+<!--</div>-->
+<!--<a data-toggle="collapse" data-parent="#accordion"-->
+<!--class="glyphicon glyphicon-plus f-r"-->
+<!--href="#collapseThree">-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div id="collapseThree" class="panel-collapse collapse">-->
+<!--<div class="panel-body">-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">蕾丝连衣裙-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">针织连衣裙-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="checkbox">-->
+<!--<label>-->
+<!--<input type="checkbox">长袖连衣裙-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+<div class="scroll" id="scrollBar">
+    <div class="bar"></div>
+    <div class="mask"></div>
+</div>
+<div class="demo" id="demo"></div>
+
+<script>
+
+
+    function seekbar(progress) {
+        // 获取元素
+        var scrollBar = document.getElementById("scrollBar");
+        var bar = scrollBar.children[0];
+        var mask = scrollBar.children[1];
+        var demo = document.getElementById("demo");
+        // 拖动原理
+        bar.onmousedown = function (event) {
+            var event = event || window.event;
+            var leftVal = event.clientX - this.offsetLeft;
+
+            // 拖动放到down的里面
+            var that = this;
+            document.onmousemove = function (event) {
+                var event = event || window.event;
+                that.style.left = event.clientX - leftVal + "px";
+
+                // // 限制条件
+                var val = parseInt(that.style.left);
+                if (val < 0) {
+                    that.style.left = 0;
+                } else if (val > 390) {
+                    that.style.left = "390px";
+                }
+                // 移动的距离为遮罩的宽度
+                mask.style.width = that.style.left;
+                // 显示百分比
+
+                var barWidth = bar.offsetWidth;
+
+                var totalWidth = scrollBar.offsetWidth - barWidth;
+
+
+                progress(parseInt(parseInt(that.style.left) / totalWidth * 100))
+
+                // 清除拖动 --- 防止鼠标已经弹起时还在拖动
+                window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+            }
+            // 鼠标抬起停止拖动
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+    }
+
+
+    function progress(progress) {
+        console.log(progress)
+    }
+
+    seekbar(progress)
+
+
+</script>
+</body>
+</html>

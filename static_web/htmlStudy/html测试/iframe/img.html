@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8">
+    <script>
+
+        //图像ping跨域技术
+        function image(){
+            var img=new Image();
+            img.onload=img.onerror=function (ev) {
+                alert("执行");
+            }
+            img.src="http://www.baidu.com?user=fang";
+            //在上面的src下可以放上请求服务器的地址,但是只能单向的通信
+            document.body.appendChild(img);
+        }
+
+        //JSONP跨域技术
+        function jsonp(){
+
+          function handleResponse(response){
+              alert("you're at ip address"+response.ip+",which is in"+response.city+","+response.region_name);
+          }
+
+          var script=document.createElement("script");
+          script.src="http://freeeoip.net/json/?callback=handleResponse";
+          document.body.insertBefore(script,document.body.firstChild);
+        }
+
+        //Comet跨域技术，一种更高级的Ajax技术，也称为服务器推送
+          function createStreamingClient(url,progress,finished){
+            var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();
+            }
+            if(window.ActiveXObject){
+                xhr=new ActiveXObject("microsoft-xmlhttp");
+            }
+
+            received=0;//全局的变量
+
+            xhr.open("get",url,true);
+            xhr.onreadystatechange=function(){
+                var result;
+                if(xhr.readyState==3){
+                    result=xhr.response.substring(received);
+                    received+=result.length;
+
+                    progress(result);
+                }else if(xhr.readyState==4){
+                    finished(xhr.responseText);
+                }
+            };
+            xhr.send(null);
+            return xhr;
+          }
+
+          var client=createStreamingClient("streaming.php",function(data){
+              alert("received"+data);
+          },function(data){
+              alert("Done!");
+          });
+
+        //Web Sockets实现双向通信
+        function WsTest(){
+            var socket=new WebSocket("ws://localhost/demo2/Ajax");
+            socket.onmessage=function (ev) {
+              alert("得到的数据为");
+            };
+
+            socket.onopen=function (ev) {
+              alert("正在建立连接");
+            };
+        }
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+<script>
+
+    image();
+    jsonp();
+</script>
+</body>
+</html>

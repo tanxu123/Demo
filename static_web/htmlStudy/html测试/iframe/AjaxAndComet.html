@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+    /*Ajax实现了无需刷新界面就能从服务器拿到数据
+    作为一种非常流行的技术，现已广泛应用于前端开发
+    Ajax的核心是XMLHttpRequest这个对象
+    看看具体的程序
+    XMLHttpRequest的方法与属性介绍
+        */
+
+      /**
+       * 检测XMLHttpRequest实例的属性与方法
+       * */
+    function ajax1(){
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }
+        if(window.ActiveXObject){
+            xhr=new ActiveXObject("microsoft-xmlhttp");
+        }
+        for(var item in xhr){
+            document.writeln(item+":"+xhr[item]+"<br/>");
+        }
+    }
+
+       function ajax(){
+           var xhr;
+           if(window.XMLHttpRequest){
+               XHR=new XMLHttpRequest();
+           }
+           if(window.ActiveXObject){
+               xhr=new ActiveXObject("microsoft-xmlhttp");
+           }
+           xhr.open("post","http://localhost/demo2/Ajax",true);
+           xhr.onreadystatechange=function(){
+               if(xhr.readyState==4){
+                   if(xhr.status==200){
+                       alert(xhr.responseText);
+                   }
+               }
+           };
+           /*
+           readystatechange事件
+            */
+           xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+           xhr.send("user=fang&password=123");
+       } function ajax(){
+        var xhr;
+        if(window.XMLHttpRequest){
+            XHR=new XMLHttpRequest();
+        }
+        if(window.ActiveXObject){
+            xhr=new ActiveXObject("microsoft-xmlhttp");
+        }
+        xhr.open("post","http://localhost/demo2/Ajax",true);
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4){
+                if(xhr.status==200){
+                    alert(xhr.responseText);
+                }
+            }
+        };
+        /*
+        readystatechange事件
+         */
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.send("user=fang&password=123");
+    }
+
+
+
+
+
+    </script>
+
+
+</head>
+<body>
+<script>
+    ajax1();
+</script>
+</body>
+</html>

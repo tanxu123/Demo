@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+    <title>定义全局变量与在window上直接定义属性的区别</title>
+    <meta http-equiv="Content-Type" content="text/css charset=utf-8">
+    <script>
+
+        function demo1(){
+
+            var age=23;
+
+            window.name="放";
+
+            delete  age;//删除不掉
+            delete window.name;//删除成功
+
+            alert(age);
+            alert(window.name);
+        }
+
+       // demo1();
+
+        function demo2() {
+
+            //alert(age);//报错
+
+            alert(window.age);//undefined
+        }
+
+       // demo2();
+
+        /**
+         * 窗口位置
+         */
+        function demo3(){
+
+            // alert(window.screenLeft);
+            // alert(window.screenTop);
+            var screenL=null;
+            var screenT=null;
+            // if(typeof window.screenTop=="undefined"||typeof window.screenLeft=="undefined"){
+            //     screenL=window.screenX;
+            //     screenT=window.screenY;
+            // }else {
+            //     screenL=window.screenLeft;
+            //     screenT=window.screenTop;
+            // }
+
+            /**
+             * 返回窗口相对于屏幕左边和上边的位置
+             * @returns {any[]} 返回的类型为数组，arr[0]为左边距，arr[1]为上边距
+             */
+            function getScreen() {
+                var arr=new Array();
+                var screenL = (typeof window.screenLeft == "number") ? window.screenLeft : window.screenX;
+                var screenT = (typeof window.screenTop == "number") ? window.screenTop : window.screenY;
+                arr[0]=screenL;
+                arr[1]=screenT;
+                return arr;
+            }
+
+        }
+
+        //demo3();
+
+        function getScreen() {
+            var arr=new Array();
+            var screenL = (typeof window.screenLeft == "number") ? window.screenLeft : window.screenX;
+            var screenT = (typeof window.screenTop == "number") ? window.screenTop : window.screenY;
+            arr[0]=screenL;
+            arr[1]=screenT;
+            return arr;
+        }
+
+
+        function demo4(){
+            window.moveTo(0,0);//移到什么位置
+           var array=getScreen();
+
+           window.moveTo(0,50);//位移
+
+            //在测试中，发现没有起到作用，原因是因为
+            //默认被浏览器关闭了
+            var array=getScreen();
+           alert(array);
+        }
+
+        //demo4();
+
+        //获得窗口的大小
+        //innerWidth,innerHeight,outerWidth,outerHeight,
+
+        function demo5(){
+            alert("内部高"+window.innerHeight);
+            alert("内部宽"+window.innerWidth);
+            alert("外部高"+window.outerHeight);
+            alert("外部宽"+window.outerWidth);
+        }
+
+       // demo5();
+
+        /**
+         * 依次返回浏览器的innerWidth,innerHeight,outerWidth,outerHeight,
+         * @returns {any[]}，返回的是数组类型
+         */
+        function getScreen(){
+            var arr=new Array();
+            arr[0]=window.innerWidth;
+            arr[1]=window.innerHeight;
+            if(typeof arr[0]!="number"||typeof arr[1]!="number"){
+
+                if(typeof document.documentElement.clientHeight!="number"||typeof document.documentElement.clientWidth!="number"){
+                    arr[0]=document.body.clientWidth;
+                    arr[1]=document.body.clientHeight;
+                }else {
+                    arr[0]=document.documentElement.clientWidth;
+                    arr[1]=document.documentElement.clientHeight;
+                }
+            }
+            arr[2]=window.outerWidth;
+            arr[3]=window.outerHeight;
+            return arr;
+        }
+
+
+        function demo6(){
+            alert(document.documentElement.clientWidth);
+            alert(document.documentElement.clientHeight);
+        }
+
+        //demo6();
+
+        /**
+         * 调整浏览器的大小
+         *
+         */
+        function resize(){
+            window.resizeBy(100,100);
+            alert(window.outerHeight);
+            alert(window.outerWidth);
+            //测试没有变化，也就是这种方法已经被浏览器禁用了
+        }
+        //resize();
+
+        /**
+         * 导航与打开窗口
+         */
+
+        function demo7(){
+            var window1=window.open("demo2.html","parent",
+                "height=400,width=300,top=10,left=10,resizable=yes,location=no");
+            window1.resizeTo(200,200);
+           // setTimeout("",3000);
+
+            //window1.close();
+        }
+      //demo7();
+
+        function demo8(){
+            window.find();
+        }
+  // demo8();
+
+        function demo9(){
+            location.href="http://www.baidu.com";
+        }
+        //demo9();
+
+        function demo10(){
+          //  location.replace("http://www.baidu.com");
+        }
+        function demo11(){
+            location.reload(true);
+        }
+
+       // demo10();
+
+        //navigator对象
+
+        function demo12(){
+          for(var item in navigator){
+              //alert(item+":"+navigator[item]);
+              document.writeln(item+":"+navigator[item]+"<br/>");
+          }
+        }
+
+      //  demo12();
+
+        //检测插件
+        function pluginTesting(name){
+            name=name.toLowerCase();
+            for(var i=0;i<navigator.plugins.length;i++){
+                if(navigator.plugins[i].name.toLowerCase().indexOf(name)>-1){
+                   return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+
+       // alert("Flash:"+pluginTesting("Flash"));
+       // alert("QuickTime:"+pluginTesting("QuickTime"));
+
+
+      function hasPlugin(name){
+          try {
+            new ActiveXObject(name);
+            return true;
+          }catch (e){
+            return false;
+          }finally {
+
+          }
+      }
+
+      //注册处理程序
+       function demo13(){
+         navigator.registerContentHandler("application/rss+xml","http://www.somereader.com?feed=%s","Some Reader");
+         //报出权限错误
+       }
+       //demo13();
+
+       //screen对象
+        function demo14() {
+            for (var item in screen) {
+                document.writeln(item + ":" + screen[item] + "<br/>");
+            }
+        }
+       // demo14();
+
+        //history
+        function demo15(){
+            for (var item in history) {
+                document.writeln(item + ":" + history[item] + "<br/>");
+            }
+        }
+
+       // demo15();
+
+
+        /**
+         * 下面是客户端的检测
+         */
+
+        //能力检测
+        /**
+         * 根据特定的id找到特定的dom对象
+         * @param id
+         * @returns {*}
+         */
+        function getElement(id){
+            if(document.getElementById){
+                return document.getElementById(id);
+            }else if(document.all){
+                return document.all[id];
+            }
+        }
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="move2.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        ul {
+            position: relative;
+        }
+
+        li {
+            float: left;
+            width: 599px;
+            height: 300px;
+            background: red;
+            border-right: 1px solid #cccccc;
+            list-style: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div>
+    <div style="width: 600px;margin: 0 auto;overflow: hidden">
+        <ul style="width: 1000%;" class="box">
+            <li style="background: #00cf0c"></li>
+            <li style="background: #1b00ff"></li>
+            <li style="background: #1bd3da"></li>
+            <li style="background: #89344f"></li>
+        </ul>
+    </div>
+</div>
+<script>
+
+    window.onload = function () {
+
+
+        var divBox = document.getElementsByClassName("box")[0];
+        var defaultOffsetDistance = 200;
+        var time = 30;
+        var index = 1;
+        var speed = 15;
+        var inter;
+        var inter2;
+
+
+        inter2 = setInterval(function () {
+
+            // var move = function () {
+            //
+            //     // var speed = (defaultOffsetDistance * index - divBox.offsetParent()) / time
+            //     //
+            //     // if (Math.floor(speed) == 0) {
+            //     //     clearInterval(inter)
+            //     // }
+            //     //
+            //     // console.log(speed)
+            //     //
+            //     // /**
+            //     //  * 这里执行的是动画的效果
+            //     //  */
+            //     // divBox.style.left = divBox.offsetLeft + speed + "px"
+            //
+            //     // console.log(divBox.style.left)
+            //
+            //
+            // }
+            // inter = setInterval(move, 10)
+
+            if (index == 3) {
+                divBox.style.left = 0;
+                index = 0;
+            }else {
+                var value = -600 * index;
+                startMove(divBox, {left: value})
+                index++
+            }
+
+
+        }, 2000)
+    }
+
+
+</script>
+</body>
+</html>

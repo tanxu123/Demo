@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <script>
+        function Bbb() {
+            var _this = this;
+            this.b = 5;
+            document.getElementById('btn1').onclick = function () {
+                _this.show();
+            };
+        }
+        Bbb.prototype.show = function () {
+            alert(this);//[object] 指代new Bbb()对象
+            alert(this.b)//5 可以访问
+        };
+        window.onload = function () {
+            /**
+             * 通过文档加载,创建对象,在创建的对象里面设置点击事件,在点击事件里面,使用闭包调用property原型函数
+             */
+            new Bbb();
+        };
+    </script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="按钮"/>
+</body>
+</html>

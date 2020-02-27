@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <style>
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            height: 30px;
+            width: 100px;
+            text-align: center;
+            background-color: #111111;
+            border-bottom: 1px solid #44ff62;
+            color: #ffffff;
+        }
+
+
+    </style>
+    <script>
+        //封装属于自己额ajax库   text/plan
+        /**
+         *
+         * @param url  请求的url
+         * @param secessful   如果返回数据成功的回调函数
+         * @param error         如果失败的 回调函数
+         */
+        function ajax(url, secessful, error) {
+            var xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            if (window.ActiveXObject) {
+                xhr = new ActiveXObject("microsoft-xmlhttp");
+            }
+            //构建请求 对象
+
+            xhr.open("get", url, true);//使用get请求，同时使用异步操作，响应结果会回调到og中nreadystatechange函数
+            xhr.send(null);
+            xhr.onreadystatechange = function (ev) {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {//如果响应成功，就调用成功这个函数，将结果通过函数返回
+                        secessful(xhr.responseText);
+                    } else {
+                        error();//反之调用错误的函数
+                    }
+                }
+            }
+        }
+
+
+        url = "http://localhost:8080/Ajax/AjaxTest?text="
+
+        /**
+         * 事件类型
+         * @param event
+         */
+        function sendAjax(event) {
+
+            var infoBox = document.getElementsByClassName("box")[0]//通过dim查找box，因为使用class查找，找到的是一个数组，数组0就是我们使用的那个ul
+            infoBox.innerHTML = ""//清空ul的内部html代码，（也就清空上次的搜索结果）
+            var html = ""//用来拼接数据
+
+            if (event.keyCode == 8) {//代表按的是删除按键，不去发送请求
+                infoBox.innerHTML = ""
+            } else {
+                ajax(url + event.keyText, function (responseText) {//这里面就是区发送一个ajax 请求
+
+                    //成功的回调        [{"user":"sasfsa","sex","女"},{"user":"sasfsa","sex","女"},{"user":"sasfsa","sex","女"},{"user":"sasfsa","sex","女"}]
+                    var value = JSON.parse(responseText)//通过JSON.pasrse()将服务器返回的Json数据字符串转化为Json对象
+                    for (var i = 0; i < value.length; i++) {//value是个json对象数组，通过遍历，获得每一个元素的值
+                        html += "<li>" + value[i] + "</li>"//拼接收集 <li>dsfgs</li><li>rwt</li>
+                    }
+
+                    alert(html);
+
+                    infoBox.innerHTML = html;//将得到的值添加到box里面
+                }, function () {
+                    //错误的回调
+                    alert("请求失败")
+                })
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+
+<!--
+
+按键按下的时候自动触发 sendAjax(事件)  参数是事件类型，
+-->
+<input type="text" placeholder="请输入值" onkeydown="sendAjax(event)">
+<ul class="box">
+</ul>
+
+</body>
+</html>

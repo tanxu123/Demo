@@ -1,0 +1,42 @@
+
+.sc-jm-step {
+
+}
+
+.sc-jm-step .page-header {
+    border-bottom: 3px solid #c92323;
+    margin: 0px 20px;
+}
+
+.sc-jm-step .col-lg-3 {
+    margin-top: 40px;
+}
+
+.sc-jm-step .col-lg-3 .media {
+
+}
+
+.sc-jm-step .col-lg-3 .media .media-body {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.sc-jm-step .col-lg-3 .media .media-body .media-heading {
+    padding-top: 5px;
+}
+
+.sc-jm-step .col-lg-3 .media .media-body p {
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.shuoming .container h5 {
+    color: #000;
+    margin-top: 30px;
+}
+
+.shuoming .container P {
+    color: #555452;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script>
+        function ajax1(request) {
+            var xhr;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            if (window.ActiveXObject) {
+                xhr = new ActiveXObject("microsoft-XMLHTTP");
+            }
+             xhr.open("get","http://localhost/demo2/Test?info="+request);
+            xhr.onstatechange = function () {
+                if (xhr.readyState == 200) {
+                    if (xhr.status == 4) {
+                        document.getElementById("area").innerText = xhr.responseText;
+                    }
+                }
+            }
+            xhr.send(null);
+        }
+
+        function get(){
+            var button=document.getElementById("button");
+            button.onclick=function (ev) {
+                var input=document.getElementById("inputValue");
+                ajax1(input.value);
+                input.value="";
+            };
+        }
+
+        function createObj(){
+
+            function Man(height,weight){
+                this.height=height;
+                this.weight=weight;
+            }
+
+            function Person(name,sex,age){
+                this.name=name;
+                this.sex=sex;
+                this.age=age;
+            }
+            var man=new Man();
+            Person.prototype=man;
+
+            var person=new Person("fang","man",22);
+            person.constructor;//Person
+            person.hasOwnProperty("name");//在实例中是否存在自己的属性
+
+            alert(person.isPrototypeOf(man));//false;
+            alert(Person.prototype);//object
+
+            //在js中函数的参数只是提供便利，解析器不会验证命名参数
+            /**
+             *
+             * @constructor
+             */
+            function Xiao(){
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<!--<textarea rows="10" cols="60" id="area"></textarea><br/>-->
+<!--<input type="text" size="40" id="inputValue">-->
+<!--<input name="submit" value="发送" type="button" id="button">-->
+<script>
+   // get();
+    createObj();
+</script>
+</body>
+</html>

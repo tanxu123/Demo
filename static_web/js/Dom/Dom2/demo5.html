@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function demo1(){
+            var drawing=document.getElementById("drawing");
+            if(drawing.getContext){
+                var context=drawing.getContext("2d");
+                context.strokeStyle="#532";
+                context.fillStyle="#684";
+                context.fillRect(30,30,30,30);
+                context.fill
+            }else{
+                alert("不支持");
+            }
+        }
+    </script>
+</head>
+<body>
+<canvas id="drawing" width="200px" height="200px"></canvas>
+<script>
+    demo1();
+</script>
+</body>
+</html>

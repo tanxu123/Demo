@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        window.onload = function (ev) {
+            var xhr;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xhr = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xhr.open("GET", "http://localhost:8080/Blog/ImgServlet", true);
+            xhr.send();
+
+            xhr.onreadystatechange = function (ev) {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        //代表的响应数据成功
+                        var response = xhr.responseText;
+                        parseJsonData(response);
+                    }
+                }
+            }
+
+            /**
+             * 解析json数据
+             * @param jsonResponse
+             * 返回的数据如下
+             [{"imgAddress":"/../../../home/fang/Pictures/one.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/two.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/three.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/four.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/five.jpeg","linkAddress":"#"}]
+             */
+            function parseJsonData(jsonResponse) {
+
+                var jsonObject = JSON.parse(jsonResponse);
+                executeUpdateImage(jsonObject);
+            }
+
+            function executeUpdateImage(jsonObject) {
+
+                var index;
+                var imgElement = document.getElementById("data_img")
+
+                var timer = setInterval(function () {
+
+                    index++;
+                    for (var i = 0; i < jsonObject.length; i++) {
+                         alert(jsonObject[i].imgAddress + "\n" + jsonObject[i].linkAddress);
+                        //if (imgElements[i] instanceof HTMLImageElement) {
+                        //     imgElements[i].src = jsonObject[i].imgAddress
+                        // }
+                        imgElement.src = jsonObject[index % i].imgAddress;
+                    }
+
+                }, 3000)
+
+
+            }
+        }
+
+
+
+    </script>
+
+    <style>
+        div.banner_div {
+            height: 300px;
+
+        }
+
+
+    </style>
+
+</head>
+<body id="body">
+<div class="banner_div">
+    <a href="#">
+        <img style="width:100%;" id="data_img">
+    </a>
+</div>
+
+
+
+</body>
+</html>

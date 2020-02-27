@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>利用jquery制作滚动到指定位置触发动画</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style type="text/css">
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .gs {
+            position: relative;
+            top: 100px;
+            font-weight: bold;
+        }
+
+
+        .xz {
+            animation: translateX1 1.5s;
+            animation-fill-mode: forwards;
+            animation-direction: alternate;
+        }
+
+        .xz1 {
+            animation: translateX2 1.5s;
+            animation-fill-mode: forwards;
+            animation-direction: alternate;
+        }
+
+
+        .xz2 {
+            animation: translateY1 1.5s;
+            animation-fill-mode: forwards;
+            animation-direction: alternate;
+        }
+
+
+        .gs {
+            float: left;
+        }
+
+        @keyframes translateX1 {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+
+        @keyframes translateX2 {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        @keyframes translateY1 {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+<script type="text/javascript">
+    /*var a,b,c;
+     a=$("#dh").offset().top;//元素相对于窗口的距离
+     b=$(window).scrollTop(); //监控窗口已滚动的距离;
+     c=$(document).height();//整个文档的高度
+     d=$(window).height();//浏览器窗口的高度
+     element  标签
+     cssname  动画
+     offset  相对于窗口的距离
+     */
+    function scrollnumber(element, cssname, offset) {
+
+
+        var a, b, c, d;
+        d = $(element).offset().top;
+        a = eval(d + offset);
+        b = $(window).scrollTop();
+        c = $(window).height();
+        if (b + c > a) {
+
+            if (element == ".tranDownRoot") {
+                //下移动
+                element = ".transDown";
+            }
+
+            $((element)).addClass((cssname));
+        }
+    }
+
+    function scrollfun() {
+        //左平移动画
+        scrollnumber(".com", 'xz', 300);
+        //左右偏移动画
+        scrollnumber(".left", 'xz', 300);
+        scrollnumber(".right", 'xz1', 300);
+
+        //右平移动画
+        scrollnumber(".r2lTranContainer", "xz1", 300)
+
+
+        //下移动动画  如果是下移动画，不能使用内部容器获得滑动的高度 ，应该使用外部容器
+        scrollnumber(".tranDownRoot", "xz2", 300)
+
+    }
+
+
+    $(document).ready(function (e) {
+
+
+        let height = $(".transDown").css("height");
+        //设置top
+        $(".transDown").css("top", "-" + height);
+
+
+        scrollfun();
+        $(window).scroll(function () {
+            scrollfun();
+        });
+    });
+</script>
+<div style="height: 1000px;width: 100%"></div>
+
+
+<!--
+
+  整体左平移动画触发
+
+-->
+<div style="width: 100%;overflow: hidden;">
+    <div class="com"
+         style="font-weight:bold; left:-100%;position: relative;width: 100%;background: #ffc107;">
+        fsdfsd
+
+        safsdg
+        afag
+
+        <div style="height: 40px"></div>
+
+    </div>
+</div>
+
+
+<div style="width: 100%;overflow: hidden;">
+    <div class="r2lTranContainer"
+         style="font-weight:bold; right:-100%;position: relative;width: 100%;background: #00fffa;">
+        fsdfsd
+
+        safsdg
+        afag
+
+        <div style="height: 40px"></div>
+
+    </div>
+</div>
+
+
+<!--
+
+ 左右两边平移动画触发
+
+-->
+
+
+<style>
+
+    .lrTrans div.block {
+
+    }
+
+
+    .left {
+        background: #0C88E8;
+        float: left;
+    }
+
+    .right {
+        background: #40cc2a;
+        float: left;
+    }
+
+</style>
+
+
+<div style="clear: both;overflow: hidden">
+
+    <div class="lrTrans">
+        <div class="left block" style="position:relative;left:-50%;width: 50%;height: 600px;">
+
+        </div>
+        <div class="right block" style="position:relative;right:-50%;width: 50%;height: 600px;">触发动画222</div>
+    </div>
+</div>
+
+
+<!--
+
+  下移动画  ， 下移动画采用的是父类 容器隐藏的形式 ，设置相对偏移  ，  但是存在一种情况，需要计算  内部容器额高度，然后动态的设置 内部容器的top值
+
+-->
+
+
+<div style="clear: both;overflow: hidden;" class="tranDownRoot">
+    <div class="transDown" style="height: 300px;background: #f68a2f;width: 100%;position: relative;">
+
+    </div>
+</div>
+
+
+<!--
+ 上移动画
+-->
+
+
+<!--
+  为了保证当前页面动画的自动触发，在 scrollfun 中设置的 参数3 不能大于底部 div的高度 ，会导致动画因为偏移量不够无法触发
+-->
+
+<div style="height: 301px;">
+
+</div>
+
+</body>
+</html>

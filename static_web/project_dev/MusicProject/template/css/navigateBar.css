@@ -1,0 +1,73 @@
+/**
+导航条的css设置
+ */
+
+img#logo {
+    position: relative;
+    top: 11px;
+    height: 30px;
+
+}
+
+div.navigateBarContainer {
+
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+ul {
+    display: inline-block;
+}
+
+li {
+    display: inline-block;
+    list-style: none;
+}
+
+li a span.navigateItm {
+    color: #4a4a4a;
+    margin-left: 20px;
+}
+
+div.navigateBarContainer li a {
+    text-decoration: none
+}
+
+/**
+选中设置的style
+ */
+.selectStyle {
+    color: #000;
+    font-weight: bold;
+}
+
+/**
+下面是搜索的style
+ */
+div.searchArea {
+    float: right;
+    overflow: hidden;
+}
+
+div.searchArea input.input {
+    background: #fbfbfb;
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: none;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 1px;
+    width: 100px;
+    margin-right: 20px;
+    border-bottom: 1px solid #4a4a4a;
+}
+
+div.navigateBarContainer div.user {
+    float: right;
+    font-size: 14px;
+    position: relative;
+    top: 18px;
+    font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+}

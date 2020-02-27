@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8">
+    <style>
+    .list{
+        width:50px;
+        height:20px;
+        list-style-type: none;
+        float: left;
+        font: 14px normal;
+        text-align: center;
+        background-color: #cccccc;
+    }
+
+        .menu{
+            width: 600px;
+            height:100px;
+        }
+        #content{
+            width:600px;
+            height:20px;
+            display: block;
+            float: right;
+            font-size: 12px;
+            font-family:华文宋体;
+        }
+        #title{
+            width:600px;
+            height:20px;
+        }
+    .contentList{
+        width: 80px;
+        height:20px;
+        list-style-type: none;
+        float: left;
+        text-align: center;
+        margin:3px 5px;
+        /*background-color: #e5f7f0;*/
+        font: 12px 宋体;
+    }
+    #editArea{
+           width:600px;
+        height:600px;
+        border:1px solid #ccc;
+        }
+
+        .colorSelect{
+            width:30px;
+            height:14px;
+            text-align: center;
+            font-size: 10px;
+            font-family: 华文宋体;
+        }
+
+
+    </style>
+    <script type="text/javascript">
+
+        function addEdit(){
+            window.onload=function (ev) {
+              var ele=document.getElementById("editArea");
+              ele.contentEditable="true";
+            };
+        }
+
+        function change(){
+         var titleBox=document.getElementById("title");
+          var ul=titleBox.children[0];//ul
+
+            var contents=document.getElementById("content");
+            var tabs=contents.children;
+          for(var i=0;i<ul.children.length;i++){
+              ul.children[i].index=i;//创建属性存放i
+              //在点击事件产生前，关闭所有的div
+              //点击事件
+              ul.children[i].onclick=function (ev) {
+               // alert(this.index);
+                  for(var j=0;j<tabs.length;j++){
+                      tabs[j].style.display="none";
+                  }
+                  tabs[this.index].style.display="block";
+              };
+              // //鼠标移入
+              ul.children[i].onmouseover=function (ev) {
+                 this.style.backgroundColor="#bbbbbb";
+              };
+               //鼠标移除
+              ul.children[i].onmouseout=function (ev) {
+                  this.style.backgroundColor="";
+              };
+            }
+        }
+
+        function staticBlock(target){
+            var ele=target.getElementsByTagName("select");
+            // alert(ele[0];
+            var value="";
+            for(var i=0;i<ele[0].length;i++){
+                if(ele[0].item(i).selected){
+                    value=ele[0].item(i).value;
+                }
+            }
+            return value;
+        }
+
+        /**
+         * 调用二级菜单
+         */
+        function secondMenu(){
+         var ul=document.getElementById("oneMenu");
+         ul.onclick=function (ev) {
+             var target=ev.srcElement||ev.target;
+                 // alert(target);
+             target=target.parentElement;
+           switch(target.id){
+               case "documentBackground":
+                 // var ele=document.getElementById("dropList");
+                 // ele.style.display="block";
+                 // ele.style.position="relative";
+                 // ele.style.zIndex="1";
+                 // ele.style.backgroundColor="#72b7bd";
+                 // var style1=ele.children[0].style;
+                 // style1.listStyleType="none";
+                 // style1.textAlign="center";
+                  var value= staticBlock(target);
+                   document.execCommand("backcolor", false, value);
+
+                   break;
+               case "style":
+                   var value=staticBlock(target);
+                   document.execCommand(value.toString(), false, null);
+                   break;
+               case "createLink":
+                   break;
+               case "cut":
+                   break;
+               case "delete":
+                   break;
+               case "fontName":
+                   break;
+               case "fontColor":
+                   break;
+               case "formatBlock":
+                   break;
+               case "addIndent":
+                   break;
+               case "subIndent":
+                   break;
+               case "italic":
+                   break;
+               case "align":
+                   break;
+               case "cancelFormatBlock":
+                   break;
+               case "removeLink":
+                   break;
+           }
+         };
+            // ul.onmouseover=function (ev2) {
+            //     // this.style.backgroundColor="#91918f";
+            //     var target=ev2.srcElement||ev2.target;
+            //     switch(target.id){
+            //         case "documentBackground":
+            //         case "addBold":
+            //         case "copy":
+            //         case "createLink":
+            //         case "cut":
+            //         case "delete":
+            //         case "fontName":
+            //         case "fontColor":
+            //         case "formatBlock":
+            //         case "addIndent":
+            //         case "subIndent":
+            //         case "italic":
+            //         case "align":
+            //         case "cancelFormatBlock":
+            //         case "removeLink":
+            //             target.style.backgroundColor="#91918f";
+            //             target.style.font="10px normal";
+            //             target.style.width="70px";
+            //             target.style.height="18px";
+            //             target.style.margin="0 4px";
+            //             target.style.border="1px solid #111";
+            //             break;
+            //     }
+            //
+            // };
+            //
+            // ul.onmouseout=function (ev) {
+            //     var target=ev.srcElement||ev.target;
+            //     switch(target.id) {
+            //         case "documentBackground":
+            //         case "addBold":
+            //         case "copy":
+            //         case "createLink":
+            //         case "cut":
+            //         case "delete":
+            //         case "fontName":
+            //         case "fontColor":
+            //         case "formatBlock":
+            //         case "addIndent":
+            //         case "subIndent":
+            //         case "italic":
+            //         case "align":
+            //         case "cancelFormatBlock":
+            //         case "removeLink":
+            //             target.style.backgroundColor = "";
+            //             target.style.width = "80px";
+            //             target.style.height = "20px";
+            //             target.style.font = "12px normal";
+            //             target.style.margin = "0";
+            //             target.style.border = "none";
+            //             break;
+            //     }
+            // };
+        }
+
+    </script>
+</head>
+<body>
+<!--tab切换-->
+<div class="menu">
+    <div id="title">
+        <ul>
+            <li class="list">效果</li>
+            <li class="list" >插入</li>
+            <li class="list">其他</li>
+            <li class="list">其他</li>
+            <li class="list">其他</li>
+        </ul>
+    </div>
+    <div id="content">
+        <div>
+            <ul id="oneMenu">
+                <li class="contentList" id="documentBackground">
+                  <select style="border: none;">
+                      <option>文档颜色</option>
+                      <option value="#bd2900" style="background-color: #bd2900">红色</option>
+                      <option value="#bd8200" style="background-color: #bd8200">橙色</option>
+                      <option  value="#f6ff15" style="background-color: #f6ff15;">黄色</option>
+                      <option value="#2bff19" style="background-color: #2bff19">绿色</option>
+                      <option  value="#00ff73" style="background-color: #00ff73">青色</option>
+                      <option value="#1b00ff" style="background-color: #1b00ff">蓝色</option>
+                      <option value="#ff00ee" style="background-color: #ff00ee">紫色</option>
+                      <option value="#fff">白色</option>
+                  </select>
+                </li>
+                <li class="contentList" id="style">
+                <select  style="border: none;">
+                    <option>样式</option>
+                    <option value="bold">加粗</option>
+                    <option value="italic">斜体</option>
+                    <option value="copy">拷贝</option>
+                    <option value="cut">剪切</option>
+                    <option value="delete">删除</option>
+                </select>
+                </li>
+                <li class="contentList" id="createLink">
+                    <select style="border: none;">
+                        <option>超链接</option>
+                        <option>创建</option>
+                        <option>删除</option>
+                    </select>
+                </li>
+                <li class="contentList" id="fontName">
+                  <select style="border: none;">
+                      <option>字体</option>
+                      <option>10</option>
+                      <option>13</option>
+                      <option>16</option>
+                      <option>19</option>
+                      <option>21</option>
+                      <option>24</option>
+                      <option>27</option>
+                      <option>30</option>
+                      <option>33</option>
+                      <option>36</option>
+                      <option>自定义</option>
+                  </select>
+                </li>
+                <li class="contentList" id="fontColor">
+                  <select style="border: none">
+                      <option>字体颜色</option>
+                      <option>红色</option>
+                      <option>橙色</option>
+                      <option>黄色</option>
+                      <option>绿色</option>
+                      <option>青色</option>
+                      <option>蓝色</option>
+                      <option>紫色</option>
+                      <option>自定义</option>
+                  </select>
+                </li>
+                <li class="contentList" id="formatBlock">
+                    <select style="border: none">
+                        <option>标签</option>
+                        <option>格式化</option>
+                        <option>取消</option>
+                    </select>
+                </li>
+                <li class="contentList" id="Indent">
+                    <select style="border: none">
+                        <option>缩进量</option>
+                        <option>+</option>
+                        <option>-</option>
+                    </select>
+                </li>
+
+                <li class="contentList" id="align">
+                    <select style="border: none">
+                        <option>对齐方式</option>
+                        <option>居中对齐</option>
+                        <option>左对齐</option>
+                        <option>右对齐</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div style="display: none;">
+            <ul>
+            <li class="contentList" id="insertHr">插入hr</li>
+            <li class="contentList" id="insertImage">插入图片</li>
+            <li class="contentList" id="insertOl">插入ol</li>
+            <li class="contentList" id="insertUl">插入ul</li>
+            <li class="contentList" id="insertP">插入p</li>
+            </ul>
+        </div>
+        <div style="display: none;"></div>
+        <div style="display: none;"></div>
+        <div style="display: none;"></div>
+    </div>
+</div>
+<script>
+     addEdit();
+    change();
+    secondMenu();
+</script>
+</body>
+</html>

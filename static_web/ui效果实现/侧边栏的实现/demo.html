@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+     window.onscroll=window.onload=window.onresize=function (ev) {
+         //得到滚动的距离
+         var ele=document.documentElement||document.body;
+         //alert(typeof ele);
+         var top=ele.scrollTop;//滚动的距离
+         //alert(top);
+         var clientHeight=ele.clientHeight;//可视区的高
+        // alert(clientHeight);666正常
+         var boxOffsetHeight=document.getElementById("box").offsetHeight;//div的高
+         //alert(boxOffsetHeight);//200正常
+         var offsetTopDiv=top+((clientHeight-boxOffsetHeight)/2);
+         //alert(offsetTopDiv);497
+
+       //  document.getElementById("box").style.top=offsetTopDiv+"px";
+         //下面是对侧边栏抖动的解决
+         var speed=5;
+         var timer=setInterval(function(){
+           //alert(  document.getElementById("box").style.top);
+            var item=Math.floor(offsetTopDiv/8);
+            // document.getElementById("box").style.top=item+"px";
+             document.getElementById("box").style.top= document.getElementById("box").offsetTop+speed+"px";
+             if(document.getElementById("box").offsetTop>=offsetTopDiv){
+                 clearInterval(timer);
+             }
+         },1);
+     }
+    </script>
+</head>
+<body style="height:2000px;">
+<div id="box" style=" width:200px;height:200px;background-color: #FFCC00;
+position:absolute;right: 0px;top:0px;"></div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    let json = '{\n' +
+        '  "id": "PAYID-LXPTM7Q1GP79228JA615513B",\n' +
+        '  "intent": "sale",\n' +
+        '  "payer": {\n' +
+        '    "payment_method": "paypal",\n' +
+        '    "status": "VERIFIED",\n' +
+        '    "payer_info": {\n' +
+        '      "email": "sb-b2asa526804@personal.example.com",\n' +
+        '      "first_name": "John",\n' +
+        '      "last_name": "Doe",\n' +
+        '      "payer_id": "AWKNCNY4SXG9Q",\n' +
+        '      "country_code": "US",\n' +
+        '      "shipping_address": {\n' +
+        '        "recipient_name": "John Doe",\n' +
+        '        "line1": "1 Main St",\n' +
+        '        "city": "San Jose",\n' +
+        '        "country_code": "US",\n' +
+        '        "postal_code": "95131",\n' +
+        '        "state": "CA"\n' +
+        '      }\n' +
+        '    }\n' +
+        '  },\n' +
+        '  "cart": "45B66287FB9249625",\n' +
+        '  "transactions": [\n' +
+        '    {\n' +
+        '      "related_resources": [\n' +
+        '        {\n' +
+        '          "sale": {\n' +
+        '            "id": "9GR15063AV417783T",\n' +
+        '            "amount": {\n' +
+        '              "currency": "USD",\n' +
+        '              "total": "533.70",\n' +
+        '              "details": {\n' +
+        '                "subtotal": "523.70",\n' +
+        '                "shipping": "10.00",\n' +
+        '                "tax": "0.00",\n' +
+        '                "handling_fee": "0.00",\n' +
+        '                "shipping_discount": "0.00",\n' +
+        '                "insurance": "0.00"\n' +
+        '              }\n' +
+        '            },\n' +
+        '            "payment_mode": "INSTANT_TRANSFER",\n' +
+        '            "state": "completed",\n' +
+        '            "protection_eligibility": "ELIGIBLE",\n' +
+        '            "protection_eligibility_type": "ITEM_NOT_RECEIVED_ELIGIBLE,UNAUTHORIZED_PAYMENT_ELIGIBLE",\n' +
+        '            "transaction_fee": {\n' +
+        '              "currency": "USD",\n' +
+        '              "value": "21.11"\n' +
+        '            },\n' +
+        '            "parent_payment": "PAYID-LXPTM7Q1GP79228JA615513B",\n' +
+        '            "create_time": "2019-11-28T02:53:58Z",\n' +
+        '            "update_time": "2019-11-28T02:53:58Z",\n' +
+        '            "links": [\n' +
+        '              {\n' +
+        '                "href": "https://api.sandbox.paypal.com/v1/payments/sale/9GR15063AV417783T",\n' +
+        '                "rel": "self",\n' +
+        '                "method": "GET"\n' +
+        '              },\n' +
+        '              {\n' +
+        '                "href": "https://api.sandbox.paypal.com/v1/payments/sale/9GR15063AV417783T/refund",\n' +
+        '                "rel": "refund",\n' +
+        '                "method": "POST"\n' +
+        '              },\n' +
+        '              {\n' +
+        '                "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXPTM7Q1GP79228JA615513B",\n' +
+        '                "rel": "parent_payment",\n' +
+        '                "method": "GET"\n' +
+        '              }\n' +
+        '            ]\n' +
+        '          }\n' +
+        '        }\n' +
+        '      ],\n' +
+        '      "amount": {\n' +
+        '        "currency": "USD",\n' +
+        '        "total": "533.70",\n' +
+        '        "details": {\n' +
+        '          "subtotal": "523.70",\n' +
+        '          "shipping": "10.00",\n' +
+        '          "tax": "0.00",\n' +
+        '          "handling_fee": "0.00",\n' +
+        '          "shipping_discount": "0.00",\n' +
+        '          "insurance": "0.00"\n' +
+        '        }\n' +
+        '      },\n' +
+        '      "payee": {\n' +
+        '        "email": "sb-scb43c598843@business.example.com",\n' +
+        '        "merchant_id": "GPXMHPEQF7HZL"\n' +
+        '      },\n' +
+        '      "description": "zerdocean.com Shopping consumption",\n' +
+        '      "custom": "订单id:2343253252356457",\n' +
+        '      "item_list": {\n' +
+        '        "shipping_address": {\n' +
+        '          "recipient_name": "John Doe",\n' +
+        '          "line1": "1 Main St",\n' +
+        '          "city": "San Jose",\n' +
+        '          "country_code": "US",\n' +
+        '          "postal_code": "95131",\n' +
+        '          "state": "CA"\n' +
+        '        }\n' +
+        '      }\n' +
+        '    }\n' +
+        '  ],\n' +
+        '  "state": "approved",\n' +
+        '  "create_time": "2019-11-28T02:52:45Z",\n' +
+        '  "update_time": "2019-11-28T02:53:58Z",\n' +
+        '  "links": [\n' +
+        '    {\n' +
+        '      "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXPTM7Q1GP79228JA615513B",\n' +
+        '      "rel": "self",\n' +
+        '      "method": "GET"\n' +
+        '    }\n' +
+        '  ]\n' +
+        '}'
+
+    console.log(JSON.parse(json))
+
+
+</script>
+
+</body>
+</html>

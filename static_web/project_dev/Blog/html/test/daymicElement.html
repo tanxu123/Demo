@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        #videoContainer {
+            text-align: center;
+        }
+
+        div.box {
+            width: 220px;
+            display: inline-block;
+            height: 260px;
+            margin-right: 16px;
+        }
+
+        .box ul.list {
+            width: 100%;
+            height: 100%;
+        }
+
+        .box ul li.one {
+            width: 100%;
+        }
+
+        .box li.text {
+            height: 25px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .box li.pro {
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            font-size: 15px;
+            color: #a8a8a8;
+            text-overflow: ellipsis;
+        }
+
+        .list .one img.img_video {
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="videoContainer">
+
+</div>
+
+<script>
+
+
+    function demo1() {
+        var div = document.createElement("div");
+        div.className = "videoContainer"
+
+        for (var i = 0; i < 5; i++) {
+            var a = document.createElement("a");
+            a.className = "link"
+            var divBox = document.createElement("div");
+            divBox.className = "box"
+            a.appendChild(divBox)
+
+            var ullist = document.createElement("ul");
+            ullist.className = "list";
+            divBox.appendChild(ullist)
+
+            var lione = document.createElement("li");
+            lione.className = "one"
+
+            var img_video = document.createElement("img");
+            img_video.className = "img_video"
+            lione.appendChild(img_video)
+
+            var litext = document.createElement("li");
+            lione.className = "text"
+
+            var lipro = document.createElement("li");
+            lione.className = "pro"
+
+            var p_pro_des = document.createElement("p");
+            p_pro_des.className = "pro_des";
+            lipro.appendChild(p_pro_des);
+
+
+            ullist.appendChild(lione);
+            ullist.appendChild(litext);
+            ullist.appendChild(lipro);
+
+            div.appendChild(a);
+        }
+
+        document.getElementsByTagName("body")[0].appendChild(div)
+    }
+
+
+    function demo2() {
+        var box = document.createElement("<div style='width: 200px;height: 30px;background-color: #0C77CF'></div>");
+
+        document.body.appendChild(box)
+    }
+
+    //    demo2()
+
+    function demo3() {
+
+        var jsonVideo = [
+            {
+                "videoName": "HTML基础21_DIV+CSS布局实例项目二",
+                "videoAddress": "http://localhost:8080/Blog/video/HTML基础21_DIV+CSS布局实例项目二.mp4",
+                "videoSize": "145M", "uploadTime": "201811131743", "videoNote": "HTML基础21_DIV+CSS布局实例项目二",
+                "videoDestribute": "HTML基础21_DIV+CSS布局实例项目二", "authorid": 111111
+            },
+            {
+                "videoName": "HTML基础19_浮动",
+                "videoAddress": "http://localhost:8080/Blog/video/HTML基础19_浮动.mp4",
+                "videoSize": "217M", "uploadTime": "201811131742", "videoNote": "HTML基础19_浮动",
+                "videoDestribute": "HTML基础19_浮动", "authorid": 111111
+            },
+            {
+                "videoName": "HTML基础14_CSS中的选择器(下)",
+                "videoAddress": "http://localhost:8080/Blog/video/HTML基础14_CSS中的选择器(下).mp4",
+                "videoSize": "234M", "uploadTime": "201811131741", "videoNote": "HTML基础14_CSS中的选择器(下)",
+                "videoDestribute": "HTML基础14_CSS中的选择器(下)", "authorid": 111111
+            },
+            {
+                "videoName": "HTML基础12_CSS基础入门",
+                "videoAddress": "http://localhost:8080/Blog/video/HTML基础12_CSS基础入门.mp4",
+                "videoSize": "119M", "uploadTime": "201811131740", "videoNote": "HTML基础12_CSS基础入门",
+                "videoDestribute": "HTML基础12_CSS基础入门", "authorid": 111111
+            },
+            {
+                "videoName": "HTML基础09_表单的设计及运用(上)",
+                "videoAddress": "http://localhost:8080/Blog/video/HTML基础09_表单的设计及运用(上).mp4",
+                "videoSize": "269M", "uploadTime": "201811131739", "videoNote": "HTML基础09_表单的设计及运用(上)",
+                "videoDestribute": "HTML基础09_表单的设计及运用(上)", "authorid": 111111
+            }]
+
+
+        var content = "";
+        for (var i = 0; i < jsonVideo.length; i++) {
+            var innerhtml = "    <a class=\"link\" href=\"" + jsonVideo[i].videoAddress + "\">\n" +
+                "        <div class=\"box\">\n" +
+                "            <ul class=\"list\">\n" +
+                "                <li class=\"one\"><img src=\"../../images/jc.jpg\" class=\"img_video\"/></li>\n" +
+                "                <li class=\"text\">" + jsonVideo[i].videoName + "</li>\n" +
+                "                <li class=\"pro\">\n" +
+                "                    <p class=\"pro_des\">" + jsonVideo[i].videoDestribute + "</p>\n" +
+                "                </li>\n" +
+                "            </ul>\n" +
+                "        </div>\n" +
+                "    </a>\n";
+
+            content += innerhtml;
+        }
+        document.getElementById("videoContainer").innerHTML = content;
+
+
+    }
+
+    demo3()
+
+</script>
+</body>
+</html>

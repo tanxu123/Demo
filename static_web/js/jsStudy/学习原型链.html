@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+        function demo1(){
+            //原型链
+            function SuperType() {
+                this.property=true;
+                this.value="这是一个父类";
+            }
+            SuperType.prototype.getSuperValue=function(){
+                return this.property;
+            };
+
+            SubType.prototype=new SuperType();
+
+            function SubType(){
+                this.property=false;
+                this.name="我还是个孩子";
+            }
+            //继承SuperType
+            SubType.prototype.getSubValue=function () {
+                return this.property;
+            };
+
+            alert(SubType.prototype.value);
+        }
+
+           //demo1();
+
+        //借用构造函数
+        function demo2(){
+            function SuperType(){
+                this.value=["red","blue","green"];
+            }
+
+            function SubType(){
+                SuperType.call(this);
+            }
+
+            var instance=new SubType();
+            instance.value;
+
+            var instance1=new SuperType();
+
+            instance1.value;
+        }
+
+        function demo4(){
+
+            function SuperType(name){
+                this.color=["red","blue","green"];
+                this.name=name;
+            }
+
+            function SubType(age){
+                SuperType.call(this,"fang");
+
+                this.age=age;
+            }
+
+            var instance=new SubType(22);
+
+        }
+
+        function demo5(){
+            function SuperType(name){
+                this.name=name;
+                this.color=["red","green","blue"];
+            }
+            SuperType.prototype.sayName=function(){
+                alert(this.name);
+            };
+
+            function SubType(age){
+                SuperType.call(this);
+                this.age=age;
+            }
+
+            SubType.prototype=new SuperType();
+
+            alert(SubType.prototype.constructor);
+            //当没有为
+        }
+
+        //demo5();
+
+
+        //原型式继承
+        function demo6(){
+            function object(o){
+                function F() {
+                }
+
+                F.prototype=o;
+
+                return new F();
+            }
+
+            var obj={
+                name:"nicholas",
+                friends:["qwe","rty","uio"]
+            }
+
+            var anotherPerson=object(obj);
+
+            anotherPerson.name;
+
+            anotherPerson.friends.push("rob");
+            //在这里friends作为prototype的属性，所以其会被共享，当多次创建对象时，取到的还是当时先前的
+            //值，因为这种变量不以对象而转移
+
+            var other=object(obj);
+
+            alert(other.friends);
+
+        }
+
+       // demo6();
+
+        function demo7(){
+
+            var obj={
+                name:"nike",
+                friends:["qwe","rty"]
+            };
+
+            var another=Object.create(obj,{
+             name:{
+                 writable:true,
+                 value:"xiao"
+             },
+                age:{
+                 writable:true,
+                    value:22
+                }
+            });
+
+        }
+
+          function demo8(){
+
+            function compareObj(name){
+
+                return function(obj1,obj2){
+                    var value1=obj1[name];
+                    var value2=obj2[name];
+
+                    if(value1>value2){
+                        return -1;
+                    }else if(value1<value2){
+                        return 1;
+                    }else {
+                        return 0;
+                    }
+                }
+            }
+          }
+
+          //演示递归的实现
+            function demo9(){
+            function factorial(argument){
+                if(argument<=1){
+                    return 1;
+                }else {
+                    return argument*factorial(argument-1);
+                }
+            }
+
+            //改进版的
+                function factorial(argument){
+                if(argument<=1){
+                    return 1;
+                }else {
+                    return argument.arguments.callee(argument-1);
+                    //arguments.callee指向正在运行函数
+                    //argument.caller指向调用函数的函数
+                }
+                }
+            }
+
+
+            //学习闭包
+            function createFunction() {
+                var result = new Array();
+
+                for (var i = 0; i < 10; i++) {
+                    result[i] = function (j) {
+                        alert(j);
+                    }(i);
+                }
+            }
+
+       // createFunction();
+
+
+        function createFunction(){
+            var result=new Array();
+
+            for(var i=0;i<10;i++){
+                result[i]=function (sum){
+                    alert(sum);
+                }(i);
+            }
+        }
+
+
+        function run() {
+
+            var array=document.getElementsByClassName("box");
+
+            var childElement=array[0].getElementsByTagName("div");
+
+            for(var i=0;i<childElement.length;i++){
+               // childElement.index=i;
+              //   childElement[i].onclick=function(){
+              //  // childElement[position].style.width="210px";
+              //  // childElement[position].style.height="210px";
+              //  // childElement[position].style.margin="0px";
+              // // alert(position);
+              //       alert(childElement.index);
+              //   };
+              //  childElement[i].onclick=onClick(i);
+                //childElement[i].clickIndex=i;
+                childElement[i].index=i;
+             //  var element=childElement[i];
+                childElement[i].onmouseover=function (ev) {
+                     //  var div=this;
+                   // alert(div.index);
+                   // div.style.height="300px";
+                   // div.style.width="300px";
+                   // div.style.margin="0px";
+                    //alert("sdgsdg");
+                    // alert(this);
+
+
+                    //下面是改进的算法
+                     //alert(element);
+                     //alert(this);
+                    this.style.backgroundColor="#4325ff";
+                   // alert(element.index);
+
+                }
+
+            }
+        }
+
+        /**
+         * 下面是解决闭包所带来的点击事件的问题
+         */
+
+        // for(i=0;i<aImg.length;i++)
+        // {
+        //     aImg[i].miaovIndex=i;
+        //     aImg[i].onmouseover=function ()
+        //     {
+        //         if(aTimer[this.miaovIndex])
+        //         {
+        //             clearTimeout(aTimer[this.miaovIndex]);
+        //         }
+        //         aUserInfo[this.miaovIndex].style.display='block';
+        //     };
+
+        // function onClick(sum){
+        //     alert(sum);
+        // }
+
+        var name="The Window";
+        function demo10(){
+            
+            var obj={
+                name:"The Object",
+               getNameFunc:function () {
+                    alert(this);
+                   return function () {
+                      return this.name;
+                   };
+               } 
+            };
+
+            alert(obj.getNameFunc()());//打印的是The Window，表示在闭包的情况下，显示的this对象是window对象，也就是顶层对象
+        }
+
+        //demo10();
+
+        //测试js没有会计作用域
+
+        function demo11(){
+            for(var i=0;i<10;i++){
+                alert(i);
+            }
+            alert(i);
+
+            if(i>5){
+                var con=0;
+            }
+            alert("con="+con);
+            //在上面的调用的方式是没有错误的，就因为js中不存在块级的作用域
+        }
+
+      //  demo11();
+
+       //模仿块级作用域
+        function demo12(){
+            (function create(){
+                var i=0;
+            })();
+         //   alert("i="+i);
+            //报错。显示 i dont defined
+        }
+       // demo12();
+
+        function demo13() {
+            var cont = function () {
+                return 12;
+            }();
+            alert("cont="+cont);
+            //这种作用是，将函数的返回值复制给onclick
+
+        }
+      //  demo13();
+
+        function demo14(){
+            var divElement=document.createElement("div");
+           divElement.style.width="200px";
+           divElement.style.height="300px";
+           divElement.style.backgroundColor="#ff33c7";
+           divElement.className="test";
+           divElement.id="test";
+           document.documentElement.appendChild(divElement);
+        }
+
+       demo14();
+
+        //测试监听
+
+        function demo15(){
+          var divElement=document.getElementById("test");
+          alert(typeof divElement.onclick);
+
+          divElement.onclick=function (ev) {
+             // alert(Html.id);
+          }
+
+        }
+
+       // demo15();
+
+        //静态私有变量
+        (function demo16(){
+          var privateVariable=10;
+
+          function privateFunc(){
+              return false;
+          }
+
+          MyObject=function(){};
+          //MyObject是个对象，且是全局的    //function MyObject(){}
+               // MyObject();这是调用程序
+
+                MyObject.prototype.publicMethod=function () {
+                  privateVariable++;
+                  return privateFunc();
+                };
+            }
+        )();
+
+          var obj=new MyObject();
+          obj.publicMethod();//可以调用
+
+
+
+
+
+
+    </script>
+
+    <style>
+
+        div{
+            width:200px;
+            height:200px;
+            background-color: #33FF00;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+<h1>对一堆div进行点击监听</h1>
+<div class="box">
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div>
+<script>
+    run();
+</script>
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Title</title>
+    <script>
+        function fun1(){
+           // "use strict";
+         //定义全局变量
+
+            //number=12;
+            var bool=true;
+            var str=Number(bool);
+            alert(str);
+            //window.isFinite()
+        }
+       // fun1();
+       // alert("数值为："+number);
+
+        function objec(){
+            var obj=new Object();
+          // alert("构造函数"+obj.constructor);
+          // alert(obj.constructor==Object);
+          // alert(typeof Object=="function")
+          alert(obj.constructor==Object.prototype.constructor);
+        }
+       // objec();
+
+        function test1(){
+
+            function Person(name){
+                this.name=name;
+                this.sayName=function(){
+                    alert("我的名字是："+name);
+                }
+                if(this.prototype){
+                    this.prototype.ablitity=function(){
+                        alert("我会唱歌");
+                    }
+                }
+            }
+
+            function Man(name,sex){
+              this.name=name;
+              this.sex=sex;
+              this.sayHello=function(){
+                alert(name+"像你打招呼");
+                }
+        }
+
+       // //检测object.hasOwnProperty(propertyName)
+       //
+       //      var per=new Person("花花");
+       //
+       //      alert(per.hasOwnProperty("ablitity"));
+       //
+       //  Man.prototype=new Person("小小");
+
+            //使用for in语句便利对象的属性
+
+          //  var per=new Person("hua");
+            // for(var i in per){
+            //    document.writeln(i+"<br/>");
+            // }
+
+            function Demo3(name,sex,age){
+                this.name=arguments[0];
+                this.sex=arguments[1];
+                this.age=arguments[2];
+            }
+
+            var demo3=new Demo3("fan","男",23);
+
+           // alert(demo3.age);
+
+        }
+
+       // test1();
+
+        function createObj(){
+            var obj=new Object();
+            obj.name="fang";
+            obj.studyClass="软件工程本2";
+
+            //下面是通过对象字面量的方式
+           function createObj1(){
+               var obj={
+                   name:"xiao",
+                   studyClass:"经济管理"
+               };
+
+           }
+        }
+
+
+
+        function test2(){
+            function display(argc){
+                var output="";
+                if(typeof argc.name=="string"){
+                    output+="Name:"+argc.name+"\n";
+                }
+                if(typeof argc.age=="number"){
+                   output+="Name:"+argc.age+"\n";
+                }
+                alert("输出数据为："+output);
+            }
+            display({
+                name:"fang",
+                age:23
+            });
+
+            display({
+                name:"xiao"
+            });
+        }
+       // test2();
+
+        //创建数组
+       function test3(){
+
+            var arr=new Array(3);
+
+            var arr1=new Array("red","blue");
+
+            var arr2=new Array();
+
+            var colors=["red","blue","green"];
+
+            var names=[];
+
+       }
+
+
+      function ifream(){
+
+            alert(window.frames);
+          //  window.frames;
+           var arr=new Array();
+           arr[0]="red";
+           if(arr instanceof Array){
+               alert("这是一个数组");
+           }else {
+               alert("不在一个框架集中，不能确定是否是数组");
+           }
+       }
+
+     function arratAttr(){
+            var arr=new Array(1,2,3,4,5);
+            alert("toString"+arr.toString());
+            alert("toLocaleString"+arr.toLocaleString());
+            alert("valueOf"+arr.valueOf());
+     }
+
+   //  arratAttr();
+
+        //重写toString，toLocaleString，valueOf方法
+   function overRide() {
+       var person = {
+           toString: function () {
+               return "fang";
+           },
+           toLocaleString: function () {
+               return "AnuiFang";
+           },
+           valueOf: function () {
+               return "Fangzhiyue";
+           }
+       };
+
+      return person.toLocaleString()+ person.toString()+person.valueOf();
+   }
+
+   //alert(overRide());
+
+        //测试数组中的方法
+        function arrayTest(){
+
+            var arr=new Array(1,5,26,346,54);
+            //arr.join("-");
+            //alert(arr.join("-"));
+            //使用push，pop，shift，unshift方法创建栈结构与队列结构
+
+            var arr=new Array("red","blue","green");
+
+            var length=arr.push("fangzhiyue");
+
+            alert(arr+"剩下"+length+"项");
+
+            length=arr.pop();
+            alert(arr+"移除"+length+"项");
+
+            length=arr.shift();
+
+            alert(arr+"移除"+length+"项");
+
+            length=arr.unshift("yellow");
+
+            alert(arr+"剩下"+length+"项");
+
+        }
+        //arrayTest();
+
+        //数组的排列与翻转
+
+        function arrTest(){
+
+            var arr=new Array(34,21,56,43,213);
+
+            //arr.reverse();
+
+            // arr.sort(function(a,b){
+            //
+            //     return a-b;
+            // });
+
+           // alert(arr);
+
+        //  var arr1=arr.concat(434,35,54);
+         // alert(arr1);
+
+            //var arr1=arr.concat([23,54,65]);
+
+           // alert(arr1);
+
+           // arr.splice(1,3,[23,35,565,767,2545,354,65,65,6,456]);
+
+           // alert(arr);
+
+            //学习迭代方法
+
+            arr.every(function (value, index, array) {
+
+            });
+
+            //过滤器
+            arr.filter(function (value, index, array) {
+
+            });
+
+            arr.forEach(function (value, index, array) {
+
+
+            });
+
+            arr.map(function (value, index, array) {
+
+            });
+
+            arr.some(function (value, index, array) {
+
+            });
+
+
+            //尝试直接继承array
+
+            // var myArray=function(){
+            //
+            // }
+
+            function MyArray(){
+
+            }
+
+            // function functionCallBack(item,index,array,flog){
+            //
+            // }
+
+            MyArray.prototype=new Array();
+
+            var array=new MyArray();
+
+            MyArray.prototype.forEach=function (functionCallBack){
+
+            };
+
+           array.forEach(function(item,index,array,flog){
+
+            });
+
+
+
+            // navigator.geolocation.getCurrentPosition(function (position) {
+            //
+            // },function (error) {
+            //
+            // },{
+            //
+            // });
+
+        }
+
+
+      // arrTest();
+
+
+        //归并算法
+
+        function test4(){
+           var arr=new Array("red","blue","green");
+           var arr=new Array(1,2,3,4,5);
+           var count=arr.reduce(function (previousValue, currentValue, currentIndex, array) {
+               return previousValue+currentValue;
+           });
+
+           alert(count);
+        }
+        //test4();
+
+        //下面是对Date的学习与深入了解
+          function dateTest(){
+            var date=new Date(2018,2,1);
+           // alert(date.toLocaleDateString());
+
+              var date=new Date(Date.parse("Feb 12,2014"));
+              alert(date);
+        }
+
+         //dateTest();
+
+        function test(){
+            var start=Date.now();
+            for(var i=0;i<1000000;i++){
+              //  print(i);
+                document.write(""+i);
+            }
+            var end=Date.now();
+
+            alert("话费了"+(end-start)+"豪秒");
+
+            alert("大约一秒处理");
+        }
+
+        function test5(){
+
+            var date=new Date(2018,9,12);
+            alert(date.valueOf());
+        }
+        //test5();
+
+
+
+        /**
+         * 测试正则表达式
+         */
+        function test6(){
+
+            var arr=new Array("att",",etwetate","afgsgsdtta");
+
+            var pattern=/at/g;//匹配所有的的at的实例
+
+            pattern.test("asffeatsgerg");
+
+            pattern=/^b/g;//匹配文本的开始是b(也就是文本已b开头)
+
+            pattern=/xiao$/i;//匹配以xiao结尾的字符串
+
+            pattern=/.ced/gi;//匹配任意一个单个字符
+
+            pattern=/er*/gi;//匹配任意字符0个或多个
+
+            pattern=/bs+/gi;//匹配前面的字符一个或多个
+
+            pattern=/<wer>/gi;//匹配包含指定字符的文本
+
+            pattern=/[a-z]*/gi;//匹配任意字符
+
+            pattern=/[^abc]/gi;//匹配不包含指定信息的文本
+
+            pattern=/cb{2}/gi;//匹配前面的字符至少两次
+
+            pattern=/we{2,3}/gi;//匹配前面的字符串两次或三次
+
+           alert(pattern.test("weere"));
+        }
+
+        //test6();
+
+        function test7() {
+            var re = null, i;
+
+            // for (i = 0; i < 10; i++) {
+            //     re = /cat/g;
+            //     alert(re.ui效果实现("catastrophe"));
+            // }
+            for (i=0;i<10;i++){
+              // re=new RegExp("cat","g");
+              //  // alert(re.ui效果实现("catastrophe"));
+              //   alert(re.global);
+              //   alert(re.ignoreCase);
+              //   alert(re.lastIndex);
+            }
+
+            re=new RegExp("cat","g");
+            // alert(re.ui效果实现("catastrophe"));
+            alert(re.global);
+            alert(re.ignoreCase);
+            alert(re.lastIndex);
+        }
+        // test7();
+
+        //测试function类型的使用
+        function test8(){
+          //1定义函数
+            function demo1(sum,sum1){
+                return sum+sum1;
+            }
+
+            var demo2=function(sum,sum1){
+                return sum1+sum;
+            }
+
+            //使用这种创建function的方法，是因为function 是一种引用类型。所以就存在这样的构造函数
+            var fun=new Function("sum","sum1","return sum+sum1;");
+
+            //这种方法居然无法创建对象，自己难以理解
+            //var divElement=new HTMLElement();
+            // for(var item in divElement.style){
+            //     alert(item);
+            // }
+             var add=function(){
+               return 0;
+             };
+
+             var add1=add;
+             add1();
+             add1=function(){
+                 return 111;
+             }
+        };
+
+       // test8();
+
+        function test9(){
+            function outer(){
+                //alert(arguments.callee);
+               // alert(arguments.caller);
+               //  alert(outer.caller);
+               //  alert(arguments.callee.caller);
+                alert(outer.callee);//未定义
+
+            }
+            outer();
+        }
+       // test9();
+
+        //下面是函数的属性以及方法
+        function test10(){
+
+            function demo1(sum1,sum2){
+                return sum1+sum2;
+            }
+
+            function demo2(){
+                return this.name;
+            }
+
+            function demo3(sum){
+                return sum;
+            }
+
+            function demo4(){
+                alert(demo1.call(this,12,12));
+            }
+
+            function Demo5(){
+                this.name="fang";
+                alert(demo2.call(this));
+                alert(this.constructor);
+            }
+            var de=new  Demo5();
+
+        }
+        //test10();
+
+        // var  test11=function(){
+        //     var glo=function(){
+        //         return this;
+        //     };
+        //     return glo();
+        // };
+        // alert(test11());//返回的是window对象
+
+        //使用math调用产生随机值
+
+        function ranndom(){
+            var random=Math.random()*10;//返回0--9的数
+           return parseInt(random);
+        }
+
+       // alert(ranndom());
+
+
+        //第六章
+        //面向对象的程序设计
+
+        //创建对象
+    function createObj() {
+            //1,使用Object
+        var obj = new Object();
+        obj.name = "fang";
+        obj.age = 22;
+        obj.sex = "男";
+
+        //2,自定义构造函数
+
+         function Person(name,age,sex){
+             this.name=name;
+             this.age=age;
+             this.sex=sex;
+         }
+
+         //var obj1=new Person();
+         var obj2=new Person()
+
+         //3,使用对象字面量
+
+        var person={
+            name:"fang",
+            age:22,
+            sex:"男"
+        }
+    }
+
+    function test11(){
+
+            var person={
+                name:"fang",
+                age:22,
+                sex:"男"
+            }
+
+            alert("更改前的属性："+person.sex);
+
+            Object.defineProperty(person,"sex",{
+              writable:false,//也就是不允许修改
+              value:"女"
+            });
+    }
+
+    function test12(){
+        var person={
+            name:"fang",
+            age:22,
+            sex:"男"
+        };
+        Object.defineProperty(person,"name",{
+            get:function () {
+             return this.name;
+            },
+            // set:function (v) {
+            //   this.name=v;
+            // }
+        });
+        alert("name"+person.name);
+        person.name="xiaoxiao";
+        alert("name"+person.name);
+    }
+    test12();
+
+       // alert("thisfasdg");
+
+
+    </script>
+</head>
+<body>
+   
+<!--<iframe src="demo3.htmlStudy">-->
+<!--</iframe>-->
+<!--<iframe src="demo4.htmlStudy"></iframe>-->
+
+<script>
+    //window.frames.onload=ifream;
+    //alert("sfdhs");
+</script>
+</body>
+</html>

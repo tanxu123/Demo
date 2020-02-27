@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+    function selelct(){
+        var box=document.getElementById("box");
+        // var count=document.getElementById("count");
+        //  var num=parseInt(count.innerText);
+        //  var tagDiv= document.createElement("div");
+        //  for(var i=0;i<num;i++){
+        //      var ele=box.createNode();
+        //      ele.style.width="100px";
+        //      ele.style.height="200px";
+        //      ele.style.backgroundColor="#ccc";
+        //      ele.style.margin="10px";
+        //      //alert("dg");
+         //}
+
+
+
+
+
+    }
+    /*
+    创建对象
+     */
+        function Person(name,age,sex){
+        this.name=name;
+        this.age=age;
+        this.sex=sex;
+
+        this.sayName=function(){
+            this.name;
+        }
+        }
+
+    /*
+    实现继承
+     */
+
+    function SuperFun(name){
+        this.name=name;
+        this.prototype.sayName=function (){
+          return this.name;
+        }
+    }
+
+
+
+
+
+
+    </script>
+    <style>
+        #model{
+            width:300px;
+             height: 100px;
+            background-color: #cccccc;
+            margin: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="model"></div>
+<p id="count">6</p>
+<div id="box">
+</div>
+<script>
+   selelct();
+</script>
+</body>
+</html>

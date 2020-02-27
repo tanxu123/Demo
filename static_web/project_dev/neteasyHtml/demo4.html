@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            var divclas = document.getElementsByTagName("li");
+            for (var i = 0; i < divclas.length; i++) {
+                divclas[i].onmouseover = function () {
+                    this.style.color = "#ff7d82"
+                    var sdad = this.getElementsByTagName("div")[0];
+                    sdad.className = "box";
+                }
+
+                divclas[i].onmouseout =function () {
+                    this.style.color="";
+                    var sawe =this.getElementsByTagName("div")[0];
+                    sawe.className="";
+                }
+            }
+        }
+    </script>
+    <style>
+        li {
+            padding: 0 100px;
+            display: inline-block;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #00CC33;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li>
+            <span>首页</span>
+            <div></div>
+        </li>
+        <li>
+            <span>百度</span>
+            <div></div>
+        </li>
+        <li>
+            <span>淘宝</span>
+            <div></div>
+        </li>
+        <li>
+            <span>京东</span>
+            <div></div>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

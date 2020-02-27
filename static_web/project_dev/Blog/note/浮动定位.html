@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>浮动定位</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">浮动定位</h1>
+		<div class="content-html" id="leanote-content"><pre id="leanote_ace_1540031998529_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">h1{
+&nbsp;&nbsp;&nbsp;&nbsp;float:left;&nbsp;&nbsp;&nbsp;/*&nbsp;&nbsp;&nbsp;right&nbsp;&nbsp;&nbsp;none&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+}</pre><p>&nbsp;<br></p><h3>1.清除浮动</h3><ol><ol><li>由于浮动，不在占据文档流的位置，通过clear可以解决页面排版的问题</li></ol></ol><pre id="leanote_ace_1540032175641_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 105px;">h2{
+&nbsp;&nbsp;&nbsp;&nbsp;clear:left;/*清除左边浮动造成的影响*/
+&nbsp;&nbsp;&nbsp;&nbsp;clear:right;/*清除右边浮动造成的影响*/
+&nbsp;&nbsp;&nbsp;&nbsp;clear:both;/*同时清除两边的浮动造成的影响*/
+&nbsp;&nbsp;&nbsp;&nbsp;/*清除浮动的影响的使用元素一般是同级的元素，使用浮动清除，就等于该控制又回到了当初的文档控制流，会占据位置*/
+}</pre><p>下面是一个使用clear进行元素属性清除的方式</p><pre id="leanote_ace_1540111588846_0" class="brush:html ace-tomorrow">&lt;!DOCTYPE&nbsp;html&gt;
+&lt;html&nbsp;lang="en"&gt;
+&lt;head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;charset="UTF-8"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Title&lt;/title&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border:&nbsp;none;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.top&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;100px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;100px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#1bd3da;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-right:&nbsp;10px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#content&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear:&nbsp;both;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="top"&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="top"&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="top"&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id="content"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--我们在父集里面设置内容的清除浮动的影响--&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;蓝牙耳机：保证无损传输的m3&lt;/p&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;蓝牙耳机：保证无损传输的m3&lt;/p&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;蓝牙耳机：保证无损传输的m3&lt;/p&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.运用overflow属性清除浮动</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运用clear属性只能清除元素左右两侧浮动的影响，然而在网页中，如果对子元素设置浮动，不对父元素东一高度，则子元素的浮动会对父元素产生影响</p><p>&nbsp; 由于受到子元素浮动的影响，没有设置高度的父集会变成一条直线，即父元素不能自适应子元素的高度，这式对父元素设置overflow:hidden样式，既可以清除浮动对该元素的影响</p><pre id="leanote_ace_1540033193823_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">h3{
+&nbsp;&nbsp;&nbsp;&nbsp;overflow:hidden;
+}</pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;3.使用after伪对象清除浮动</p><ol><ol><li>&nbsp; &nbsp; &nbsp; &nbsp;设置伪对象的height:0;</li><li>在伪对象里面设置content属性，属性值可以为空 &nbsp;content=“”;</li></ol></ol><pre id="leanote_ace_1540033340861_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 147px;">div{
+&nbsp;&nbsp;&nbsp;&nbsp;display:block;/*这个属性必须要进行设置，原因是如果不设置，由于内部的元素使用浮动脱离文档流，造成该div内部没有元素进行填充
+&nbsp;&nbsp;&nbsp;&nbsp;所以高度为0，显示为一条线*/
+&nbsp;&nbsp;&nbsp;&nbsp;clear:both;/*清除浮动的影响*/
+&nbsp;&nbsp;&nbsp;&nbsp;content:"";/**设置内容的值为空**/
+&nbsp;&nbsp;&nbsp;&nbsp;height:0;
+&nbsp;&nbsp;&nbsp;&nbsp;visibility:hidden;
+}</pre><h3>2.overflow的属性</h3><p>&nbsp;<br></p><table class="reference mce-item-table"><tbody><tr><th>值</th><th>描述</th></tr><tr><td>visible</td><td>默认值。内容不会被修剪，会呈现在元素框之外。</td></tr><tr><td>hidden</td><td>内容会被修剪，并且其余内容是不可见的。</td></tr><tr><td>scroll</td><td>内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。</td></tr><tr><td>auto</td><td>如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。</td></tr><tr><td>inherit</td><td>规定应该从父元素继承 overflow 属性的值。</td></tr></tbody></table><p>&nbsp;<br></p><h3>3.定位</h3><p>position 属性指定了元素的定位类型。</p><p>position 属性的五个值：</p><blockquote><p><a href="http://www.runoob.com/css/css-positioning.html#position-static" data-mce-href="http://www.runoob.com/css/css-positioning.html#position-static">static</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;自动定位，默认</p><p>静态定位就是采用文档的默认定位模式，无法通过left，right，top，bottom来改变元素的位置</p><p><a href="http://www.runoob.com/css/css-positioning.html#position-relative" data-mce-href="http://www.runoob.com/css/css-positioning.html#position-relative">relative</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 相对定位，相对其原文档流的位置进行定位,需要注意的是会占据文档流</p><p>相对标准文档流的位置进行定位，也就是相对其在static定位的位置的偏移</p><p><a href="http://www.runoob.com/css/css-positioning.html#position-fixed" data-mce-href="http://www.runoob.com/css/css-positioning.html#position-fixed">fixed</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;固定定位 相对浏览器窗口进行定位</p><p>会脱离文档流，不会随着浏览器窗口大小的改变来改变位置，一般很少使用.因为相对的是浏览器，当我们的文档过长时，显示的位置随着我们的滚动却没有变化，这是比较坑的。</p><p><a href="http://www.runoob.com/css/css-positioning.html#position-absolute" data-mce-href="http://www.runoob.com/css/css-positioning.html#position-absolute">absolute</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 绝对定位 相对上一个已经定位的父元素进行定位</p><p>依据最近的已经定位(绝对定位，固定定位，或相对定位)的父元素进行定位，如没有父元素进行定位，则依据body进行(浏览器窗口进行定位)</p><p>如果对元素设置绝对定位，但是不设置偏移量，元素的位置不变，但是会脱离文档流，定义多个边偏移属性时，如果left和right冲突使用left，如果</p><p>top与bottom冲突，使用top</p><p><a href="http://www.runoob.com/css/css-positioning.html#position-sticky" data-mce-href="http://www.runoob.com/css/css-positioning.html#position-sticky">sticky</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;基于用户的滚动位置来定位。这个可以用来制作不能滚动的标题栏</p><p>&nbsp;<br></p><p>元素可以使用的顶部，底部，左侧和右侧属性定位。然而，这些属性无法工作，除非是先设定position属性。他们也有不同的工作方式，这取决于定位方法。</p></blockquote><p>如果我们需要设置子元素在父元素的直接位置保持不变，就可以设置父元素采用相对定位，但是不设置偏移量，然后设置子元素采用绝对定位</p><p>&nbsp;<br></p><h3>4.对齐</h3><ol><li>关于实现对齐，菜鸟给了很多的实现方案，下面是链接地址<a href="http://www.runoob.com/css/css-align.html" data-mce-href="http://www.runoob.com/css/css-align.html">对齐</a></li></ol><p>&nbsp;<br></p><h3>5.z-index层叠等级属性</h3><ol><li>取值可为正负0，默认为0，取值越大，定位元素在层叠元素越居上，z-index属性仅仅对定位元素有效</li></ol><p>&nbsp;<br></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

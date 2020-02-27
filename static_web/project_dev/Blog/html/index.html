@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/indexTitle.css" type="text/css" rel="stylesheet">
+    <script>
+
+
+        /**
+         * 文章信息列表，存放的是文章的相关信息
+         * 里面存放的对象是article对象，具体的属性可以查看服务器编写的javaBean
+         * 这里面存放的是获得到的文章的最新信息，也就是最新发布的文章的列表
+         * {
+         *  this.articleDestribute = articleDestribute;
+            this.articleName = articleName;
+            this.articlePublishTime = articlePublishTime;
+            this.authorid = authorid;
+            this.articleAddress = articleAddress;
+            this.classfy = classfy;
+            this.articlePictureAddress = articlePictureAddress;
+            }
+         */
+        var articleInfoList;
+
+        /**
+         * 全局的视频播放的相关信息，获得的是视频播放数量的排行，以及排行所对应的视频信息
+         * 该变量是一个集合 ，里面存放的是一个对象
+         * {
+                            "count": 16,
+                            "videoName": "HTML基础02_标准结构",
+                            "videoAddress": "http://localhost:8080/Blog/video/HTML基础02_标准结构.mp4",
+                            "videoSize": "221MB",
+                            "uploadTime": "201811131735",
+                            "videoNote": "HTML基础02_标准结构",
+                            "videoDestribute": "HTML基础02_标准结构",
+                            "authorid": 111111,
+                            "classfy": "html基础教程设计",
+                            "classOrder": "1"
+                        }
+         */
+        var globalVideoWatchCounts;
+
+        /**
+         * 全局的视频播放的相关信息，获得的是视频播放数量的排行，以及排行所对应的视频信息
+         * 该变量是一个集合 ，里面存放的是一个对象，下面是对象的实例属性说明
+         {
+                            "count": 3,
+                            "articleDestribute": "2_css技术美化网页",
+                            "articleName": "使用css样式修饰，让你的html网页更加美观",
+                            "articlePublishTime": "201811141810",
+                            "authorid": 111111
+          }
+         */
+        var globalArticleReadCounts;
+
+        /**
+         * 格式化日期和时间的函数
+         */
+        var formatDateAndTime;
+
+
+        /**
+         * 当界面加载完成后。加载数据
+         * @param ev
+         */
+        window.onload = function (ev) {
+
+            formatDateAndTime = function (timeAndDate) {
+                var year = timeAndDate.substring(0, 4);
+                var month = timeAndDate.substring(4, 6)
+                var day = timeAndDate.substring(6, 8)
+                var hours = timeAndDate.substring(8, 10)
+                var seconds = timeAndDate.substring(10, 12);
+                var time = year + "-" + month + "-" + day + " " + hours + ":" + seconds;
+                return time;
+            }
+
+
+            function Request() {
+
+
+                /**
+                 * 创建一个ajax对象
+                 */
+                this.createAJAX = function () {
+                    var xhr;
+                    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                        xhr = new XMLHttpRequest();
+                    }
+                    else {// code for IE6, IE5
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    return xhr;
+                }
+
+                /**
+                 * @param url 请求的资源的地址
+                 * @param parseJsonData ajax响应数据产生的回调函数
+                 */
+                this.request = function (url, parseJsonData) {
+                    var xhr = this.createAJAX();
+                    //alert(xhr)
+                    xhr.open("GET", url, true);
+                    xhr.send();
+                    xhr.onreadystatechange = function (ev) {
+                        // alert(xhr.status)
+                        if (xhr.readyState == 4) {
+                            if (xhr.status == 200) {
+                                var response = xhr.responseText;
+
+                                parseJsonData(response);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            function ParseData() {
+
+                /**
+                 * 解析json数据
+                 * 这里解析的数据是图片数据
+                 * @param jsonResponse
+                 * 返回的数据如下
+                 [{"imgAddress":"/../../../home/fang/Pictures/one.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/two.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/three.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/four.jpeg","linkAddress":"#"},{"imgAddress":"/../../../home/fang/Pictures/five.jpeg","linkAddress":"#"}]
+                 */
+                this.parseImgeJsonData = function (jsonResponse) {
+                    var jsonObject = JSON.parse(jsonResponse);
+                    //  alert(jsonResponse)
+                    executeUpdateImage(jsonObject);
+
+                }
+
+                var index = 0;
+
+                function executeUpdateImage(jsonObject) {
+                    var imgElements = document.getElementById("data_img")
+                    var imgLink = document.getElementById("img_link");
+
+                    setInterval(function () {
+                        index++;
+                        imgElements.src = jsonObject[index % jsonObject.length].pictureAddress
+                        //alert( jsonObject[index % jsonObject.length].imgAddress)
+                        imgLink.href = jsonObject[index % jsonObject.length].pictureAddress
+                    }, 3000)
+                }
+
+                /**
+                 * 解析每日一言的回调函数
+                 * @param jsonObject
+                 */
+
+                this.parseProverbJsonData = function (jsonResponse) {
+                    //alert(jsonResponse)
+                    var jsonObject = JSON.parse(jsonResponse);
+
+                    var proverbP = document.getElementsByClassName("proverbOne");
+
+                    for (var i = 0; i < jsonObject.length; i++) {
+
+                        var publishTime = jsonObject[i].publishTime;
+                        var content = jsonObject[i].content;
+                        var authorid = jsonObject[i].authorid;
+                        var proverbid = jsonObject[i].proverbid;
+                        proverbP[i].innerText = content;
+
+                    }
+
+                }
+
+                var videoServerAddress = "http://localhost:8080/Blog/VideoServlet"
+
+                /**
+                 * @param jsonObject
+                 * 解析视频的json数据
+                 */
+                this.parseVideoJsonData = function (jsonResponse) {
+
+                    var linkBox = document.getElementById("videoContainer");
+                    var boxs = linkBox.getElementsByClassName("link");
+
+                    var jsonVideo = JSON.parse(jsonResponse);
+
+
+                    var content = "";
+
+
+                    for (var i = 0; i < jsonVideo.length; i++) {
+                        var videoLinkAddress = videoServerAddress + "?videoAddress=" + jsonVideo[i].videoAddress;
+                        var innerhtml = "<a class=\"link\" href=\"" + videoLinkAddress + "\">\n" +
+                            "        <div class=\"box\">\n" +
+                            "            <ul class=\"list\">\n" +
+                            "                <li class=\"one\"><img src=\"../images/jc.jpg\" class=\"img_video\"/></li>\n" +
+                            "                <li class=\"text\">" + jsonVideo[i].videoName + "</li>\n" +
+                            "                <li class=\"pro\">\n" +
+                            "                    <p class=\"pro_des\">" + jsonVideo[i].videoDestribute + "</p>\n" +
+                            "                </li>\n" +
+                            "            </ul>\n" +
+                            "        </div>\n" +
+                            "    </a>\n";
+
+                        content += innerhtml;
+                    }
+                    document.getElementById("videoContainer").innerHTML = content;
+
+                }
+
+                /**
+                 * 解析文章的json数据
+                 * @param jsonObject
+                 */
+                this.parseArticleJsonData = function (jsonObject) {
+
+                    var content1 = "";
+
+                    //alert(jsonObject)
+                    var articleObj = document.getElementById("articleDetail");
+                    var jsonArticle = JSON.parse(jsonObject);
+                    //将文章的信息直接存放到全局中
+                    articleInfoList = jsonArticle;
+
+                    for (var i = 0; i < jsonArticle.length; i++) {
+                        var timeAndDate = formatDateAndTime(jsonArticle[i].articlePublishTime);
+                        var innerHtml = "<div class=\"articleContent\">\n" +
+                            "                    <div class=\"articlePicture\"><img src=\"" + jsonArticle[i].articlePictureAddress + "\" width=\"205px\" height=\"136px\"></div>\n" +
+                            "                    <div class=\"articleInfo\">\n" +
+                            "                        <h4 class=\"marginFill\">" + jsonArticle[i].articleName + "</h4>\n" +
+                            "                        <img src=\"../images/author.png\"/>\n" +
+                            "                        <span style='font-size: 14px;'>发布时间:&nbsp;" + timeAndDate + "</span>\n" +
+                            "                     &nbsp;&nbsp;   <span style='font-size: 14px;'>分类:&nbsp;" + jsonArticle[i].classfy + "</span>\n" +
+                            "                        <p class='articleDescribute'>" + jsonArticle[i].articleDestribute + "</p>\n" +
+                            "                    </div>\n";
+                        var articleQuery = "http://localhost:8080/Blog/ArticleServlet?articlePublishTime=" + jsonArticle[i].articlePublishTime;
+                        var linkHtml = "<a href='" + articleQuery + "'>" + innerHtml + "</a>"
+                        articleObj.innerHTML += linkHtml;
+
+                    }
+                }
+                /**
+                 * 用户状态的查询
+                 * @param ev
+                 */
+                this.userLoginInfo = function (jsonResponse) {
+                    //alert(jsonResponse)
+                    var userStatus = JSON.parse(jsonResponse);
+                    if (userStatus.errorCode == 0) {
+                        var userInfo = userStatus.user;
+                        //代表已经登录了
+                        var innerhtml = "            <a href=\"login.html\"><img data-v-07578fd8=\"\" height=\"30\" src=\"" + userInfo.picture + "\" class=\"img-item-user\"/></a>\n" +
+                            "            <a href=\"login.html\"><span data-v-07578fd8=\"\" class=\"item-text\">注销</span></a>"
+
+                        var loginBox = document.getElementById("login-box");
+                        loginBox.innerHTML = innerhtml;
+                    }
+                }
+                /**
+                 * 查询数据激励，也就是文章被阅读的数量
+                 * @param jsonResponse
+                 */
+                this.dataRecord = function (jsonResponse) {
+                    //alert(jsonResponse)
+
+                    var dataRecord = JSON.parse(jsonResponse);
+                    //文章排行的数据
+                    var articleReadCounts = dataRecord.articleReadCounts;
+                    globalArticleReadCounts = articleReadCounts;
+                    var tuijianArticleListBox = document.getElementById("tuijianArticleListBox");
+                    tuijianArticleListBox.innerHTML = "";
+                    for (var i = 0; i < articleReadCounts.length; i++) {
+                        var innerHtml = "                        <a href=\"#\">\n" +
+                            "                            <li class=\"tuijianArticleList\">\n" +
+                            "                                <span class=\"tuijianArticleRank\">" + (i + 1) + "</span>\n" +
+                            "                                <span class=\"tuijianArticleName\">" + articleReadCounts[i].articleName + "</span>\n" +
+                            "                            </li>\n" +
+                            "                        </a>";
+                        tuijianArticleListBox.innerHTML += innerHtml;
+                    }
+
+                    //视频排行的数据
+                    var videoWatchCounts = dataRecord.videoWatchCounts;
+                    globalVideoWatchCounts = videoWatchCounts;
+
+                }
+
+                this.articleListByClassfy = function (jsonResponse) {
+                    //alert(jsonResponse)
+                    var classfyObj = JSON.parse(jsonResponse);
+                    for (var i = 0; i < classfyObj.length; i++) {
+                        var articleClassfy = classfyObj[i];
+                        var classfyName = articleClassfy.classfy;
+                        var headHtml = "                    <div class=\"bottomArticleSingle\">\n" +
+                            "                        <div class=\"learnBlog\">\n" +
+                            "                            <span>" + classfyName + "</span>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"bottomArticleSingleList\">\n";
+                        var articleInfos = articleClassfy.articles;
+                        for (var j = 0; j < articleInfos.length; j++) {
+                            //下面是文章的相关信息
+                            var inner = "  <li class=\"tuijianArticleList\">\n" +
+                                "                                <span class=\"tuijianArticleRank\">" + (j + 1) + "</span>\n" +
+                                "                                <span class=\"tuijianArticleName\">" + articleInfos[j].articleName + "</span>\n" +
+                                "                            </li>\n";
+                            headHtml += inner;
+                        }
+                        headHtml += "                        </div>\n" +
+                            "                    </div>\n";
+                        document.getElementById("bottomArticleBox").innerHTML += headHtml;
+
+                    }
+                }
+
+                this.websiteLogcatInfo = function (jsonResponse) {
+                    //alert(jsonResponse)
+                    var logcatObj = JSON.parse(jsonResponse);
+
+                    var logcatContainer = document.getElementById("logcatContainer");
+                    logcatContainer.innerHTML = "";
+                    for (var i = 0; i < logcatObj.length; i++) {
+                        var logTime = formatDateAndTime(logcatObj[i].logTime);
+                        var content = logcatObj[i].content;
+                        var inner = "  <ul class=\"logMessageList\">\n" +
+                            "                            <li>" + logTime + "</li>\n" +
+                            "                            <li>" + content + "</li>\n" +
+                            "                        </ul>";
+                        logcatContainer.innerHTML += inner;
+                    }
+
+                }
+
+                /**
+                 *网站链接的信息的解析
+                 */
+                this.webLinkInfo = function (jsonResponse) {
+                    //alert(jsonResponse)
+                    var linkObj = JSON.parse(jsonResponse);
+                    var logcatBox = document.getElementById("friendlyLinkBox");
+                    logcatBox.innerHTML = "";
+                    for (var i = 0; i < linkObj.length; i++) {
+                        var linkAddress = linkObj[i].linkAddress;
+                        var content = linkObj[i].content;
+                        var linkInfo = " <li class=\"friendlyLinkItem\"><a href=\"" + linkAddress + "\"><span>" + content + "</span></a></li>";
+                        logcatBox.innerHTML += linkInfo;
+                    }
+                }
+
+                /**
+                 * [{"userid":-1,"leaveMessageid":-1,"leaveMessageTime":"201811111210","content":"很好"}]
+                 * 解析用户的留言
+                 */
+                this.parseLeaveMessageInfo = function (jsonResponse) {
+                    //alert(jsonResponse)
+
+                    var leaveMessageUserObj = JSON.parse(jsonResponse);
+                    var nowLeaveMessage = document.getElementById("nowLeaveMessage");
+                    nowLeaveMessage.innerHTML = "";
+                    for (var i = 0; i < leaveMessageUserObj.length; i++) {
+                        var leaveMessageObj = leaveMessageUserObj[i].leaveMessage;
+                        var time = formatDateAndTime(leaveMessageObj.leaveMessageTime);
+                        var content = leaveMessageObj.content;
+                        var name = leaveMessageUserObj[i].name;
+                        var picture = leaveMessageUserObj[i].picture;
+                        var innerHtml = "                        <div class=\"nowLeaveMessageSingle\">\n" +
+                            "                            <img src=\"" + picture + "\" align=\"top\" class='headPicture'>\n" +
+                            "                            <div class=\"nowLeaveMessageContent\">\n" +
+                            "                                <h5 class=\"currentSelect\">" + name + "</h5>\n" +
+                            "                                <p class=\"nowLeaveMessageContentTalk\">" + content + "</p>\n" +
+                            "                                <span class='leaveMessageDate'>" + time + "</span>\n" +
+                            "                            </div>\n" +
+                            "                        </div>";
+                        nowLeaveMessage.innerHTML += innerHtml;
+                    }
+                }
+
+            }
+
+
+            var imgAddress = "http://localhost:8080/Blog/ImgServlet";
+            //参数代表的是获得最新的每日一言的数据的数量2代表两个
+            var proverbAddress = "http://localhost:8080/Blog/ProverbServlet?current=2"
+
+            var videoAddress = "http://localhost:8080/Blog/VideoServlet?current=5"
+
+            var articleAddress = "http://localhost:8080/Blog/ArticleServlet?current=10"
+
+            var userLoginValidate = "http://localhost:8080/Blog/UserServlet?status=1";
+
+            var articleClassAddress = "http://localhost:8080/Blog/DataRecord?videoRecord=6&articleRecord=6"
+            //系统界面下边的通过系统的分类实现文章的排列
+            var articleClassfy = "http://localhost:8080/Blog/ArticleServlet?classfy=1"
+            //网站的日志logcat
+            var websiteLogcat = "http://localhost:8080/Blog/LogcatServlet?logcat=6";
+            //网站的外链
+            var webLink = "http://localhost:8080/Blog/LinkServlet?link=4"
+            var leaveMeassage = "http://localhost:8080/Blog/LeaveMessageServlet?message=6"
+            var request = new Request();
+            var parseData = new ParseData();
+
+            //请求图片地址
+            request.request(imgAddress, parseData.parseImgeJsonData);
+            //请求每日一言的地址
+            request.request(proverbAddress, parseData.parseProverbJsonData);
+            //请求视频的地址
+            request.request(videoAddress, parseData.parseVideoJsonData);
+            //请求图片文章地址
+            request.request(articleAddress, parseData.parseArticleJsonData)
+            //请求用户的信息，也就是去查看用户是否进行了登录
+            request.request(userLoginValidate, parseData.userLoginInfo)
+            //请求文章的分类信息以及分类信息对应的数据
+            request.request(articleClassAddress, parseData.dataRecord)
+            //请求文章的分类信息
+            request.request(articleClassfy, parseData.articleListByClassfy)
+            //请求网站日志
+            request.request(websiteLogcat, parseData.websiteLogcatInfo);
+            //请求网站外链
+            request.request(webLink, parseData.webLinkInfo);
+            //请求网网站留言的相关数据
+            request.request(leaveMeassage, parseData.parseLeaveMessageInfo);
+
+            //对界面搜索的处理
+            var imgButton = document.getElementById("searchButton");
+            imgButton.onclick = function (ev) {
+                var inputObj = document.getElementsByClassName("inputSearch")[0];
+                if (inputObj.value == "全站搜索" || "" == inputObj.value) {
+                    alert("请填写正确的查询条件")
+                } else {
+                    //在这里进行查询
+                }
+            }
+
+
+            /**
+             *
+             * 处理推荐列表的点击事件
+             */
+            function progressTuijianListClick() {
+                var ulObj = document.getElementById("tuijianlistset");
+                var scrollbar = document.getElementById("tuijianlistScrollbarset");
+                var linkset = ulObj.getElementsByTagName("a");
+                var liset = scrollbar.getElementsByTagName("li");
+                for (var i = 0; i < linkset.length; i++) {
+                    linkset[i].tag = i;
+                    linkset[i].onclick = function (ev) {
+                        this.className += " currentSelect";
+                        liset[this.tag].className += " currentSelectBg";
+                        //下面是对数据进行填充
+                        switch (this.tag) {
+                            case 0:
+                                var articleReadCounts = globalArticleReadCounts;
+                                var tuijianArticleListBox = document.getElementById("tuijianArticleListBox");
+                                tuijianArticleListBox.innerHTML = "";
+                                for (var i = 0; i < articleReadCounts.length; i++) {
+                                    var innerHtml = "                        <a href=\"#\">\n" +
+                                        "                            <li class=\"tuijianArticleList\">\n" +
+                                        "                                <span class=\"tuijianArticleRank\" >" + (i + 1) + "</span>\n" +
+                                        "                                <span class=\"tuijianArticleName\">" + articleReadCounts[i].articleName + "</span>\n" +
+                                        "                            </li>\n" +
+                                        "                        </a>";
+                                    tuijianArticleListBox.innerHTML += innerHtml;
+                                }
+                                //执行的是文章排行数据
+                                break;
+                            case 1:
+                                var videoWatchCounts = globalVideoWatchCounts;
+                                var tuijianArticleListBox = document.getElementById("tuijianArticleListBox");
+                                tuijianArticleListBox.innerHTML = "";
+                                for (var i = 0; i < videoWatchCounts.length; i++) {
+                                    var innerHtml = "                        <a href=\"#\">\n" +
+                                        "                            <li class=\"tuijianArticleList\">\n" +
+                                        "                                <span class=\"tuijianArticleRank\">" + (i + 1) + "</span>\n" +
+                                        "                                <span class=\"tuijianArticleName\">" + videoWatchCounts[i].videoName + "</span>\n" +
+                                        "                            </li>\n" +
+                                        "                        </a>";
+                                    tuijianArticleListBox.innerHTML += innerHtml;
+                                }
+                                //执行的是视频排行数据
+                                break;
+                            case 2:
+                                //执行的是获得最新的文章列表
+                                var articleNowList = articleInfoList;
+                                var tuijianArticleListBox = document.getElementById("tuijianArticleListBox");
+                                tuijianArticleListBox.innerHTML = "";
+                                for (var i = 0; i < articleNowList.length; i++) {
+                                    var innerHtml = "                        <a href=\"#\">\n" +
+                                        "                            <li class=\"tuijianArticleList\">\n" +
+                                        "                                <span class=\"tuijianArticleRank\">" + (i + 1) + "</span>\n" +
+                                        "                                <span class=\"tuijianArticleName\">" + articleNowList[i].articleName + "</span>\n" +
+                                        "                            </li>\n" +
+                                        "                        </a>";
+                                    tuijianArticleListBox.innerHTML += innerHtml;
+                                }
+                                break;
+                        }
+                        for (var j = 0; j < linkset.length; j++) {
+                            if (j != this.tag) {
+                                linkset[j].className = "tuijianlist";
+                                liset[j].className = "tuijianlistScrollbar";
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            progressTuijianListClick();
+
+
+        }
+
+
+    </script>
+    <style>
+
+
+        /*
+        下面是主体的修饰
+        */
+
+        .body {
+            background-color: #f7f7f7;
+        }
+
+        div.contentBox {
+            width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        div.content {
+            overflow: hidden;
+        }
+
+        div.content div.banner_div {
+            height: 330px;
+            width: 620px;
+            float: left;
+            margin-top: 20px;
+        }
+
+        div.content div.proverb {
+            float: right;
+            width: 400px;
+            margin-top: 20px;
+            position: relative;
+            top: 60px;
+            height: 230px;
+            background: url("../images/proverb.jpg");
+        }
+
+        div.content div.proverb div.proverbTalk {
+            height: 200px;
+            width: 400px;
+            margin: 0px auto;
+            position: relative;
+            padding-top: 50px;
+            top: 15px;
+        }
+
+        div.content div.proverb div.proverbTalk p.proverbOne {
+            /*height: 100px;*/
+            max-height: 88px;
+            width: 360px;
+            margin: 0 auto;
+            padding: 10px;
+            overflow: hidden;
+            color: #FFFFFF;
+            font-size: 13px;
+        }
+
+        #data_img {
+            height: 330px;
+            width: 620px;
+        }
+
+        /**
+        下面就是视频的显示
+         */
+
+        h2.videoTag {
+            width: 235px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 5px;
+            font-size: 1pc;
+            color: #fff;
+            font-weight: 500;
+            background: #4b5153;
+            box-shadow: 5px 3px 10px #756f71;
+            border-radius: 3px;
+            margin: 20px 0 10px 3px;
+            text-align: center;
+        }
+
+        div.box {
+            width: 220px;
+            display: inline-block;
+            height: 260px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            margin-right: 16px;
+        }
+
+        .box ul.list {
+            width: 100%;
+            height: 100%;
+        }
+
+        .box ul li.one {
+            width: 100%;
+        }
+
+        .box li.text {
+            height: 25px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .box li.pro {
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            font-size: 15px;
+            color: #a8a8a8;
+            text-overflow: ellipsis;
+        }
+
+        #videoContainer {
+            text-align: center;
+        }
+
+        img.img_video {
+            width: 100%;
+        }
+
+        span.leaveMessageDate {
+            font-size: 13px;
+        }
+
+        img.headPicture {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+
+        /*a:link{*/
+        /*text-decoration: none;*/
+        /*color: #000;*/
+        /*}*/
+        /*a:visited,a.hover{*/
+        /*text-decoration: none;*/
+        /*color:  #000;*/
+        /*}*/
+
+        /**
+        下面是对文章的相关进行处理
+         */
+        .contentBox h2.title-h2 {
+            font-size: 1pc;
+            font-weight: 400;
+            color: #333;
+            padding: 2px 0 2px 10px;
+            border-left: 2px solid #3472ef;
+            margin: 0 0 20px 2px;
+        }
+
+        .contentBox div.articleDisplay {
+            width: 65%;
+            float: left;
+            margin-top: 40px;
+
+        }
+
+        div.articleContent {
+            height: 176px;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        div.articlePicture {
+            display: inline-block;
+            width: 35%;
+            position: relative;
+            top: 20px;
+        }
+
+        div.articleInfo {
+            display: inline-block;
+            width: 63%;
+            overflow: hidden;
+            position: relative;
+            /*top: -20px;*/
+        }
+
+        .contentBox div.articleDisplay div.bottomArticleBox {
+
+        }
+
+        .contentBox div.rightHelpAndNav {
+            width: 33%;
+            float: right;
+            margin-top: 40px;
+        }
+
+        .marginFill {
+            margin-bottom: 10px;
+        }
+
+        .contentBox div.articleDisplay div#articleDetail {
+            width: 100%;
+
+        }
+
+        p.pro_des {
+            font-family: "Microsoft YaHei";
+            font-size: 13px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        p.articleDescribute {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #a7a7a7;
+        }
+
+        /**
+            下面是对右边界面的显示处理
+         */
+        div.rightPlayBox {
+            overflow: hidden;
+        }
+
+        div.rightPlayBox div.searchArea {
+            height: 60px;
+            overflow: hidden;
+            background-color: #ffffff;
+            padding-left: 20px;
+        }
+
+        div.rightPlayBox div.searchArea div.searchBox {
+            height: 35px;
+            border: 1px solid #a1a1a1;
+            position: relative;
+            width: 300px;
+            top: 12px;
+            padding-left: 10px;
+            border-radius: 5px;
+
+        }
+
+        div.rightPlayBox div.searchArea div.searchBox img.searchIcon {
+            position: relative;
+            top: 9px;
+        }
+
+        div.rightPlayBox div.searchArea div.searchBox input.inputSearch {
+            position: relative;
+            top: 3px;
+        }
+
+        /**
+        下面是对模块的设置
+         */
+        div.rightPlayBox div.side-nav {
+            overflow: hidden;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        div.rightPlayBox div.side-nav li.nav-1 {
+            width: 40%;
+            height: 40px;
+            text-align: center;
+            float: left;
+            line-height: 40px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        div.rightPlayBox div.side-nav li.nav-2 {
+            width: 40%;
+            height: 40px;
+            float: right;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .bgcolor_1 {
+            border: 1px solid #0C77CF;
+            background-color: #0C77CF;
+        }
+
+        .bgcolor_2 {
+            border: 1px solid #ff5ecf;
+            background-color: #ff5ecf;
+        }
+
+        .bgcolor_3 {
+            border: 1px solid #00cf0c;
+            background-color: #00cf0c;
+        }
+
+        .bgcolor_4 {
+            border: 1px solid #cfb700;
+            background-color: #cfb700;
+        }
+
+        .fontColor {
+            color: #ffffff;
+        }
+
+        /**
+        下面是对关于我的相关信息的设置
+         */
+        div.learnMe {
+            overflow: hidden;
+            padding: 0px 10px 10px 0px;
+            background-color: #ffffff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        div.learnBlog {
+            border-left: 2px solid #89344f;
+            padding-left: 10px;
+            font-size: 1pc;
+            font-family: "Microsoft YaHei";
+            margin-bottom: 10px;
+        }
+
+        div.learnMe li.learnLiSet {
+            display: inline-block;
+            width: 70px;
+            text-align: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .learnFont {
+            font-size: 14px;
+            font-family: "Microsoft YaHei";
+        }
+
+        div.hottuijian {
+            overflow: hidden;
+            padding: 0px 10px 10px 0px;
+            background-color: #ffffff;
+            /*margin-top: 10px;*/
+            margin-bottom: 10px;
+        }
+
+        .currentSelect {
+            color: #ff1e21;
+        }
+
+        li.tuijianlist {
+            display: inline-block;
+            width: 120px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        li.tuijianlistScrollbar {
+            width: 120px;
+            height: 1px;
+            display: inline-block;
+        }
+
+        li.currentSelectBg {
+            background-color: #ff1e21;
+        }
+
+        /**
+        处理推荐的文章列表
+         */
+
+        div.tuijianArticleListBox {
+            margin: 5px;
+        }
+
+        li.tuijianArticleList {
+            overflow: hidden;
+            height: 40px;
+            padding: 5px 5px 5px 10px;
+            margin: 0 10px 0px 10px;
+            border-bottom: 1px solid #dddddf;
+        }
+
+        li.tuijianArticleList span.tuijianArticleRank {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+            background-color: #f9ff00;
+            position: relative;
+            top: 5px;
+
+            line-height: 20px;
+            text-align: center;
+            color: #FFFFFF;
+            border-radius: 5px;
+            border: 1px solid #f9ff00;
+        }
+
+        span.tuijianArticleName {
+            display: inline-block;
+            position: relative;
+            top: 10px;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        /**
+        留言的处理
+         */
+        div.nowLeaveMessageBox {
+            margin: 5px;
+            background-color: #FFFFFF;
+        }
+
+        div.nowLeaveMessageBox div.nowLeaveMessageSingle {
+            border-top: 1px solid #dddddf;
+            margin: 10px 10px 0px 10px;
+            padding: 10px 0px;
+        }
+
+        div.nowLeaveMessageBox div.nowLeaveMessageContent {
+            display: inline-block;
+            width: 260px;
+        }
+
+        div.nowLeaveMessageBox p.nowLeaveMessageContentTalk {
+            overflow: hidden;
+            font-size: 13px;
+
+        }
+
+        /**
+        网站日志
+         */
+        div.logBox {
+            margin: 10px 5px 5px 5px;
+            background-color: #FFFFFF;
+        }
+
+        div.logBox ul.logMessageList {
+            padding: 10px;
+            font-size: 14px;
+            color: #9a9a9c;
+        }
+
+        /**
+        下面是友情链接的实现
+         */
+
+        div.friendlyLink {
+            margin: 10px 5px 5px 5px;
+            background-color: #FFFFFF;
+        }
+
+        div.friendlyLink li.friendlyLinkItem {
+            width: 48%;
+            display: inline-block;
+            height: 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        div.friendlyLink li.friendlyLinkItem span {
+            color: #9a9a9c;
+        }
+
+        /**
+        下面是对下边文章的设置
+         */
+        div.bottomArticleSingle {
+            width: 380px;
+            background-color: #FFFFFF;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 20px;
+
+        }
+
+        img.img-item-user {
+            position: relative;
+            top: 10px;
+            margin-right: 10px;
+            border-radius: 15px;
+        }
+
+
+    </style>
+    <!--<link rel="stylesheet" href="../css/search.css" type="text/css">-->
+</head>
+<body>
+
+<div data-v-07578fd8="" class="header-wrap clearfix">
+    <img data-v-07578fd8="" src="../images/logo.9bde9cc.png" alt="段亮个人博客" class="logo fl">
+    <div data-v-07578fd8="" class="nav-wrap">
+        <ul data-v-07578fd8="" class="nav-list">
+            <li data-v-07578fd8="" class="nav-item "><a href="index.html" class="active">首页</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="videoPage.html" class="linkPage">免费视频教程</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="webMode.html" class="linkPage">网站模板</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="studyPage.html" class="linkPage">学无止境</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="personalNotePage.html" class="linkPage">个人日记</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="learnMe.html" class="linkPage">关于方志月</a></li>
+            <li data-v-07578fd8="" class="nav-item"><a href="leaveMessage.html" class="linkPage">留言板</a></li>
+        </ul>
+        <div data-v-07578fd8="" class="login-box" id="login-box">
+            <a href="login.html"><span data-v-07578fd8="" class="item-text">登录</span></a>/
+            <a href="login.html"><span data-v-07578fd8="" class="item-text">注册</span></a>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!--下面是网页的主体部分的显示-->
+<div class="body">
+    <div class="contentBox">
+        <div class="content">
+            <!--左边显示的图片-->
+            <div class="banner_div">
+                <a href="#" id="img_link">
+                    <img src="../images/three.jpeg" id="data_img"/>
+                </a>
+            </div>
+            <!--右边显示的每日一说-->
+            <div class="proverb">
+                <div class="proverbTalk">
+                    <p class="proverbOne"></p>
+                    <p class="proverbOne"></p>
+                </div>
+            </div>
+        </div>
+
+        <!--免费在线视频-->
+        <h2 class="videoTag">
+            免费在线学习
+            <span style="color: #0C77CF">Video Learn</span>
+        </h2>
+
+        <!--下面是视频的容器-->
+        <div id="videoContainer">
+
+        </div>
+
+        <!--下面是文章的显示-->
+        <div>
+            <div class="articleDisplay">
+                <!--下面是文章的显示-->
+                <h2 data-v-d0a26284="" class="title-h2">文章推荐</h2>
+                <div id="articleDetail"></div>
+
+                <!--下面是对下边文章分类的显示-->
+                <div class="bottomArticleBox" id="bottomArticleBox">
+                    <!--<div class="bottomArticleSingle">-->
+                    <!--<div class="learnBlog">-->
+                    <!--<span>html基础学习</span>-->
+                    <!--</div>-->
+                    <!--<div class="bottomArticleSingleList">-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="bottomArticleSingle">-->
+                    <!--<div class="learnBlog">-->
+                    <!--<span>html基础学习</span>-->
+                    <!--</div>-->
+                    <!--<div class="bottomArticleSingleList">-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--<li class="tuijianArticleList">-->
+                    <!--<span class="tuijianArticleRank">1</span>-->
+                    <!--<span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>-->
+                    <!--</li>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="rightHelpAndNav">
+            <h2 data-v-d0a26284="" class="title-h2">站内搜索</h2>
+            <!--下面是站内搜索，以及右边的导航条-->
+            <!--搜索界面-->
+            <div class="rightPlayBox">
+                <div class="searchArea">
+                    <div class="searchBox">
+                        <input type="text" maxlength="40" size="24" value="全站搜索" class="inputSearch">
+                        <img src="../images/search.svg" class="searchIcon" id="searchButton"/>
+                    </div>
+                </div>
+                <div>
+                    <!--常见模块-->
+                    <div data-v-d0a26284="" class="side-nav">
+                        <ul data-v-d0a26284="" class="clearfix">
+                            <li data-v-d0a26284="" class="nav-1 bgcolor_1"><a data-v-d0a26284="" href="learnMe.html"
+                                                                              class="fontColor">关于我</a></li>
+                            <li data-v-d0a26284="" class="nav-2 bgcolor_2"><a data-v-d0a26284="" href="videoPage.html"
+                                                                              class="fontColor">视频教程</a></li>
+                            <li data-v-d0a26284="" class="nav-1 bgcolor_3"><a data-v-d0a26284="" href="#"
+                                                                              class="fontColor">SEO优化</a></li>
+                            <li data-v-d0a26284="" class="nav-2 bgcolor_4"><a data-v-d0a26284=""
+                                                                              href="#"
+                                                                              class="fontColor">留言版</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="learnMe">
+                    <!--关注博客以及加群-->
+                    <div class="learnBlog">
+                        <span>关注博客</span>
+                    </div>
+                    <ul>
+                        <li class="learnLiSet learnFont">微信号</li>
+                        <li class="learnLiSet learnFont">fangzhiyueDev</li>
+                    </ul>
+                    <ul>
+                        <li class="learnLiSet learnFont">qq号</li>
+                        <li class="learnLiSet learnFont">1933315107</li>
+                    </ul>
+                    <div>
+                        <span class="learnFont">微信公众号：</span>
+                        <img src="../images/weixin.png" align="top"/>
+                    </div>
+
+
+                </div>
+                <div class="hottuijian">
+                    <!--热门推荐-->
+                    <div class="learnBlog">
+                        <span>热门推荐</span>
+                    </div>
+                    <ul id="tuijianlistset">
+                        <!--文章的被阅读数最高的前6排行-->
+                        <li class="currentSelect tuijianlist"><a href="#"><span>文章排行</span></a></li>
+                        <!--文章分类为建站知识的-->
+                        <li class="tuijianlist"><a href="#"><span>视频排行</span></a></li>
+                        <li class="tuijianlist"><a href="#"><span>最新文章</span></a></li>
+                    </ul>
+                    <ul id="tuijianlistScrollbarset">
+                        <li class="tuijianlistScrollbar currentSelectBg"></li>
+                        <li class="tuijianlistScrollbar"></li>
+                        <li class="tuijianlistScrollbar"></li>
+                    </ul>
+                    <div class="tuijianArticleListBox" id="tuijianArticleListBox">
+                        <a href="#">
+                            <li class="tuijianArticleList">
+                                <span class="tuijianArticleRank">1</span>
+                                <span class="tuijianArticleName">今天给大家分享的主题是前端的自我成长</span>
+                            </li>
+                        </a>
+                    </div>
+                </div>
+                <div class="nowLeaveMessageBox">
+                    <!--最新留言-->
+                    <div class="learnBlog">
+                        <span>最新留言</span>
+                    </div>
+                    <div class="nowLeaveMessage" id="nowLeaveMessage">
+                        <!--<div class="nowLeaveMessageSingle">-->
+                        <!--<img src="../images/usepricture.jpeg" align="top">-->
+                        <!--<div class="nowLeaveMessageContent">-->
+                        <!--<h5 class="currentSelect">姜成SEO </h5>-->
+                        <!--<p class="nowLeaveMessageContentTalk">最近看了聪哥的（SEO白手起家的创业录）有很深的感触!我觉得有一些话说得很有道理</p>-->
+                        <!--<span>2018年11月9日</span>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="logBox">
+                    <!--站长日志-->
+                    <div class="learnBlog">
+                        <span>一路走来</span>
+                    </div>
+                    <div id="logcatContainer">
+                        <!--<ul class="logMessageList">-->
+                        <!--<li>2014-03-07</li>-->
+                        <!--<li>完善网站基本功能：文章页添加多说留言插</li>-->
+                        <!--<li>个人博客 1.0 版本正式发布</li>-->
+                        <!--</ul>-->
+
+                        <!--<ul class="logMessageList">-->
+                        <!--<li>2014-03-07</li>-->
+                        <!--<li>完善网站基本功能：文章页添加多说留言插</li>-->
+                        <!--<li>个人博客 1.0 版本正式发布</li>-->
+                        <!--</ul>-->
+
+                        <!--<ul class="logMessageList">-->
+                        <!--<li>2014-03-07</li>-->
+                        <!--<li>完善网站基本功能：文章页添加多说留言插</li>-->
+                        <!--<li>个人博客 1.0 版本正式发布</li>-->
+                        <!--</ul>-->
+                    </div>
+                </div>
+                <div class="friendlyLink">
+                    <!--友情链接-->
+                    <div class="learnBlog">
+                        <span>友情链接</span>
+                    </div>
+                    <ul id="friendlyLinkBox">
+                        <!--<li class="friendlyLinkItem"><a href="webMode.htmlStudy"><span>网站模板</span></a></li>-->
+                        <!--<li class="friendlyLinkItem"><a href="http://www.baidu.com"><span>百度网站</span></a></li>-->
+                        <!--<li class="friendlyLinkItem"><a href="http://www.baidu.com"><span>百度网站</span></a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+</script>
+
+</body>
+</html>

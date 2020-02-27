@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        /**
+         * 父类函数
+         */
+        function User() {
+            this.name="fang";
+            this.age=12;
+            this.sayName=function () {
+                alert(this.name);
+            }
+        }
+
+        /**
+         * 子类函数
+         */
+        function Person(){
+
+        }
+
+        function Man(){
+
+        }
+
+        //构造一个对象
+        var user=new User();
+
+        alert(User.name)//这个会打印函数的名称，每个函数都有这个属性
+
+        //构造一个Person对象
+        var person=new Person();
+
+        /**
+         * 这里将函数的原型对象指向一个User对象
+         * 也就是函数原型中存在了User对象的属性了方法
+         */
+        Person.prototype=new User();
+        /**
+         * 这个是修改函数原型的构造函数的指向
+         */
+        Person.prototype.constructor=User;
+
+
+        /**
+         *
+         * 原型存在与函数中，我们创建一个函数，或默认创建一个prototype属性
+         * 指向这个函数的原型对象，所以我们不能通过函数对象去操作原型，因为原型是
+         * 通过函数来定义的，并非对象
+         *
+         *
+         * 函数的原型是一个指针，可以指向任意对象，我们通过指定原型的值来实现对象属性的继承
+         *
+         *
+         * 通过为函数原型重新赋值对象，其实实现了对原型的重定义，这时候在函数原型重定义之前创建的
+         * 对象会指向原先的原型，这时候原来的对象不会具有现在原型的属性和方法，
+         * 例如下面的代码
+         */
+        function User() {
+            this.name="fang";
+            this.age=12;
+            this.sayName=function () {
+                alert(this.name);
+            }
+        }
+
+        var person=new Person();
+        Person.prototype=new User();
+        person.sayName();//出错
+
+        /**
+         * 请正确的理解函数与对象的关系
+         */
+        alert(User)//这个是函数的引用。虽然里面通过this定义了对象的一些属性和方法
+                   //但是这些属性和方法是通过构造对象后对象存在的，我们不能通过User.name
+                   //去尝试访问对象里面的属性和方法，这是错误的理解，构造函数也是函数。
+
+        /**
+         * 原型中的所有属性都会被很多的实例共享
+         * 对于基本类型可以说的过去，我们通过在实例上添加一个同名的属性，可以对原型的数据进行隐藏
+         * 但对于引用类型造成实例数据的共享，就不好解决，因为对于一些数据，我们是希望能够被对象使用，而不是共享的
+         */
+
+        function Person(){
+
+        }
+        Person.prototype={
+            constructor:Person,
+            name:"fang",
+            age:22,
+            friends:["xiaoxiao","laji"],
+            sayName:function () {
+                alert(this.friends)
+            }
+        }
+
+        var person1=new Person();
+        var person2=new Person();
+
+        person1.friends.push("van");
+        alert(person1.friends);//"xiaoxiao","laji","van"
+        alert(person2.friends);//"xiaoxiao","laji","van"
+        alert(person2.friends===person1.friends);//true
+
+
+        /**
+         * 上面的解决方案就是通过组合使用构造函数和原型模式
+         * 构造函数用于定义实例属性，原型模式定义方法和共享的属性
+         * 这种模式是用来定义引用类型的一种默认模式
+         */
+
+        function Person(name){
+            this.name=name;
+            this.friends=["yueyue","gagad"]
+        }
+
+        Person.prototype={
+            constructor:Person,
+            sayName:function () {
+                this.name;
+            }
+        }
+
+
+        /**
+         * 对于使用上面的方法构造对象，对于oop来说，不太友好，所以下面出现了动态的原型模式
+         * 当没有定义sayName的时候，会定义sayName方法，之后定义过后，就不会再次创建了，通过
+         * 添加到原型对象中，实现了方法的共享
+         */
+
+        function WoMan(name){
+
+            this.name=name;
+            //方法
+            if(typeof this.sayName!="function"){
+                WoMan.prototype.sayName=function () {
+                    alert("说"+this.name)
+                }
+            }
+        }
+
+        var p=new WoMan("fang");
+       p.sayName()//说fang
+
+
+        /**
+         * 下面是寄生构造函数的实现
+         * 对于下面的代码感觉很奇怪
+         * 解释：
+         */
+        function Person1(name){
+            var o=new Object();
+            o.name=name;
+            o.sayName=function () {
+                alert(this.name)
+            }
+            return o;
+        }
+
+        var person1=new Person1("fnag");
+        person1.sayName();
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

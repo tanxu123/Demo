@@ -1,0 +1,149 @@
+
+.sc-detail-nav-menu {
+
+    height: 40px;
+    background: #f7f7f7;
+    line-height: 40px;
+}
+
+.sc-detail-nav-menu span {
+    color: #e24f4f;
+}
+
+.sc-detail-nav-menu .breadcrumb {
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.sc-detail-nav-menu li:last-child span {
+    color: #777777;
+}
+
+.sc-detail-content {
+    margin-top: 30px;
+}
+
+.sc-detail-content .col-lg-9, .col-lg-9 .col-lg-6:first-child {
+
+    padding: 0px;
+
+}
+
+.sc-detail-content ul {
+    padding: 0px;
+    margin-top: 20px;
+
+}
+
+.sc-detail-content ul li {
+    display: inline-block;
+    width: 19%;
+    padding: 0px;
+    border: 0px;
+    float: left;
+    margin-right: 1.25%;
+}
+
+.sc-detail-content ul li:last-child {
+    margin-right: 0px;
+}
+
+.sc-detail-content ul li img {
+    width: 100%;
+}
+
+.sc-detail-content .splitLine {
+    height: 3px;
+    width: 100px;
+    margin-top: 5px;
+    background: #d0d0d0;
+}
+
+.sc-detail-content .media-left {
+    width: 100px;
+}
+
+.sc-detail-content .box1 {
+    float: left; /*这个设置了浮动*/
+    /*width: 100px;*/
+    /*height: 100px;*/
+    width: 60px;
+    margin-right: 20px;
+}
+
+.sc-detail-content .box2 {
+    /**
+              清除浮动,
+              让这个元素绝对绝缘 bfc ,不让其他浮动元素影响自己,而且不让自己的浮动影响被的元素
+               */
+    overflow: hidden;
+}
+
+.sc-detail-content .box2 .btn-default {
+    border-radius: 0px;
+
+}
+
+.sc-detail-content .box2 .btn-default:hover {
+    border-color: #c92323;
+    background: none;
+}
+
+
+.sc-detail-content .btn-toolbar .btn-group:first-child {
+    margin-right: 20px;
+}
+
+.sc-detail-content .btn-toolbar .btn-group:first-child button {
+    border-radius: 0px;
+    height: 40px;
+    width: 100px;
+}
+
+.sc-detail-content .btn-toolbar .btn-group:last-child button {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    height: 40px;
+}
+
+
+.sc-detail-content .col-lg-6 {
+    margin-bottom: 40px;
+}
+
+
+.sc-detail-content .col-lg-6 p {
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px;
+    border-top: 1px dashed #CCCCCC;
+}
+
+
+.sc-detail-content h4.page-header {
+    margin: 40px 0px 0px;
+}
+
+
+.sc-detail-content .container ul.nav {
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.sc-detail-content .container ul.nav a {
+    color: #6b6b6b;
+}
+
+
+.sc-detail-content .container ul.nav a:hover {
+    color: #111111;
+}
+
+.sc-detail-content .container ul.nav li a {
+    border-top: 4px solid #111111;
+}
+
+
+

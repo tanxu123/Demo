@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我我音乐</title>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .newMusicContainer {
+            width: 1000px;
+            margin: 0 auto;
+            background: url("../images/bg.jpg");
+            height: 300px;
+            padding-left: 30px;
+            overflow: hidden;
+            color: #ffffff;
+            font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+
+        }
+
+        div.newMusicContainer div.newMusicHead {
+        }
+
+        div.newMusicContainer div.newMusicHead .title {
+            font-size: 25px;
+        }
+
+        div.newMusicContainer div.newMusicHead ul {
+            display: inline-block;
+        }
+
+        div.newMusicContainer div.newMusicHead li {
+
+            display: inline-block;
+            font-size: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px transparent solid;
+
+        }
+
+        div.leftImage {
+            overflow: hidden;
+            float: left;
+        }
+
+        div .leftImage img.albumImg {
+            width: 200px;
+        }
+
+        div.rightMusicList {
+            width: 760px;
+            float: right;
+        }
+
+        div.rightMusicList li {
+            list-style: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        div.rightMusicList li span {
+            display: inline-block;
+            width: 160px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+
+            font-size: 14px;
+        }
+
+        div .rightMusicList img.leftimg {
+            margin-left: 60px;
+            position: relative;
+            top: 3px;
+        }
+
+        div .rightMusicList div.rightImg {
+            float: right;
+            margin-right: 60px;
+        }
+
+        /**
+        版权实现的模块
+         */
+        div.copyright {
+            background: url("../images/bg.jpg");
+            margin: 30px auto 20px;
+            color: #ffffff;
+            padding-left: 20px;
+            width: 1000px;
+            overflow: hidden;
+        }
+
+        div.copyright ul {
+            display: block;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+
+    </style>
+    <script src="../template/create.js"></script>
+    <script>
+
+
+        var servler = "http://localhost:8080/music";
+
+        /**
+         *
+         * @param html
+         */
+        function changeLocation(html) {
+
+            location.href = html;
+
+        }
+
+
+        var url = "http://localhost:8080/music/DataCenter";
+
+
+        window.onload = function () {
+
+
+            var defaultIndex = 0;
+            var before = defaultIndex;
+
+            var mode = document.getElementsByClassName("newMusicHeadUl")[0];
+            var liSet = mode.getElementsByTagName("li");
+            changeStyle(true);
+
+            demo1 = function () {
+                for (var i = 0; i < liSet.length; i++) {
+                    liSet[i].index = i;
+                    liSet[i].onclick = function () {
+                        //在这里进行数据的重新赋值
+                        liSet[before].style.borderBottom = "";
+
+                        defaultIndex = this.index;
+
+                        onloadClassfyData(liSet[defaultIndex].innerText)
+                        changeStyle(true);
+                        before = this.index;
+
+
+                    }
+                }
+            }();
+
+
+            function changeStyle(bool) {
+                if (bool) {
+                    liSet[defaultIndex].style.borderBottom = "1px #F47615 solid";
+                } else {
+                    liSet[defaultIndex].style.borderBottom = "";
+                }
+            }
+
+
+            function onloadClassfyData(classfy) {
+
+                var url1 = url + "?classfy=" + classfy;
+
+                sendAjax(url1, function (response) {
+
+                    //alert(response)
+                    //在这里处理json的数据
+                    var classWrapper = JSON.parse(response);
+
+
+                    var rightMusicList = document.getElementsByClassName("musicListUlContainer")[0];
+                    rightMusicList.innerHTML = "";
+
+                    for (var i = 0; i < classWrapper.length; i++) {
+
+                        var music = classWrapper[i];
+
+                        var inner = "  <ul>\n" +
+                            "                <li>\n" +
+                            "                    <span>" + (i + 1) + "</span>\n" +
+                            "                    <span>" + music.musicName + "</span>\n" +
+                            "                    <span>" + music.singerName + "</span>\n" +
+                            "                    <span>" + music.playTime + "</span>\n" +
+                            "                </li>\n" +
+                            "            </ul>";
+
+                        rightMusicList.innerHTML += inner;
+                    }
+
+                    //添加完成后，添加音乐的的点击事件的处理
+
+                    var ulSet = rightMusicList.getElementsByTagName("ul");
+                    for (i = 0; i < ulSet.length; i++) {
+                        ulSet[i].tag = i;
+                        ulSet[i].onclick = function (ev) {
+                            //传递歌曲的id,到服务器，查询歌曲的address，用来获取详细信息，传递到歌曲的播放界面
+                            // location.href = url + "?musicId=" + classWrapper[this.tag].musicId;//
+                            var source = document.getElementById("audioResource");
+                            source.src = servler + classWrapper[this.tag].musicAddress;
+                            alert(JSON.stringify(classWrapper[this.tag]))
+
+                            var img = document.getElementById("playingMusic");
+                            var musicName = document.getElementById("musicName");
+                            var singerName = document.getElementById("singerName");
+                            img.src = servler + classWrapper[this.tag].image;
+                            musicName.innerText = classWrapper[this.tag].musicName;
+                            singerName.innerText = classWrapper[this.tag].singerName;
+
+                            source.play();
+
+
+                        }
+                        ulSet[i].onmouseover = function (ev) {
+                            this.style.backgroundColor = "#ccc";
+                            this.style.color = "#111";
+                        }
+                        ulSet[i].onmouseout = function (ev) {
+                            this.style.backgroundColor = "";
+                            this.style.color = "";
+                        }
+                    }
+
+                });
+
+            }
+
+
+            function sendAjax(url, response) {
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        response(xhr.responseText);
+                    }
+                }
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+
+            onloadClassfyData(liSet[defaultIndex].innerText);
+
+            var onloadHotMusicData = function () {
+                var url1 = url + "?albums=1";
+                sendAjax(url1, function (response) {
+
+                    var responseArray = JSON.parse(response);
+                    var array = [];
+                    for (var i = 0; i < responseArray.length; i++) {
+                        var album = responseArray[i];
+                        var id = album.id;
+                        var name = album.name;
+                        var image = album.image;
+                        var author = album.author;
+                        var type = album.type;
+                        var playCount = album.playConut;
+                        array[i] = new MusicMenu(null, image, "mesicMenuDetail.html", name, author, type, id);
+                    }
+
+
+                    var modelWrapper = new ModelWrapper("热门歌曲", "全部", "allMusicMenu.html", false, array);
+                    var htmlobj = new CreateDisplayTemplate(modelWrapper)
+                    document.getElementById("tuijian").innerHTML = htmlobj.createMusicMenuList();
+                    htmlobj.addEvent(0);
+                });
+            }
+
+            onloadHotMusicData();
+
+
+            var onloadNewSingrList = function (ev) {
+                var url1 = url + "?singers=1";
+                sendAjax(url1, function (response) {
+
+                    var responseArray = JSON.parse(response);
+                    var array = [];
+                    for (var i = 0; i < responseArray.length; i++) {
+
+                        var singerObj = responseArray[i];
+                        var id = singerObj.id;
+                        var name = singerObj.name;
+                        var describute = singerObj.describute;
+                        var image = singerObj.image;
+                        array[i] = new Singer(id, name, describute, image, "singer.html");
+                    }
+                    var modelWrapper1 = new ModelWrapper("热门艺人", "全部", "allSinger.html", true, array);
+
+
+                    var htmlobj1 = new CreateDisplayTemplate(modelWrapper1)
+                    document.getElementById("star").innerHTML = htmlobj1.createMusicMenuList();
+                    htmlobj1.addEvent(1);
+                });
+            }
+
+            onloadNewSingrList();
+
+
+            var onLoadUserData = function () {
+
+                var url1 = "?loginStatus=false";
+                sendAjax("http://localhost:8080/music/UserLoginAction" + url1,
+                    function (response) {
+
+                        var user = JSON.parse(response);//传递的是user对象
+                        if (user = null || user.name == null) {
+
+                        } else {
+                            setLoginStatus(true, user.name);
+                        }
+                    });
+            };
+            onLoadUserData();
+        }
+
+    </script>
+
+</head>
+<body>
+
+<!--创建导航条-->
+<div style="overflow: hidden" id="navigateBarOut"></div>
+<script src="../template/mode/model.js"></script>
+<script src="../template/navigateBar.js"></script>
+<link rel="stylesheet" href="../template/css/navigateBar.css">
+<script>
+
+    var navigateBarOut = document.getElementById("navigateBarOut")
+
+    navigateBarOut.style.marginBottom = "20px"
+
+    navigateBarOut.innerHTML = createView;
+
+    createNavigate(null, [
+        new ClickItem("爱看", "#"), new ClickItem("我的音乐", "myMusic.html")
+    ], "login.html", "register.html")
+</script>
+<!--banner-->
+<div style="overflow: hidden" id="banner"></div>
+<script src="../template/banner.js"></script>
+<link rel="stylesheet" href="../template/css/banner.css">
+<script>
+    document.getElementById("banner").innerHTML = containerView;
+    createBanner();
+</script>
+
+<!--推荐歌单-->
+<div style="overflow: hidden" id="tuijian"></div>
+<!--推荐的数据-->
+<script src="../template/tuijian.js"></script>
+<link rel="stylesheet" href="../template/css/tuijian.css">
+<script>
+
+
+</script>
+<!--新歌-->
+<div class="newMusicContainer" style="width: 970px;">
+    <div class="newMusicHead">
+        <span class="title">新歌</span>
+        <ul class="newMusicHeadUl">
+            <li>华语</li>
+            <li>欧美</li>
+            <li>日本</li>
+            <li>韩国</li>
+        </ul>
+    </div>
+
+    <div>
+        <div class="leftImage">
+            <img src="../images/album.jpg" class="albumImg"/>
+        </div>
+        <div class="rightMusicList">
+            <div class="musicListHead" style="">
+                <img src="../images/播放.svg" class="leftimg" onclick="changeLocation('play.html')"/>
+                <span style="position: relative;top: -4px;font-size: 14px">播放全部</span>
+                <div class="rightImg">
+                    <img src="../images/downstep2.svg" onclick="changeLocation('allSinger.html')">
+                </div>
+            </div>
+
+            <div class="musicListUlContainer" style="overflow: hidden">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!--热门艺人-->
+<div style="overflow: hidden" id="star"></div>
+<script>
+
+
+</script>
+
+
+<!--版权模块-->
+<div class="copyright">
+    <ul>
+        <li>关于虾米</li>
+        <li>关于我们</li>
+        <li>虾米招聘</li>
+        <li>联系我们</li>
+        <li>知识产权声明</li>
+        <li>联系客服</li>
+        <li>意见反馈</li>
+    </ul>
+
+    <ul>
+        <li>入职虾米</li>
+        <li>音乐人</li>
+        <li>音乐专栏</li>
+    </ul>
+</div>
+
+
+<!--这个是播放的列表-->
+
+<div style="width: 100%;
+height: 50px;background-image: url('../images/bg.jpg');
+position:fixed;z-index: 15;bottom:0px; left:0px;">
+
+
+    <div style="width: 1000px;overflow: hidden;margin: 0 auto;position: relative;top: 5px;
+background: #111111;color: #ffffff;">
+
+        <audio controls style="width: 500px;" id="audioResource">
+        </audio>
+        <img src="../images/上一页.svg"/>
+        <img src="../images/下一页%20(2).svg" style="position: relative;top: -2px;"/>
+
+        <div style="display: inline-block">
+            <img src="" id="playingMusic" height="30px"/>
+            <ul>
+                <li><span id="singerName"></span></li>
+                <li><span id="musicName"></span></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

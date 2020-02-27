@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+      function move(){
+     var box=document.getElementById("tbox");
+     var ul=box.getElementsByTagName("ul")[0];
+     var li=ul.getElementsByTagName("li");
+      ul.innerHTML+=ul.innerHTML;
+      ul.style.width=178*8+"px";
+      }
+
+    </script>
+    <style>
+        li{
+            width:178px;
+            height:108px;
+            float: left;
+        }
+        /*width: 728px; height: 108px; margin: 0 auto; position: relative; overflow: hidden;*/
+        .box{
+            widht:728px;
+            height:108px;
+            overflow: hidden;
+            margin: 0 auto; position: relative;
+        }
+        ul{
+            position:absolute;
+            top:0px;
+            left:0px;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="tbox">
+    <ul>
+    <li><img src="images/1.jpg" alt=""></li>
+    <li><img src="images/2.jpg" alt=""></li>
+    <li><img src="images/3.jpg" alt=""></li>
+    <li><img src="images/4.jpg" alt=""></li>
+</ul>
+</div>
+<script>
+    //move();
+</script>
+</body>
+</html>

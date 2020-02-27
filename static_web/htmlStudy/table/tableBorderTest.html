@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        /*table tr:first-child::before {*/
+        /*    content: "";*/
+        /*    display: inline-block;*/
+        /*    width: 20px;*/
+        /*    height: 20px;*/
+        /*    background-color: #00ff73;*/
+        /*    position: absolute;*/
+        /*}*/
+
+        html {
+        !important;
+        }
+
+        body {
+
+        }
+
+
+        .corner {
+            display: inline-block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #0C88E8;
+            left: 0px;
+            top: 0px;
+        }
+
+        .corner-right {
+            display: inline-block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #0C88E8;
+            right: 0px;
+            top: 0px;
+        }
+
+
+        .corner-bottom-left {
+            display: inline-block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #0C88E8;
+            left: 0px;
+            bottom: 0px;
+
+        }
+
+
+        .corner-right-bottom {
+            display: inline-block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #0C88E8;
+            right: 0px;
+            bottom: 0px;
+        }
+
+
+        table {
+            position: relative;
+        }
+
+        table tr:first-child {
+
+        }
+
+        table tr:nth-child(1) {
+
+        }
+
+        /*
+         伪元素
+        */
+        table::after {
+            content: '';
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+
+        /**
+          :  代表的是伪类
+         */
+        table:hover {
+            background-color: #0b0b0b;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<table border="1" width="400px" style="text-align: center;margin: 0 auto;">
+    <tr>
+        <td><span class="corner"></span>row 1, cell 1</td>
+        <td>row 1, cell 2<span class="corner-right"></span></td>
+    </tr>
+    <tr>
+        <td><span class="corner-bottom-left"></span>row 2, cell 1</td>
+        <td><span class="corner-right-bottom"></span>ow 2, cell 2</td>
+    </tr>
+</table>
+
+
+<p>
+    afasfs
+    safasfa
+</p>
+
+
+<div class="top">
+    <img class="img" src="" alt="">
+    <span class="basic">发现</span>
+    <span class="basic">发现</span>
+    <span class="basic">发现</span>
+
+
+    <div class="searchBox">
+        <input class="search">
+        <span class="icon"></span>
+    </div>
+
+
+    <div class="rightMenu">
+
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<div class="cotnent"></div>
+
+
+<div class="footer"></div>
+
+<script>
+
+</script>
+</body>
+</html>

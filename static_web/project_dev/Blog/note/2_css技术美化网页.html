@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>2_css技术美化网页</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">2_css技术美化网页</h1>
+		<div class="content-html" id="leanote-content"><h3>1.引入CSS样式表</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.行内式</p><pre id="leanote_ace_1539421011494_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">&lt;标记名&nbsp;style="属性名：属性值;属性名：属性值;"&gt;内容&lt;/标记名&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</pre><p>&nbsp; &nbsp; &nbsp;总结：实际上每个html都有style属性，用来设置行内式</p><p>&nbsp; &nbsp; 2.内嵌式</p><pre id="leanote_ace_1539421194299_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 168px;">&lt;style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;p{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size:10px;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color:#ccc;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align:center;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-family:s'宋体';
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&lt;/style&gt;&nbsp;&nbsp;&nbsp;&nbsp;</pre><p>&nbsp; &nbsp;3.链入式<br></p><pre id="leanote_ace_1539504355587_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">&lt;link&nbsp;href="css路径"&nbsp;rel="stylesheet"&nbsp;type="text/html"/&gt;&nbsp;</pre><h3>&nbsp; 2.css基础选择器</h3><p>1.标记选择器</p><pre id="leanote_ace_1539504508855_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">标记名{属性名1:属性值1;属性名2:属性值2;}&nbsp;&nbsp;该语法中，所有的标记都能作为标记选择器&nbsp;&nbsp;html&nbsp;，body，p等</pre><p>2.类选择器</p><pre id="leanote_ace_1539504608397_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">.类名{属性名1:属性值1;属性名2:属性值2;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;记住类可以多个，一个标记可以使用多个类。中间用空格隔开</pre><p>3.id选择器</p><pre id="leanote_ace_1539504707077_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">#id名{属性名1:属性值1;属性名2:属性值2;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id选择器是唯一的，不能出现多个</pre><p>4.通配选择器</p><pre id="leanote_ace_1539504779644_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 21px;">*{属性名1:属性值1;属性名2:属性值2;}&nbsp;&nbsp;&nbsp;匹配页面的所有元素</pre><p>5.css复合选择器</p><pre id="leanote_ace_1539590619453_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 525px;">&lt;!--标签指定式选择器,又被称作交际选择器&nbsp;&nbsp;&nbsp;由两个选择器组成，第一个为标记选择器，第二个为class选择器或id选择器--&gt;
+&lt;!--后代选择器就是把外标签写在前面，后面跟上内标签，可以多重嵌套--&gt;
+&lt;!--并集选择器，使用上面的所有选择器，使用逗号分开就行--&gt;
+&lt;head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;p.mycapter{&nbsp;&nbsp;/*标签指定式选择器*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:green;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;h1#title{&nbsp;&nbsp;&nbsp;/*标签指定式选择器*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:blue;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;p&nbsp;img{&nbsp;&nbsp;/*后代选择器*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:300px;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;p.mycapter,h1#title{&nbsp;/*并集选择器*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align:center;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&nbsp;id="title"&gt;标题&lt;/h1&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;class="mycapter"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img&nbsp;src="images/top.jpg"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;
+&lt;/body&gt;</pre><h3>3.css字体样式属性</h3><table class="mce-item-table" style="height: 181px;" width="616" data-mce-style="height: 181px;"><tbody><tr><td>相对长度单位</td><td>说明</td></tr><tr><td>em</td><td>相对当前对象内文本的字体尺寸</td></tr><tr><td>px</td><td>像素</td></tr><tr><td>绝对长度单位</td><td>&nbsp;</td></tr><tr><td>pt</td><td>点</td></tr><tr><td>in</td><td>英寸</td></tr><tr><td>cm</td><td>厘米</td></tr><tr><td>mm</td><td>毫米</td></tr><tr><td>比例%</td><td><br></td></tr><tr><td>%</td><td><p>设置占整个屏幕的%比例</p><p>&nbsp;<br></p></td></tr></tbody></table><p>&nbsp; &nbsp;1.font综合设置字体属性</p><pre id="leanote_ace_1539506191268_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 42px;">选择器{font:font-style&nbsp;font-variant&nbsp;font-weight&nbsp;font-size/line-height&nbsp;font-family;}
+&lt;!--其中不需要的属性可以省略，但必须保留font-size和font-family属性--&gt;</pre><table class="mce-item-table" style="height: 175px;" width="823" data-mce-style="height: 175px;"><tbody><tr><td>font-style</td><td>normal,italic[斜体],oblique[斜体]</td></tr><tr><td>font-variant</td><td>normal,small-caps, 注意该属性只对英文有效</td></tr><tr><td>font-weight</td><td>normal,bold[粗体],bolder[更粗],lighter[更细],100-900 [细----&gt;粗 400:normal;700:bold;]</td></tr><tr><td>font-size</td><td><p>px</p></td></tr><tr><td>font-family</td><td>字体，设置中文字体使用双引号 ,英文同中文混合 &nbsp;英文放在最前面</td></tr></tbody></table><p>&nbsp;<br></p><p>2.css文本外观属性</p><table class="mce-item-table" style="height: 131px;" width="818" data-mce-style="height: 131px;"><tbody><tr><td>color</td><td>文本颜色 &nbsp;1预定义颜色值red,yellow,... &nbsp; &nbsp; &nbsp;2.十六进制#fff231....... &nbsp; &nbsp; &nbsp; 3.rgb(255,0,0)或 rgb(100%,0%,0%)</td></tr><tr><td>letter-spacing</td><td>字间距 &nbsp; &nbsp; &nbsp; 可以为负值 正常位normal</td></tr><tr><td>word-spacing</td><td>单词间距 &nbsp; &nbsp;定义的是单词与单词间的距离 ，正常为normal</td></tr><tr><td>line-height</td><td>行间距 &nbsp; &nbsp; &nbsp;通常用来定义与容器高一样实现字体的垂直居中 &nbsp; px &nbsp; &nbsp;em &nbsp; &nbsp;% 单位</td></tr><tr><td>text-transform</td><td>文本转化 &nbsp; 控制大小写 &nbsp; &nbsp; &nbsp;none &nbsp; &nbsp;capitalize[首字母大写] &nbsp;uppercase[大写] &nbsp;lowercase[小写] &nbsp; &nbsp;&nbsp;</td></tr><tr><td>text-decoration</td><td>文本装饰 &nbsp; &nbsp; none &nbsp; &nbsp;underline[下划线] &nbsp; &nbsp;overline[上划线] &nbsp; &nbsp;line-through[删除线]</td></tr><tr><td>text-align</td><td>水平对齐方式 &nbsp; &nbsp; left &nbsp; &nbsp; right &nbsp; &nbsp; &nbsp;center &nbsp;&nbsp;</td></tr><tr><td>text-indent</td><td>首行缩进 &nbsp; &nbsp; &nbsp; &nbsp;允许使用负值 &nbsp; 一般使用em &nbsp; &nbsp; 只对块级元素有效</td></tr><tr><td>white-space</td><td>空白符处理 &nbsp; &nbsp; &nbsp; normal &nbsp; &nbsp; &nbsp;pre[欲格式化，按文档的书写格式保留空格，空行] &nbsp; &nbsp;nowrap[空格空行无效，强制文本不能换行，除非遇到&lt;br/&gt; 内容超出自动增加滚动条]</td></tr></tbody></table><p>注意：text-align 对行内块无效，只能用于块级元素和行内块元素 &nbsp;，如果需要设置一个图像水平居中，可以为图像添加一个父标记&lt;p&gt;或&lt;div&gt; 然后对父标记设置text-align=center</p><p>&nbsp;<br></p><h3>4.css的层叠性与继承性</h3><p>1.层叠性：多种样式的叠加，</p><p>2.继承性：在书写css样式表时，子标记会继承父标记的某些样式，但是如果网页使用了大量的继承，那么判断的样式会很麻烦，所以对于字体，文本属性等网页的常用样式可以使用继承，但并不是所有的元素都可以继承，例如下面的元素</p><ol><li>margin</li><li>border</li><li>padding</li><li>background</li><li>position</li><li>布局属性</li><li>元素宽高属性</li></ol><p>记住，我们如果为body设置属性，但是并不会影响到h1-h6的设置，原因是h1-h6的语义较强，代表的就是标题</p><p>&nbsp;<br></p><p>3.css的优先级</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.标记选择器的权重：1 &nbsp; &nbsp; &nbsp; 类选择器权重：10 &nbsp; &nbsp; &nbsp; id选择器权重：100 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于通用选择器来说，id选择器具有最高的优先级别</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 2.继承样式的权重为0，即子啊嵌套过程中，不论父标记的选择权重多大，子标记继承时，权重为0，也就是子元素定义的样式会覆盖继承的样式</p><pre id="leanote_ace_1539592307567_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 42px;">strong{color:red;}
+#header{color:green;}</pre><p>&nbsp; &nbsp; 对应的html</p><pre id="leanote_ace_1539592360010_0" class="brush:html ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">&lt;p&nbsp;id="header"&nbsp;class="blue"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;继承的样式不如自己定义&lt;/strong&gt;
+&lt;/p&gt;</pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;3.行内式有限，应用style属性的元素，其行内样式的权重非常高，可以理解为远大于100，总之比上面提到的都大<br></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 4.权重相同时，css遵循就近原则，也就是说靠近元素的样式具有最大的优先级，或者说排在最后的样式优先级最大</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 5.css定义了一个!important命令，该命令被赋予了最大的优先级别</p><pre id="leanote_ace_1539592656818_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">#header{
+&nbsp;&nbsp;&nbsp;&nbsp;color:red!important;&nbsp;&nbsp;&nbsp;/*位于属性值与分号之间*/
+}</pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 6.复合选择器的坑</p><ol><li>类选择器的的权重大于后代选择器，不论后代选择器有多少个标记选择器进行叠加</li><li>复合选择器的权重无论多少个类选择器和标记选择器的叠加其权重都不会超过id选择器</li></ol><p>&nbsp;<br></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

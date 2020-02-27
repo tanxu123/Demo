@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+
+        .box1 {
+            float: left;  /*这个设置了浮动*/
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+
+
+        .box2 {
+            /**
+            清除浮动,
+            让这个元素绝对绝缘 bfc ,不让其他浮动元素影响自己,而且不让自己的浮动影响被的元素
+             */
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<!--小技巧-->
+<!--文本环绕-->
+
+
+
+
+<div class="box1"></div>
+<div class="box2">
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内容
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+</div>
+</body>
+</html>

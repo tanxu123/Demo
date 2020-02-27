@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+
+
+
+    </style>
+
+    <script>
+
+        /**
+         *
+         * @param html
+         */
+        function changeLocation(html) {
+
+            location.href = html;
+
+        }
+
+
+        window.onload = function () {
+
+
+            var defaultIndex = 0;
+            var before = defaultIndex;
+
+            var mode = document.getElementsByClassName("newMusicHeadUl")[0];
+            var liSet = mode.getElementsByTagName("li");
+            changeStyle(true);
+
+            demo1 = function () {
+                for (var i = 0; i < liSet.length; i++) {
+                    liSet[i].index = i;
+                    liSet[i].onclick = function () {
+                        //在这里进行数据的重新赋值
+                        liSet[before].style.borderBottom = "";
+
+                        defaultIndex = this.index;
+                        changeStyle(true);
+                        before = this.index;
+                    }
+                }
+            }();
+
+
+            function changeStyle(bool) {
+                if (bool) {
+                    liSet[defaultIndex].style.borderBottom = "1px #F47615 solid";
+                } else {
+                    liSet[defaultIndex].style.borderBottom = "";
+                }
+            }
+
+        }
+    </script>
+
+</head>
+<body>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+.sc-contact-info {
+
+}
+
+.sc-contact-info .page-header {
+    border-bottom: 3px solid #c92323;
+    margin: 20px 10px;
+}
+
+.sc-contact-info .col-lg-6 p {
+    font-size: 15px;
+    color: #646464;
+    margin-bottom: 10px;
+}
+
+.sc-contact-info .col-lg-6 {
+    padding: 0px 40px;
+}
+
+.sc-contact-info .col-lg-6 .form-control {
+    border-radius: 0px;
+    resize: none;
+}
+
+.sc-contact-info .col-lg-6 .btn {
+    border-radius: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+    background: #d75a5a;
+    border: none;
+}
+
+.sc-contact-info #allmap {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
+}

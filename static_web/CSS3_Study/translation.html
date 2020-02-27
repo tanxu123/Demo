@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .box {
+
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: relative;
+            -webkit-transition: width 2s; /* Safari */
+            transition: all 2s;
+        }
+
+        .box:hover {
+            width: 300px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+
+    var startX;
+    var startWidth = 0
+    var box = document.querySelector(".box");
+    box.onmouseover = function (e) {
+        startX = e.clientX
+        // startWidth = this.offsetWidth
+    }
+    box.onmousemove = function (e) {
+        var moveX = e.clientX;
+        var distance = moveX - startX;
+        console.log(distance)
+        this.style.left = this.offsetLeft + distance + "px";
+        startX = moveX
+    }
+
+    box.onmouseout = function (e) {
+
+    }
+
+
+</script>
+
+</body>
+</html>

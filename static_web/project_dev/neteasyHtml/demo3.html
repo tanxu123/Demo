@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+        window.onload = function () {
+            function demo1() {
+                var divCla = document.getElementsByClassName("one")[0];
+                divCla.onclick = function (ev) {
+                    divCla.className = "two";
+                }
+            }
+
+            function demo2() {
+                var liSet = document.getElementsByTagName("li");
+                (function () {
+                    for (var i = 0; i < liSet.length; i++) {
+                        liSet[i].index = i;
+                        //添加鼠标移入事件
+                        liSet[i].onmouseover = function () {
+                            // alert(this.index)
+                            // alert(i);
+                            this.style.color = "#fe5000"
+                            var div1 = this.getElementsByTagName("div")[0];
+                            div1.className = "divBox";
+                        }
+
+                        //添加鼠标移除事件
+                        liSet[i].onmouseout = function () {
+                            this.style.color = ""
+                            var div1 = this.getElementsByTagName("div")[0];
+                            div1.className = "";
+                        }
+
+                        liSet[i].onclick = function () {
+                            var div1 = this.getElementsByTagName("div")[0];
+                            div1.className = "divBox";
+                        }
+
+                    }
+                })();
+            }
+
+
+            //demo1();
+            demo2();
+
+        }
+
+
+    </script>
+    <style>
+
+        .one {
+            width: 200px;
+            height: 200px;
+            background-color: #c7c4cb;
+        }
+
+        .two {
+            width: 200px;
+            height: 200px;
+            background-color: #2fff07;
+        }
+
+        li {
+            position: relative;
+            display: inline-block;
+            padding: 0px 100px;
+        }
+
+        .divBox {
+            width: 200px;
+            position: absolute;
+            height: 200px;
+            background-color: #9a9a9c;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="one"></div>
+
+
+<ul>
+    <li>
+        <span>首页</span>
+        <div></div>
+    </li>
+    <li>
+        <span>百度</span>
+        <div></div>
+    </li>
+    <li>
+        <span>淘宝</span>
+        <div></div>
+    </li>
+    <li>
+        <span>京东</span>
+        <div></div>
+    </li>
+</ul>
+
+<script>
+    // demo1();
+</script>
+</body>
+</html>

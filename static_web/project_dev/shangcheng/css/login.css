@@ -1,0 +1,89 @@
+
+.sc-login-form form {
+
+    border-radius: 3px;
+    border: 1px solid #CCCCCC;
+
+}
+
+.sc-login-form .container .col-lg-6 {
+
+    margin-top: 100px;
+
+
+}
+
+.sc-login-form .container .col-lg-6 .form-group {
+    margin: 20px 0px;
+    overflow: hidden;
+}
+
+.sc-login-form .container .col-lg-6 .form-group label {
+    position: relative;
+    top: 5px;
+}
+
+.sc-login-form .container .col-lg-6 .checkbox {
+    margin-top: 0px;
+}
+
+.sc-login-form .form-group .col-lg-12 button:first-child {
+    background: #111;
+    color: #ffffff;
+    border-color: #111111;
+}
+
+.sc-login-form .form-group .col-lg-12 span:nth-of-type(1) {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+}
+
+.sc-login-form .form-group .col-lg-12 span:nth-of-type(1)::after {
+    content: '';
+    display: inline-block;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    line-height: 32px;
+    position: relative;
+    top: 5px;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    background-image: url("../images/weixin.svg");
+    background-clip: border-box;
+}
+
+.sc-login-form .form-group .col-lg-12 span:nth-of-type(2)::after {
+    content: '';
+    display: inline-block;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    line-height: 32px;
+    position: relative;
+    top: 5px;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    background-image: url("../images/QQ.svg");
+    background-clip: border-box;
+}
+
+.sc-login-form .form-group .col-lg-12 a, a:hover {
+    color: #000;
+}
+
+
+.sc-lg-tip {
+    margin: 40px 0px;
+}
+
+.sc-lg-tip ol {
+    padding-left: 15px;
+}
+
+.sc-lg-tip ol li {
+    height: 30px;
+
+}
+

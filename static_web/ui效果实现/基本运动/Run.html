@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta content="text/html charset=utf-8" http-equiv="Content-Type">
+    <style>
+        #box1{
+            width:100px;height:100px;background-color: #FFCC00;
+            position:absolute;top:0px;left:0px;
+        }
+    </style>
+    <script>
+        var timer=null;
+        window.onload=function (ev) {
+            var run=document.getElementById("run");
+            var box=document.getElementById("box1");
+            run.onclick=function (ev2) {
+                var ispeed=5;
+                if(timer){//解决timer滞留所带来的多个定时器同时操作运动
+                    clearInterval(timer);
+                }
+                timer=setInterval(
+                  function(){
+                      box.style.left=box.offsetLeft+ispeed+"px";
+                  },30);
+            }
+            var stop=document.getElementById("stop");
+            stop.onclick=function (ev2) {
+                clearInterval(timer);
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box1"></div>
+<div style="width:400px;height:400px;"></div>
+<button id="run">开始</button>
+<button id="stop">停止</button>
+</body>
+</html>

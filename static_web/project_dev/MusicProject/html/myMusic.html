@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+        div.container {
+            width: 1000px;
+            overflow: hidden;
+
+            margin: 0 auto;
+        }
+
+        div.leftMenu {
+
+            width: 200px;
+            height: 400px;
+            background: url("../images/bg.jpg");
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        div.leftMenu li {
+            width: 200px;
+            cursor: context-menu;
+            padding-top: 10px;
+            height: 30px;
+            display: block;
+        }
+
+        div.rightList {
+            width: 700px;
+            overflow: hidden;
+            float: left;
+        }
+
+    </style>
+
+    <script>
+
+        var defaultIndex = 0;
+
+        var beforeIndex = 0;
+
+        var tableHead = " <tr>\n" +
+            "                    <td></td>\n" +
+            "                    <td>歌曲标题</td>\n" +
+            "                    <td>时长</td>\n" +
+            "                    <td>歌手</td>\n" +
+            "                    <td>专辑</td>\n" +
+            "                </tr>";
+
+
+        var singleTableHead = " <tr>\n" +
+            "                    <td></td>\n" +
+            "                    <td>歌手名</td>\n" +
+            "                    <td>分类</td>\n" +
+            "                </tr>";
+
+        var albumTableHead = " <tr>\n" +
+            "                    <td></td>\n" +
+            "                    <td>专辑</td>\n" +
+            "                    <td>作者</td>\n" +
+            "                    <td>类型</td>\n" +
+            "                    <td>播放量</td>\n" +
+            "                </tr>";
+
+
+        var url = "http://localhost:8080/music/UserCenter";
+
+        function sendAjax(url, response) {
+            var xhr;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    response(xhr.responseText);
+                }
+            }
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+
+        window.onload = function (ev) {
+
+            var leftMenu = document.getElementsByClassName("leftMenu")[0];
+
+            var liSet = leftMenu.getElementsByTagName("li");
+
+            function loadData() {
+
+
+                for (var i = 0; i < liSet.length; i++) {
+                    liSet[i].tag = i;
+                    liSet[i].onclick = function (ev) {
+                        //在这里加载数据
+                        loadDataReal(this.innerText);
+
+                        liSet[beforeIndex].style.backgroundColor = "";
+                        defaultIndex = this.tag;
+                        this.style.backgroundColor = "#111";
+                        this.style.color = "#fff";
+                        beforeIndex = this.tag;
+                    }
+                    liSet[i].onmouseover = function (ev) {
+                        this.style.backgroundColor = "#ccc";
+                    }
+
+                    liSet[i].onmouseout = function (ev) {
+
+                        this.style.backgroundColor = "";
+                    }
+                }
+            };
+
+
+            function loadDataReal(text) {
+                var url1 = url + "?theme=" + text;
+                sendAjax(url1, function (response) {
+
+
+                    var responseObj = JSON.parse(response);
+
+                    if (responseObj.responseCode != null) {
+                        // location.href = "login.htmlStudy";
+                    } else {
+                        //代表已经登录请求的是对应的数据
+                        var musicList = responseObj;
+
+                        //  alert(response)
+
+                        var musicCollection = document.getElementById("musicCollection");
+
+                        var musicSingle = musicList[0];
+
+                        if ("author" in musicSingle) {
+                            musicCollection.innerHTML = albumTableHead;
+                        } else if ("describute" in musicSingle) {//代表加载的是singer数据
+                            musicCollection.innerHTML = singleTableHead;
+                        } else {
+                            musicCollection.innerHTML = tableHead;
+                        }
+
+
+                        for (var i = 0; i < musicList.length; i++) {
+
+                            var musicSingle = musicList[i];
+                            var inner;
+
+                            if ("author" in musicSingle) {
+
+                                inner = " <tr class=\"singleMusicData\">\n" +
+                                    "                    <td>\n" +
+                                    "                        <span style=\"position: relative;top: -2px;margin-right: 10px\">1</span>\n" +
+                                    "                        <img src=\"../images/play.svg\" width=\"20px\" style=\"position: relative;top: 2px;\"/>\n" +
+                                    "                    </td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.name + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.author + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.type + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.playCount + "</td>\n" +
+                                    "                </tr>";
+
+                            } else if ("describute" in musicSingle) {//代表加载的是singer数据
+
+                                inner = " <tr class=\"singleMusicData\">\n" +
+                                    "                    <td>\n" +
+                                    "                        <span style=\"position: relative;top: -2px;margin-right: 10px\">1</span>\n" +
+                                    "                        <img src=\"../images/play.svg\" width=\"20px\" style=\"position: relative;top: 2px;\"/>\n" +
+                                    "                    </td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.name + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.describute + "</td>\n" +
+                                    "                </tr>";
+
+
+                            } else {
+                                inner = " <tr class=\"singleMusicData\">\n" +
+                                    "                    <td>\n" +
+                                    "                        <span style=\"position: relative;top: -2px;margin-right: 10px\">1</span>\n" +
+                                    "                        <img src=\"../images/play.svg\" width=\"20px\" style=\"position: relative;top: 2px;\"/>\n" +
+                                    "                    </td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.musicName + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.playTime + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.singerName + "</td>\n" +
+                                    "                    <td class=\"one\">" + musicSingle.albumName + "</td>\n" +
+                                    "                </tr>";
+                            }
+
+
+                            musicCollection.innerHTML += inner;
+                        }
+
+
+                        var trSet = document.getElementsByClassName("singleMusicData");
+                        for (var i = 0; i < trSet.length; i++) {
+                            trSet[i].onclick = function () {
+                                //在这里去查询歌曲的地址，然后直接赋值给播放的audio进行播放
+                            }
+                            trSet[i].onmouseover = function (ev) {
+                                this.style.backgroundColor = "#ccc";
+                            }
+                            trSet[i].onmouseout = function (ev) {
+                                this.style.backgroundColor = "";
+                            }
+                        }
+                    }
+
+                });
+            }
+
+            loadData();
+
+
+            loadDataReal(liSet[defaultIndex].innerText);
+
+
+            liSet[defaultIndex].style.backgroundColor = "#ccc";
+        }
+
+    </script>
+    <style>
+        div.rightList {
+            float: left;
+        }
+
+        div.rightList div button {
+            margin-top: 20px;
+        }
+
+        td.one {
+            font-size: 13px;
+            color: #5c5c5c;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!--创建导航条-->
+<div style="overflow: hidden" id="navigateBarOut"></div>
+<script src="../template/mode/model.js"></script>
+<script src="../template/navigateBar.js"></script>
+<link rel="stylesheet" href="../template/css/navigateBar.css">
+<script>
+
+    var navigateBarOut = document.getElementById("navigateBarOut")
+
+    navigateBarOut.style.marginBottom = "20px"
+
+    navigateBarOut.innerHTML = createView;
+
+    defalutSelectIndex = 1;
+
+    createNavigate(null, [
+        new ClickItem("爱看", "index.html"), new ClickItem("我的音乐", "#")
+    ], "login.html", "register.html")
+</script>
+
+
+<div class="container">
+    <!--左边的div，用于显示操作列表-->
+    <div class="leftMenu">
+
+        <ul>
+            <li>收藏的歌曲</li>
+            <li>热门推荐</li>
+            <li>推荐歌手</li>
+            <li>推荐歌单</li>
+        </ul>
+
+    </div>
+
+    <!--右边的div，用于显示最新的推荐-->
+    <div class="rightList">
+        <div class="rightListTop" style="margin-left: 100px">
+            <img src="../images/like.png" style="float: left;margin-right: 40px"/>
+            <div style="float: left">
+                <img src="../images/tag.svg"/>
+                <span style="font-size: 26px">我喜欢的音乐</span>
+                <div>
+                    <img src="../images/user.jpg" height="30px"/>
+                    <span>方方方</span>
+                </div>
+                <div>
+                    <button>播放</button>
+                    <button>收藏</button>
+                    <button>分享</button>
+                    <button>下载</button>
+                    <button>评论</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!---下面是菜单的显示-->
+        <div style="clear: both;margin-left: 50px;padding-top: 40px">
+            <span style="font-size: 23px">歌曲列表</span>
+            <span style="color: #9a9a9c;font-size: 14px;">345首歌曲</span>
+            <span style="float: right;color: red;font-size: 14px">播放量：5757</span>
+            <hr style="background-color: red"/>
+
+            <table style="width: 600px;margin-top: 20px" id="musicCollection">
+                <tr>
+                    <td></td>
+                    <td>歌曲标题</td>
+                    <td>时长</td>
+                    <td>歌手</td>
+                    <td>专辑</td>
+                </tr>
+                <tr class="singleMusicData">
+                    <td>
+                        <span style="position: relative;top: -2px;margin-right: 10px">1</span>
+                        <img src="../images/play.svg" width="20px" style="position: relative;top: 2px;"/>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div style="width: 100%;
+height: 50px;background-image: url('../images/bg.jpg');
+position:fixed;z-index: 15;bottom:0px; left:0px;">
+
+
+    <div style="width: 1000px;overflow: hidden;margin: 0 auto;position: relative;top: 5px;
+background: #111111">
+
+        <audio controls style="width: 500px;">
+            <source src="../others/Assen捷%20陈同学%20-%20不落.mp3" type="audio/mpeg">
+        </audio>
+        <img src="../images/上一页.svg"/>
+        <img src="../images/下一页%20(2).svg" style="position: relative;top: -2px;"/>
+    </div>
+</div>
+
+
+</body>
+</html>

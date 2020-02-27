@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        //跨域源资源共享
+        function cors(){
+            var button=document.getElementById("button");
+            button.onclick=function (ev) {
+                ev.preventDefault();
+                var xdr;
+                alert("sdgs");
+                xdr=new XDomainRequest();
+                xdr.onload=function(){
+                    alert(xdr.responseText;
+                };
+                xdr.open("get","http://www.baidu.com/什么好");
+                xdr.send(null);
+            }
+        }
+
+        //图像ping跨域技术
+        function image(){
+            var img=new Image();
+            img.onload=img.onerror=function (ev) {
+                alert("执行");
+            }
+            img.src="http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
+            document.body.appendChild(img);
+        }
+
+
+    </script>
+</head>
+<body>
+<button id="button">发送</button>
+<script>
+    //cors();
+    //out();
+    image();
+</script>
+</body>
+</html>

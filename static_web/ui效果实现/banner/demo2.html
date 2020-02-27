@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var xhr;
+
+        function getReq() {
+            var url = "http://12.16.0.2:9999/demo";
+            xhr = new ActiveXObject("microsoft.XMLHTTP");
+            if (xhr == null) {
+                xhr = new XMLHttpRequest();
+            }
+            var requestBody = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" ' +
+                'xmlns:q0="http://ws.itcast.cn/"' +
+                ' xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
+                'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+                '<soapenv:Body>' +
+                '<q0:sayHello>' +
+                '<arg0>'+name+'</arg0>' +
+                '</q0:sayHello>' +
+                '</soapenv:Body>' +
+                '</soapenv:Envelope>';
+
+            xhr.open("POST",url,true);
+
+            xhr.setRequestHeader("Content-Type","text/xml;charset=UTF-8");
+
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+                        var v=xhr.responseXML;
+                        alert(v);
+                    }
+                }
+            }
+            xhr.send(requestBody);
+
+
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

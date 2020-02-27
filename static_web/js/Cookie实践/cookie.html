@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script>
+        /*
+        封装cookie
+         */
+        function setCookie(name,value,time){
+            var odate=new Date();
+            odate.setDate(odate.getDate()+time);
+            document.cookie=name+"="+value+";expires="+odate;
+        }
+        function getCookie(name){
+           var cookie= document.cookie;
+           var cookies=cookie.split(";");
+          //alert(cookies);//user=fang;
+          //  alert(cookies)
+           for(var i=0;i<cookies.length;i++){
+               var cookieMap=cookies[i].split("=");
+               //alert(cookieMap);
+               if(cookieMap[0]==name){
+                   return cookieMap;
+               }else{
+                   return null;
+               }
+           }
+
+
+        }
+        function removeCookie(name){
+            //document.cookie=name+"= ;expires=-1";
+               var cookie=getCookie(name);
+               document.cookie=cookie[0]+"="+cookie[1]+";expires=-1";
+        }
+
+        function demo1(){
+            setCookie("user","fang",30);
+            // var date=new Date();
+            // date.setDate(date.getDate()+30);
+            // alert("时间"+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate());
+            //alert(getCookie("user"));
+            alert(getCookie("user"));
+
+            removeCookie("user");
+            alert(getCookie("user"));
+        }
+
+    </script>
+</head>
+<body>
+<script>
+    demo1();
+</script>
+</body>
+</html>
